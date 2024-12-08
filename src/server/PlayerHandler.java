@@ -8,10 +8,12 @@ public class PlayerHandler implements Runnable {
     private Socket socket;
     private GameServer server;
     private PrintWriter out;
+    private int playerId;
 
-    public PlayerHandler(Socket socket, GameServer server) {
+    public PlayerHandler(Socket socket, GameServer server, int playerId) {
         this.socket = socket;
         this.server = server;
+        this.playerId = playerId;
     }
 
     @Override
@@ -22,8 +24,8 @@ public class PlayerHandler implements Runnable {
 
             String move;
             while ((move = in.readLine()) != null) {
-                System.out.println("Received move: " + move);
-                server.broadcastMove(move);
+                System.out.println("Received move from player " + playerId + ": " + move);
+                server.broadcastMove(move, playerId);
             }
         } catch (IOException e) {
             e.printStackTrace();

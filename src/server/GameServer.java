@@ -18,7 +18,7 @@ public class GameServer {
 
         while (players.size() < playerCount) {
             Socket clientSocket = serverSocket.accept();
-            PlayerHandler playerHandler = new PlayerHandler(clientSocket, this);
+            PlayerHandler playerHandler = new PlayerHandler(clientSocket, this, players.size() + 1);
             players.add(playerHandler);
             new Thread(playerHandler).start();
             System.out.println("Player connected: " + players.size() + "/" + playerCount);
@@ -28,9 +28,9 @@ public class GameServer {
         // Start the game logic here
     }
 
-    public void broadcastMove(String move) {
+    public void broadcastMove(String move, int playerId) {
         for (PlayerHandler player : players) {
-            player.sendMessage(move);
+            player.sendMessage("Player " + playerId + ": " + move);
         }
     }
 
