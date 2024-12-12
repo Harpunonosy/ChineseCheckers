@@ -20,9 +20,9 @@ public class GameServer {
 
         while (players.size() < playerCount) {
             Socket clientSocket = serverSocket.accept();
-             //TODO PlayerHandler playerHandler = new PlayerHandler(clientSocket, this, players.size() + 1);
-            //players.add(playerHandler);
-            //new Thread(playerHandler).start();
+            PlayerHandler playerHandler = new PlayerHandler(clientSocket, this, players.size() + 1);
+            players.add(playerHandler);
+            new Thread(playerHandler).start();
             System.out.println("Player connected: " + players.size() + "/" + playerCount);
         }
 
@@ -30,16 +30,16 @@ public class GameServer {
         // Start the game logic here
     }
 
-    //TODO .sendMessage w klasie playerHandler
-    /*public void broadcastMove(String move, int playerId) {
+
+    public void broadcastMove(String move, int playerId) {
         for (PlayerHandler player : players) {
             player.sendMessage("Player " + playerId + ": " + move);
         }
-    }*/
+    }
 
     public static void main(String[] args) throws IOException {
         GameServer server = new GameServer(2); // Example with 2 players
-        //server.startServer(); //TODO
+        server.startServer(); 
     }
 
     
