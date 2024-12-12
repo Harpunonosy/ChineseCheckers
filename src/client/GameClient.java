@@ -1,3 +1,5 @@
+package client;
+
 import java.io.IOException;
 
 public class GameClient {
@@ -21,3 +23,4 @@ public class GameClient {
         client.start();
     }
 }
+

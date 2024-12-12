@@ -1,3 +1,5 @@
+package client;
+
 import java.util.Scanner;
 
 public class ClientInputHandler {
@@ -17,3 +19,4 @@ public class ClientInputHandler {
         }
     }
 }
+
