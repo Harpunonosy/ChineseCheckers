@@ -18,10 +18,10 @@ To compile and execute this project u nedd to do this steps:
 
 1. Start server:
     ```sh
-    java -cp out GameServer
+    java -cp out server.GameServer
     ```
 
 2. Start Client:
     ```sh
-    java -cp out GameClient
+    java -cp out client.GameClient
     ```
