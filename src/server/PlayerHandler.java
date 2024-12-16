@@ -1,6 +1,5 @@
 package server;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,6 +10,7 @@ public class PlayerHandler implements Runnable {
     private Socket socket;
     private GameServer server;
     private PrintWriter out;
+    private BufferedReader in;
     private int playerId;
 
     public PlayerHandler(Socket socket, GameServer server, int playerId) {
@@ -22,7 +22,7 @@ public class PlayerHandler implements Runnable {
     @Override
     public void run() {
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
 
             String move;

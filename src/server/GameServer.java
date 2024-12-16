@@ -15,7 +15,7 @@ public class GameServer {
     }
 
     public void startServer() throws IOException {
-        ServerSocket serverSocket = new ServerSocket(12345);
+        ServerSocket serverSocket = new ServerSocket(12345); 
         System.out.println("Server started, waiting for players...");
 
         while (players.size() < playerCount) {
