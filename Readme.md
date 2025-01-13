@@ -2,7 +2,7 @@
 
 To compile and execute this project u nedd to do this steps:
 
-### Compilation (OFC U NEED TO BE IN THE MAIN FOLDER NOR SRC OR UML!!!)
+### Compilation 
 
 1. Compile server files:
     ```sh
