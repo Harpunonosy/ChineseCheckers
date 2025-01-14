@@ -1,3 +1,5 @@
+package client;
+
 import java.io.IOException;
 
 public class ClientOutputHandler implements Runnable {

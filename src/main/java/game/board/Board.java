@@ -1,5 +1,5 @@
-package board;
-import move.Move;
+package game.board;
+import game.move.Move;
 
 public interface Board {
   void initialize();

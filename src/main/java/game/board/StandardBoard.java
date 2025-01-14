@@ -1,9 +1,9 @@
-package board;
+package game.board;
 
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
-import move.Move;
+import game.move.Move;
 
 public class StandardBoard implements Board {
     private Map<Point, CellVertex> vertices;

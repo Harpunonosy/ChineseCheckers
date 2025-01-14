@@ -1,4 +1,4 @@
-package move;
+package game.move;
 
 public class Move {
     private int startX;

@@ -1,5 +1,6 @@
-import board.Board;
-import move.Move;
+package rules;
+import game.board.Board;
+import game.move.Move;
 
 public class StandardRuleSet implements GameRuleSet{
 
