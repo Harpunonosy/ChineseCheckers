@@ -39,7 +39,7 @@ public class StandardBoard implements Board {
     }
 
     //sprawdza czy powinien być vertex na danych współrzędnych
-    private boolean isValidPosition(int x, int y) {
+    protected boolean isValidPosition(int x, int y) {
       if((x+y) % 2 != 0) return false;
         // Przykładowa logika sprawdzania, czy pozycja jest prawidłowa
         if (x < 0 || x >= 25 || y < 0 || y >= 17) {
