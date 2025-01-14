@@ -67,5 +67,11 @@
                 <exec.mainClass>client.GameClient</exec.mainClass>
             </properties>
         </profile>
+        <profile>
+            <id>Work</id>
+            <properties>
+                <exec.mainClass>game.board.Main</exec.mainClass>
+            </properties>
+        </profile>
     </profiles>
 </project>
