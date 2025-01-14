@@ -1,5 +1,5 @@
 package factories;
 
-public abstract class GameFactory {
-    
-}
+public interface GameFactory {
+
+} 

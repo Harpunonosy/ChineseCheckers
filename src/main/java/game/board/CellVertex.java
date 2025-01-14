@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CellVertex {
     private Point location;
-    private int content;
+    private Pawn pawn;
     private List<CCEdge> edges;
 
     public CellVertex(Point location) {
@@ -15,20 +15,20 @@ public class CellVertex {
 
     public CellVertex(Point location, int content) {
         this.location = location;
-        this.content = content;
         this.edges = new ArrayList<>();
+        this.pawn = null;
     }
 
     public Point getLocation() {
         return location;
     }
 
-    public int getContent() {
-        return content;
+    public Pawn getPawn() {
+        return pawn;
     }
 
-    public void setContent(int content) {
-        this.content = content;
+    public void setPawn(Pawn pawn) {
+        this.pawn = pawn;
     }
 
     public List<CCEdge> getEdges() {

@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 import game.move.Move;
+import rules.StandardRuleSet;
 
 public class StandardBoard implements Board {
     private Map<Point, CellVertex> vertices;
@@ -36,6 +37,7 @@ public class StandardBoard implements Board {
                 }
             }
         }
+        initializePawns();
     }
 
     //sprawdza czy powinien być vertex na danych współrzędnych
@@ -78,16 +80,21 @@ public class StandardBoard implements Board {
 
     public CellVertex getVertexAt(int x, int y) {
       return vertices.get(new Point(x, y));
-  }
+    }
 
     @Override
     public void makeMove(Move move, int playerId) {
+        StandardRuleSet ruleSet = new StandardRuleSet();
+    if (ruleSet.isValidMove(move, playerId, this)) {
         // Implementacja wykonania ruchu
         CellVertex start = matrix[move.getStartX()][move.getStartY()];
         CellVertex end = matrix[move.getEndX()][move.getEndY()];
         // Przenieś pionek z wierzchołka start do wierzchołka end
-        end.setContent(start.getContent());
-        start.setContent(0);
+        end.setPawn(start.getPawn());
+        start.setPawn(null);
+    } else {
+        System.out.println("Ruch jest nielegalny");
+    }
     }
 
     @Override
@@ -96,12 +103,39 @@ public class StandardBoard implements Board {
         for (int y = 0; y < 17; y++) {
             for (int x = 0; x < 25; x++) {
                 if (matrix[x][y] != null) {
-                    System.out.print(matrix[x][y].getContent() + " ");
+                    Pawn pawn = matrix[x][y].getPawn();
+                    if (pawn != null) {
+                        System.out.print(pawn.getPlayerId() + " ");
+                    } else {
+                        System.out.print("0 ");
+                    }
                 } else {
                     System.out.print(". ");
                 }
             }
             System.out.println();
+        }
+    }
+
+    private void initializePawns() {
+        // Ustawienie pionków dla gracza 1 (dolny trójkąt)
+        int[][] player1Positions = {
+            {12, 16}, {11, 15}, {13, 15}, {10, 14}, {12, 14}, {14, 14}, {9, 13}, {11, 13}, {13, 13}, {15, 13}
+        };
+        for (int[] pos : player1Positions) {
+            if (matrix[pos[0]][pos[1]] != null) {
+                matrix[pos[0]][pos[1]].setPawn(new Pawn(1));
+            }
+        }
+    
+        // Ustawienie pionków dla gracza 2 (górny trójkąt)
+        int[][] player2Positions = {
+            {12, 0}, {11, 1}, {13, 1}, {10, 2}, {12, 2}, {14, 2}, {9, 3}, {11, 3}, {13, 3}, {15, 3}
+        };
+        for (int[] pos : player2Positions) {
+            if (matrix[pos[0]][pos[1]] != null) {
+                matrix[pos[0]][pos[1]].setPawn(new Pawn(2));
+            }
         }
     }
 }
