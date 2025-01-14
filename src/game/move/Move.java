@@ -1,3 +1,5 @@
+package move;
+
 public class Move {
     private int startX;
     private int startY;

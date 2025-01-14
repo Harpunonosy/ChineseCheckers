@@ -1,4 +1,5 @@
 import board.Board;
+import move.Move;
 
 public class StandardRuleSet implements GameRuleSet{
 
