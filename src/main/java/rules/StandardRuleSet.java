@@ -12,8 +12,13 @@ public class StandardRuleSet implements GameRuleSet{
     CellVertex end = board.getVertexAt(move.getEndX(), move.getEndY());
 
     // Check if the start position contains the player's pawn
-    if (start == null || start.getPawn() == null || start.getPawn().getPlayerId() != playerid || end.getPawn() != null) {
+    if (start == null || start.getPawn() == null || start.getPawn().getPlayerId() != playerid) {
         return false;
+    }
+
+    if(end.getPawn() != null){
+      //TODO CHECK COMBO OR STH
+      return false;
     }
 
     // Check if there is a direct edge between start and end positions

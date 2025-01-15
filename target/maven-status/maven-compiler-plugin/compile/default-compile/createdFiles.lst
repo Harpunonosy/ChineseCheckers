@@ -1,6 +1,5 @@
 utils/Utils.class
 client/ClientInputHandler.class
-game/board/StandardBoard.class
 rules/StandardRuleSet.class
 game/state/GameState.class
 server/GameServer.class

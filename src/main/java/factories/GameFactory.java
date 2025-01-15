@@ -1,5 +1,9 @@
 package factories;
 
-public interface GameFactory {
+import game.board.Board;
+import rules.GameRuleSet;
 
+public interface GameFactory {
+  Board createBoard();
+  GameRuleSet createRuleSet();
 } 

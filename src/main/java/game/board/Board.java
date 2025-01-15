@@ -5,5 +5,6 @@ public interface Board {
   void initialize();
   void display();
   void makeMove(Move move, int playerId);
-  public CellVertex getVertexAt(int x, int y);  
+  CellVertex getVertexAt(int x, int y);
+  void setPlayersToRegions(int numberOfPlayers);  
 }
