@@ -1,6 +1,8 @@
 package game.board;
 
-public class CCEdge {
+import java.io.Serializable;
+
+public class CCEdge implements Serializable{
     private CellVertex srcVertex;
     private CellVertex destVertex;
 

@@ -1,8 +1,10 @@
-package game.board;
+package game.board.StandardBoard;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import game.board.CellVertex;
+import game.board.CCEdge;
 
 public class StandardBoardTest {
     private StandardBoard board;

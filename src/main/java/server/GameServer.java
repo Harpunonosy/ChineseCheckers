@@ -1,4 +1,14 @@
 package server;
+
+import factories.StandardGameFactory;
+import game.Game;
+import game.board.StandardBoard.StandardBoard;
+import game.move.Move;
+import game.state.GameState;
+import game.state.WaitingForPlayersState;
+import utils.SerializationUtils;
+import game.state.GameInProgressState;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,35 +18,140 @@ import java.util.List;
 public class GameServer {
     private List<PlayerHandler> players = new ArrayList<>();
     private int playerCount;
+    private int maxPlayers;
+    private Game game;
+    private GameState currentState;
+    private PlayerHandler currentPlayer;
 
-    public GameServer(int playerCount) {
-        this.playerCount = playerCount;
+    public GameServer(int maxPlayers) {
+        if (maxPlayers < 2 || maxPlayers > 6 || maxPlayers == 5) {
+            throw new IllegalArgumentException("Invalid number of players. The game supports between 2 3 4 or 6 players");
+        }
+        this.maxPlayers = maxPlayers;
+        this.playerCount = 0;
+        this.currentState = new WaitingForPlayersState();
     }
 
     public void startServer() throws IOException {
         ServerSocket serverSocket = new ServerSocket(12345);
         System.out.println("Server started, waiting for players...");
 
-        while (players.size() < playerCount) {
+        while (currentState instanceof WaitingForPlayersState) {
             Socket clientSocket = serverSocket.accept();
             PlayerHandler playerHandler = new PlayerHandler(clientSocket, this, players.size() + 1);
             players.add(playerHandler);
             new Thread(playerHandler).start();
-            System.out.println("Player connected: " + players.size() + "/" + playerCount);
+            currentState.handlePlayerJoin(this);
+            System.out.println("Player connected: " + players.size() + "/" + maxPlayers);
         }
-
-        System.out.println("All players connected. Game starting...");
-        // Start the game logic here
     }
 
-    public void broadcastMove(String move, int playerId) {
+    /*
+     *  metody do rozsyłania
+     */
+
+    public void broadcastPlayerInfo() {
         for (PlayerHandler player : players) {
-            player.sendMessage("Player " + playerId + ": " + move);
+            player.sendMessage("Player " + player.getPlayerId() + " connected. " +
+                    playerCount + "/" + maxPlayers + " players connected.");
         }
+    }
+
+    public void broadcastBoardState() {
+        StandardBoard board = (StandardBoard) game.getBoard();
+        String serializedBoard = SerializationUtils.serializeBoard(board);
+        if (serializedBoard != null) {
+            for (PlayerHandler player : players) {
+                player.sendMessage("BOARD_STATE:" + serializedBoard);
+            }
+        }
+    }
+
+    public void sendMessageToPlayer(int playerId, String message) {
+        players.get(playerId - 1).sendMessage(message);
+    }
+
+    public void broadcastMessage(String message) {
+        for (PlayerHandler player : players) {
+            player.sendMessage(message);
+        }
+    }
+
+    /*
+     * metody do zarządzania graczami
+     */
+
+    public void setCurrentPlayer(PlayerHandler currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public PlayerHandler getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void incrementPlayerCount() {
+        playerCount++;
+    }
+
+    public int getPlayerCount() {
+        return playerCount;
+    }
+
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
+
+    public List<PlayerHandler> getPlayers() {
+        return players;
+    }
+
+    public void nextPlayer() {
+        int currentIndex = players.indexOf(currentPlayer);
+        currentPlayer = players.get((currentIndex + 1) % players.size());
+    }
+
+    /*
+     * STAN GRY
+     */
+
+    public void setState(GameState state) {
+        this.currentState = state;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    /*
+     * RUCH
+     */
+
+     public Move parseMove(String move) {
+        String[] parts = move.split("-");
+        int startX = Integer.parseInt(parts[0]);
+        int startY = Integer.parseInt(parts[1]);
+        int endX = Integer.parseInt(parts[2]);
+        int endY = Integer.parseInt(parts[3]);
+        return new Move(startX, startY, endX, endY);
+    }
+
+    public void processMove(String move, int playerId) {
+        currentState.handleMove(this, move, playerId);
+        broadcastBoardState();
+    }
+
+    /*
+     * STARTOWANIE
+     */
+
+    public void startGame() {
+        game = new Game(new StandardGameFactory(), maxPlayers);
+        setState(new GameInProgressState(this));
+        broadcastBoardState();
     }
 
     public static void main(String[] args) throws IOException {
-        GameServer server = new GameServer(2); // Example with 2 players
+        GameServer server = new GameServer(5); 
         server.startServer();
     }
 }

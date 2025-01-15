@@ -1,6 +1,9 @@
 package game.state;
 
-public interface GameState {
+import server.GameServer;
 
-    
+public interface GameState {
+    void handlePlayerJoin(GameServer server);
+    void handleMove(GameServer server, String move, int playerId);
+    void broadcastState(GameServer server);
 }

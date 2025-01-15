@@ -1,5 +1,3 @@
-package client;
-
 import java.io.IOException;
 
 public class GameClient {
@@ -10,20 +8,16 @@ public class GameClient {
     public GameClient(String serverAddress) throws IOException {
         connection = new ClientConnection(serverAddress);
         inputHandler = new ClientInputHandler(connection);
-        outputHandler = new ClientOutputHandler(connection, inputHandler);
+        outputHandler = new ClientOutputHandler(connection);
     }
 
     public void start() {
         new Thread(outputHandler).start();
-        inputHandler.handleInput(); 
+        inputHandler.handleInput();
     }
 
-    public static void main(String[] args) {
-        try {
-            GameClient client = new GameClient("localhost");
-            client.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws IOException {
+        GameClient client = new GameClient("localhost");
+        client.start();
     }
 }
