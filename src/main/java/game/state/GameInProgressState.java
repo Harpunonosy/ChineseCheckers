@@ -1,6 +1,7 @@
 package game.state;
 
 import server.GameServer;
+import game.move.Move;
 
 public class GameInProgressState implements GameState {
 
@@ -20,14 +21,19 @@ public class GameInProgressState implements GameState {
     @Override
     public void handleMove(GameServer server, String move, int playerId) {
         if (server.getCurrentPlayer().getPlayerId() == playerId) {
-            // Process the move
-            server.getGame().makeMove(server.parseMove(move), playerId);
-            server.broadcastBoardState();
+            Move parsedMove = server.parseMove(move);
+            if (server.getGame().getGameRuleSet().isValidMove(parsedMove, playerId, server.getGame().getBoard())) {
+                // Process the move
+                server.getGame().makeMove(parsedMove, playerId);
+                server.broadcastBoardState();
 
-            // Move to the next player
-            server.nextPlayer();
-            server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!");
-            server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.");
+                // Move to the next player
+                server.nextPlayer();
+                server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!");
+                server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.");
+            } else {
+                server.sendMessageToPlayer(playerId, "Invalid move. Please try again.");
+            }
         } else {
             server.sendMessageToPlayer(playerId, "It's not your turn.");
         }
