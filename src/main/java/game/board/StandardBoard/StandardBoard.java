@@ -186,8 +186,7 @@ public class StandardBoard implements Board,Serializable {
                 playerTargetRegions.put(6,3);
                 initializePlayerPawns(6,6);
                 break;
-            default:
-            
+
         }
     }
 

@@ -151,7 +151,7 @@ public class GameServer {
     }
 
     public static void main(String[] args) throws IOException {
-        GameServer server = new GameServer(5); 
+        GameServer server = new GameServer(2); 
         server.startServer();
     }
 }
