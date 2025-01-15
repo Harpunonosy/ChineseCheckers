@@ -2,9 +2,11 @@ package server;
 
 import factories.StandardGameFactory;
 import game.Game;
+import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
 import game.state.GameState;
 import game.state.WaitingForPlayersState;
+import utils.SerializationUtils;
 import game.state.GameInProgressState;
 
 import java.io.IOException;
@@ -52,9 +54,13 @@ public class GameServer {
         }
     }
 
-    public void broadcastGameState() {
-        for (PlayerHandler player : players) {
-            player.sendMessage(game.getBoard().toString());
+    public void broadcastBoardState() {
+        StandardBoard board = (StandardBoard) game.getBoard();
+        String serializedBoard = SerializationUtils.serializeBoard(board);
+        if (serializedBoard != null) {
+            for (PlayerHandler player : players) {
+                player.sendMessage("BOARD_STATE:" + serializedBoard);
+            }
         }
     }
 
@@ -128,6 +134,7 @@ public class GameServer {
 
     public void processMove(String move, int playerId) {
         currentState.handleMove(this, move, playerId);
+        broadcastBoardState();
     }
 
     /*
@@ -137,7 +144,7 @@ public class GameServer {
     public void startGame() {
         game = new Game(new StandardGameFactory(), maxPlayers);
         setState(new GameInProgressState(this));
-        broadcastGameState();
+        broadcastBoardState();
     }
 
     public static void main(String[] args) throws IOException {

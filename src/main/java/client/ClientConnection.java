@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import game.board.StandardBoard.StandardBoard;
+import utils.SerializationUtils;
+
 public class ClientConnection {
     private Socket socket;
     private PrintWriter out;
@@ -23,6 +26,10 @@ public class ClientConnection {
 
     public String receiveMessage() throws IOException {
         return in.readLine();
+    }
+
+    public StandardBoard deserializeBoard(String serializedBoard) { //Rozpakowywanie planszy
+        return SerializationUtils.deserializeBoard(serializedBoard);
     }
 
     public void close() throws IOException {

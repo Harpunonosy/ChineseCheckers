@@ -1,13 +1,15 @@
 package game.board;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CellVertex{
+public class CellVertex implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Point location;
     private Pawn pawn;
-    private transient List<CCEdge> edges; // Mark edges as transient if they should not be serialized
+    private List<CCEdge> edges;
 
     public CellVertex(Point location) {
         this(location, 0);

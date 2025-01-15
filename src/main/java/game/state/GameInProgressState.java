@@ -22,7 +22,7 @@ public class GameInProgressState implements GameState {
         if (server.getCurrentPlayer().getPlayerId() == playerId) {
             // Process the move
             server.getGame().makeMove(server.parseMove(move), playerId);
-            server.broadcastGameState();
+            server.broadcastBoardState();
 
             // Move to the next player
             server.nextPlayer();
@@ -35,6 +35,6 @@ public class GameInProgressState implements GameState {
 
     @Override
     public void broadcastState(GameServer server) {
-        server.broadcastGameState();
+        server.broadcastBoardState();
     }
 }
