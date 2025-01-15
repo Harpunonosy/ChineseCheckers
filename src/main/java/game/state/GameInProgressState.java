@@ -3,11 +3,15 @@ package game.state;
 import server.GameServer;
 import game.move.Move;
 
+import java.util.Random;
+
 public class GameInProgressState implements GameState {
 
     public GameInProgressState(GameServer server) {
         // Randomly select the first player
-        server.setCurrentPlayer(server.getPlayers().get(0)); // Start with the first player
+        Random random = new Random();
+        int randomIndex = random.nextInt(server.getPlayers().size());
+        server.setCurrentPlayer(server.getPlayers().get(randomIndex)); // Start with a random player
         server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!");
         server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.");
     }

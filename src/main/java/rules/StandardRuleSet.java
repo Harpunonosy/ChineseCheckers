@@ -1,5 +1,4 @@
 package rules;
-import java.util.Map;
 
 import game.board.Board;
 import game.board.CCEdge;
@@ -25,7 +24,7 @@ public class StandardRuleSet implements GameRuleSet{
             return true;
         }
     }
-    
+
     //sprawdź czy możesz przeskoczyć danego pionka
     int midX = (move.getStartX() + move.getEndX()) / 2;
     int midY = (move.getStartY() + move.getEndY()) / 2;
