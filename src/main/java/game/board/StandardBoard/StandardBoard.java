@@ -131,12 +131,61 @@ public class StandardBoard implements Board {
                 initializePlayerPawns(1,1);
                 //player 2
                 playerTargetRegions.put(2,1);
+                initializePlayerPawns(2,4);
+                break;
+            case 3:
+                playerTargetRegions = new HashMap<>();
+                //player1
+                playerTargetRegions.put(1,4);
+                initializePlayerPawns(1,1);
+                //player2
+                playerTargetRegions.put(2,6);
+                initializePlayerPawns(2,3);
+                //player3
+                playerTargetRegions.put(3,2);
+                initializePlayerPawns(3,5);
+                break;
+            case 4:
+                playerTargetRegions = new HashMap<>();
+                //player1
+                playerTargetRegions.put(1,5);
+                initializePlayerPawns(1,2);
+                //player2
+                playerTargetRegions.put(2,6);
+                initializePlayerPawns(2,3);
+                //player3
+                playerTargetRegions.put(3,2);
+                initializePlayerPawns(3,5);
+                //player4
+                playerTargetRegions.put(4,3);
+                initializePlayerPawns(4,6);
+                break;
+            case 6:
+                playerTargetRegions = new HashMap<>();
+                //player1
+                playerTargetRegions.put(1,4);
+                initializePlayerPawns(1,1);
+                //player2
+                playerTargetRegions.put(2,5);
                 initializePlayerPawns(2,2);
+                //player3
+                playerTargetRegions.put(3,6);
+                initializePlayerPawns(3,3);
+                //player4
+                 playerTargetRegions.put(4,1);
+                initializePlayerPawns(4,4);
+                //player5
+                playerTargetRegions.put(5,2);
+                initializePlayerPawns(5,5);
+                //player6
+                playerTargetRegions.put(6,3);
+                initializePlayerPawns(6,6);
+                break;
         }
     }
 
     private void initializePlayerPawns(int playerId, int targetRegion) { //ustawia pionki playera o danym id według przypisanemu mu regionu startowego
-        int[][] positions = getPlayerStartingPositions(targetRegion);
+        int[][] positions = getRegion(targetRegion);
         for (int[] pos : positions) {
             if (matrix[pos[0]][pos[1]] != null) {
                 matrix[pos[0]][pos[1]].setPawn(new Pawn(playerId));
@@ -144,13 +193,13 @@ public class StandardBoard implements Board {
         }
     }
 
-    private int[][] getPlayerStartingPositions(int Region) {
+    public int[][] getRegion(int Region) {
         switch (Region) {
             case 1:
                 return new int[][]{
                     {12, 16}, {11, 15}, {13, 15}, {10, 14}, {12, 14}, {14, 14}, {9, 13}, {11, 13}, {13, 13}, {15, 13}
                 };
-            case 2:
+            case 4:
                 return new int[][]{
                     {12, 0}, {11, 1}, {13, 1}, {10, 2}, {12, 2}, {14, 2}, {9, 3}, {11, 3}, {13, 3}, {15, 3}
                 };
@@ -158,7 +207,7 @@ public class StandardBoard implements Board {
                 return new int[][]{
                     {0, 4}, {2, 4}, {4, 4}, {6, 4}, {1, 5}, {3, 5}, {5, 5}, {2, 6}, {4, 6}, {3,7}
                 };
-            case 4:
+            case 6:
                 return new int[][]{
                     {18, 12}, {20, 12}, {22, 12}, {24, 12}, {19, 11}, {21, 11}, {23, 11}, {20, 10}, {22, 10}, {21,9}
                 };
@@ -166,13 +215,17 @@ public class StandardBoard implements Board {
                 return new int[][]{
                     {18, 4}, {20, 4}, {22, 4}, {24, 4}, {19, 5}, {21, 5}, {23, 5}, {20, 6}, {22, 6}, {21,7}
                 };
-            case 6:
+            case 2:
                 return new int[][]{
                     {0, 12}, {2, 12}, {4, 12}, {6, 12}, {1, 11}, {3, 11}, {5, 11}, {2, 10}, {4, 10}, {3,9}
                 };
             default:
                 return new int[0][0];
         }
+    }
+
+    public Map<Integer, Integer> getPlayerTargetRegions() {
+        return playerTargetRegions;
     }
 
 }

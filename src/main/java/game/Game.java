@@ -22,6 +22,10 @@ public class Game {
       return board;
     }
 
+    public GameRuleSet getGameRuleSet(){
+      return ruleSet;
+    }
+
     public void displayBoard() {
         board.display();
     }

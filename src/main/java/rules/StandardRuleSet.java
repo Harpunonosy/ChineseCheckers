@@ -1,7 +1,10 @@
 package rules;
+import java.util.Map;
+
 import game.board.Board;
 import game.board.CCEdge;
 import game.board.CellVertex;
+import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
 
 public class StandardRuleSet implements GameRuleSet{
@@ -32,8 +35,23 @@ public class StandardRuleSet implements GameRuleSet{
   }
 
   @Override
-  public boolean isGameOver(Board board){
-    //TODO
-    return true;
-  }
+    public boolean isGameOver(Board board, int playerId) {
+        if (board instanceof StandardBoard) {
+            StandardBoard standardBoard = (StandardBoard) board;
+            int targetRegion = standardBoard.getPlayerTargetRegions().get(playerId);
+            return areAllPawnsInTargetRegion(standardBoard, playerId, targetRegion);
+        }
+        return false;
+    }
+
+    private boolean areAllPawnsInTargetRegion(StandardBoard board, int playerId, int targetRegion) {
+        int[][] targetPositions = board.getRegion(targetRegion);
+        for (int[] pos : targetPositions) {
+            CellVertex vertex = board.getVertexAt(pos[0], pos[1]);
+            if (vertex == null || vertex.getPawn() == null || vertex.getPawn().getPlayerId() != playerId) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
