@@ -15,19 +15,27 @@ public class StandardRuleSet implements GameRuleSet{
     CellVertex end = board.getVertexAt(move.getEndX(), move.getEndY());
 
     // Check if the start position contains the player's pawn
-    if (start == null || start.getPawn() == null || start.getPawn().getPlayerId() != playerid) {
+    if (start == null || start.getPawn() == null || start.getPawn().getPlayerId() != playerid || end.getPawn() != null) {
         return false;
-    }
-
-    if(end.getPawn() != null){
-      //TODO CHECK COMBO OR STH
-      return false;
     }
 
     // Check if there is a direct edge between start and end positions
     for (CCEdge edge : start.getEdges()) {
         if (edge.getDestVertex().equals(end)) {
             return true;
+        }
+    }
+    
+    //sprawdź czy możesz przeskoczyć danego pionka
+    int midX = (move.getStartX() + move.getEndX()) / 2;
+    int midY = (move.getStartY() + move.getEndY()) / 2;
+    CellVertex midVertex = board.getVertexAt(midX, midY);
+
+    if (midVertex != null && midVertex.getPawn() != null) {
+        for (CCEdge edge : midVertex.getEdges()) {
+            if (edge.getDestVertex().equals(end)) {
+                return true;
+            }
         }
     }
 

@@ -25,9 +25,13 @@ public class ClientOutputHandler implements Runnable {
                     StandardBoard board = connection.deserializeBoard(serializedBoard);
                     updateBoardUI(board);
                 } else {
-                    System.out.println("Server: " + message);
                     if (message.equals("It's your turn!")) {
                         inputHandler.promptForMove();
+                    } else if (message.startsWith("Invalid move")) {
+                        System.out.println("Server: " + message);
+                        inputHandler.promptForMove();
+                    } else {
+                        System.out.println("Server: " + message);
                     }
                 }
             }
