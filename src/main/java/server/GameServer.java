@@ -24,6 +24,9 @@ public class GameServer {
     private PlayerHandler currentPlayer;
 
     public GameServer(int maxPlayers) {
+        if (maxPlayers < 2 || maxPlayers > 6 || maxPlayers == 5) {
+            throw new IllegalArgumentException("Invalid number of players. The game supports between 2 3 4 or 6 players");
+        }
         this.maxPlayers = maxPlayers;
         this.playerCount = 0;
         this.currentState = new WaitingForPlayersState();
@@ -148,7 +151,7 @@ public class GameServer {
     }
 
     public static void main(String[] args) throws IOException {
-        GameServer server = new GameServer(2); // Example with 3 players
+        GameServer server = new GameServer(5); 
         server.startServer();
     }
 }
