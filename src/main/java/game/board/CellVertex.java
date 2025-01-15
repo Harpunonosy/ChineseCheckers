@@ -4,10 +4,10 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CellVertex {
+public class CellVertex{
     private Point location;
     private Pawn pawn;
-    private List<CCEdge> edges;
+    private transient List<CCEdge> edges; // Mark edges as transient if they should not be serialized
 
     public CellVertex(Point location) {
         this(location, 0);

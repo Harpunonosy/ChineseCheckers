@@ -1,6 +1,7 @@
 package game.board.StandardBoard;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import game.board.Pawn;
 import game.move.Move;
 import rules.StandardRuleSet;
 
-public class StandardBoard implements Board {
+public class StandardBoard implements Board,Serializable {
     private Map<Point, CellVertex> vertices; // Nie wiem czy to będzie przydatne
     private CellVertex[][] matrix; // Plansza
     private Map<Integer, Integer> playerTargetRegions; // Do przypisywania kto ma gdzie iść
@@ -85,6 +86,10 @@ public class StandardBoard implements Board {
 
     public CellVertex getVertexAt(int x, int y) {
       return vertices.get(new Point(x, y));
+    }
+
+    public CellVertex[][] getMatrix(){
+        return matrix;
     }
 
     @Override

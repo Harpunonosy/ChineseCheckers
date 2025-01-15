@@ -1,6 +1,6 @@
 package game.board;
 
-public class Pawn {
+public class Pawn{
     private int playerId;
 
     public Pawn(int playerId) {
