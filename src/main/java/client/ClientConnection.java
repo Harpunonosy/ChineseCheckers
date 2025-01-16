@@ -18,8 +18,8 @@ public class ClientConnection {
 
     public ClientConnection(String serverAddress) throws IOException {
         socket = new Socket(serverAddress, 12345);
-        out = new PrintWriter(socket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        out = new PrintWriter(socket.getOutputStream(), true); // To server
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // From server
     }
 
     public void sendMessage(Message message) {

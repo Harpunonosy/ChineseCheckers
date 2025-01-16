@@ -55,8 +55,8 @@ public class GameServer {
 
     public void broadcastPlayerInfo() {
         Message message = new Message("PLAYER_INFO", "Player " + playerCount + "/" + maxPlayers + " players connected.");
-        for (PlayerHandler player : players) {
-            player.sendMessage(message);
+        for (PlayerHandler playerHandler : players) {
+            playerHandler.sendMessage(message);
         }
     }
 
@@ -65,8 +65,8 @@ public class GameServer {
         String serializedBoard = SerializationUtils.serializeBoard(board);
         if (serializedBoard != null) {
             Message message = new Message("BOARD_STATE", serializedBoard);
-            for (PlayerHandler player : players) {
-                player.sendMessage(message);
+            for (PlayerHandler playerHandler : players) {
+                playerHandler.sendMessage(message);
             }
         }
     }

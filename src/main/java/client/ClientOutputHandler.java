@@ -3,7 +3,6 @@ package client;
 import game.board.CellVertex;
 import game.board.Pawn;
 import game.board.StandardBoard.StandardBoard;
-
 import java.io.IOException;
 import utils.message.Message;
 
