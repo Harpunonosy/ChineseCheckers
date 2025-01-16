@@ -6,46 +6,47 @@ import game.board.CellVertex;
 import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
 
-public class StandardRuleSet implements GameRuleSet{
+public class StandardRuleSet implements GameRuleSet {
 
-  @Override
-  public boolean isValidMove(Move move, int playerid, Board board){
-   CellVertex start = board.getVertexAt(move.getStartX(), move.getStartY());
-    CellVertex end = board.getVertexAt(move.getEndX(), move.getEndY());
+    @Override
+    public boolean isValidMove(Move move, int playerId, Board board) {
+        StandardBoard standardBoard = (StandardBoard) board;
+        CellVertex start = standardBoard.getVertexAt(move.getStartX(), move.getStartY());
+        CellVertex end = standardBoard.getVertexAt(move.getEndX(), move.getEndY());
 
-    // Check if the start position contains the player's pawn
-    if (start == null || start.getPawn() == null || start.getPawn().getPlayerId() != playerid || end.getPawn() != null) {
-        return false;
-    }
-
-    // Check if there is a direct edge between start and end positions
-    for (CCEdge edge : start.getEdges()) {
-        if (edge.getDestVertex().equals(end)) {
-            return true;
+        // Check if the start position contains the player's pawn
+        if (start == null || start.getPawn() == null || start.getPawn().getPlayerId() != playerId || end.getPawn() != null) {
+            return false;
         }
-    }
 
-    //sprawdź czy możesz przeskoczyć danego pionka
-    int midX = (move.getStartX() + move.getEndX()) / 2;
-    int midY = (move.getStartY() + move.getEndY()) / 2;
-    CellVertex midVertex = board.getVertexAt(midX, midY);
-
-    if (midVertex != null && midVertex.getPawn() != null) {
-        for (CCEdge edge : midVertex.getEdges()) {
+        // Check if there is a direct edge between start and end positions
+        for (CCEdge edge : start.getEdges()) {
             if (edge.getDestVertex().equals(end)) {
                 return true;
             }
         }
+
+        // Check if the move is a valid jump over another pawn
+        int midX = (move.getStartX() + move.getEndX()) / 2;
+        int midY = (move.getStartY() + move.getEndY()) / 2;
+        CellVertex midVertex = standardBoard.getVertexAt(midX, midY);
+
+        if (midVertex != null && midVertex.getPawn() != null) {
+            for (CCEdge edge : midVertex.getEdges()) {
+                if (edge.getDestVertex().equals(end)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
-    return false;
-  }
-
-  @Override
+    @Override
     public boolean isGameOver(Board board, int playerId) {
         if (board instanceof StandardBoard) {
             StandardBoard standardBoard = (StandardBoard) board;
-            int targetRegion = standardBoard.getPlayerTargetRegions().get(playerId);
+            int targetRegion = standardBoard.getPlayersTargetRegions().get(playerId);
             return areAllPawnsInTargetRegion(standardBoard, playerId, targetRegion);
         }
         return false;

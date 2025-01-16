@@ -1,9 +1,8 @@
 package game.state;
 
+import java.util.Random;
 import server.GameServer;
 import game.move.Move;
-
-import java.util.Random;
 
 public class GameInProgressState implements GameState {
 
@@ -12,6 +11,11 @@ public class GameInProgressState implements GameState {
         Random random = new Random();
         int randomIndex = random.nextInt(server.getPlayers().size());
         server.setCurrentPlayer(server.getPlayers().get(randomIndex)); // Start with a random player
+        
+        // Broadcast the board state to the current player
+        server.broadcastBoardState();
+        
+        // Notify the current player that it's their turn
         server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!");
         server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.");
     }

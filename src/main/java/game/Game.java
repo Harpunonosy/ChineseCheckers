@@ -32,7 +32,7 @@ public class Game {
 
     public void makeMove(Move move, int playerId){
       if(ruleSet.isValidMove(move, playerId, board)){
-        board.makeMove(move, playerId);
+        board.makeMove(move, playerId, ruleSet);
       }
     }
 

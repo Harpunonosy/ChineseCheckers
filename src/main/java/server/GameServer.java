@@ -45,6 +45,10 @@ public class GameServer {
             System.out.println("Player connected: " + players.size() + "/" + maxPlayers);
         }
     }
+    //TODO DELETE AFTER GUI IS MADE
+    public boolean teleportPawn(int startX, int startY, int endX, int endY) {
+        return ((StandardBoard) game.getBoard()).teleportPawn(startX, startY, endX, endY);
+    }
 
     /*
      *  metody do rozsyłania
@@ -135,10 +139,32 @@ public class GameServer {
         return new Move(startX, startY, endX, endY);
     }
 
+    //TODO DELETE AFTER GUI IS READY
     public void processMove(String move, int playerId) {
-        currentState.handleMove(this, move, playerId);
-        broadcastBoardState();
+        if (move.startsWith("teleport")) {
+            String[] parts = move.substring("teleport".length()).split("-");
+            int startX = Integer.parseInt(parts[0]);
+            int startY = Integer.parseInt(parts[1]);
+            int endX = Integer.parseInt(parts[2]);
+            int endY = Integer.parseInt(parts[3]);
+            boolean success = teleportPawn(startX, startY, endX, endY);
+            if (success) {
+                sendMessageToPlayer(playerId, "Teleport successful.");
+                broadcastBoardState();
+            } else {
+                sendMessageToPlayer(playerId, "Teleport failed. Either the start position does not contain your pawn or the end position is occupied.");
+            }
+        } else {
+            currentState.handleMove(this, move, playerId);
+            broadcastBoardState();
+        }
     }
+
+
+    // public void processMove(String move, int playerId) {
+    //     currentState.handleMove(this, move, playerId);
+    //     broadcastBoardState();
+    // }
 
     /*
      * STARTOWANIE

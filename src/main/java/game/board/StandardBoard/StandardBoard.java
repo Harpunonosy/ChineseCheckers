@@ -10,9 +10,9 @@ import game.board.CCEdge;
 import game.board.CellVertex;
 import game.board.Pawn;
 import game.move.Move;
-import rules.StandardRuleSet;
+import rules.GameRuleSet;
 
-public class StandardBoard implements Board,Serializable {
+public class StandardBoard implements Board, Serializable {
     private Map<Point, CellVertex> vertices; // Nie wiem czy to będzie przydatne
     private CellVertex[][] matrix; // Plansza
     private Map<Integer, Integer> playerTargetRegions; // Do przypisywania kto ma gdzie iść
@@ -48,7 +48,7 @@ public class StandardBoard implements Board,Serializable {
 
     //sprawdza czy powinien być vertex na danych współrzędnych
     protected boolean isValidPosition(int x, int y) {
-      if((x+y) % 2 != 0) return false;
+        if((x+y) % 2 != 0) return false;
         // Przykładowa logika sprawdzania, czy pozycja jest prawidłowa
         if (x < 0 || x >= 25 || y < 0 || y >= 17) {
             return false;
@@ -85,7 +85,7 @@ public class StandardBoard implements Board,Serializable {
     }
 
     public CellVertex getVertexAt(int x, int y) {
-      return vertices.get(new Point(x, y));
+        return vertices.get(new Point(x, y));
     }
 
     public CellVertex[][] getMatrix(){
@@ -93,25 +93,37 @@ public class StandardBoard implements Board,Serializable {
     }
 
     @Override
-    public void makeMove(Move move, int playerId) {
-        StandardRuleSet ruleSet = new StandardRuleSet();
-    if (ruleSet.isValidMove(move, playerId, this)) {
-        // Implementacja wykonania ruchu
-        CellVertex start = matrix[move.getStartX()][move.getStartY()];
-        CellVertex end = matrix[move.getEndX()][move.getEndY()];
-        // Przenieś pionek z wierzchołka start do wierzchołka end
-        end.setPawn(start.getPawn());
-        start.setPawn(null);
-    } else {
-        System.out.println("Ruch jest nielegalny");
+    public void makeMove(Move move, int playerId, GameRuleSet ruleSet) {
+        if (ruleSet.isValidMove(move, playerId, this)) {
+            // Implementacja wykonania ruchu
+            CellVertex start = matrix[move.getStartX()][move.getStartY()];
+            CellVertex end = matrix[move.getEndX()][move.getEndY()];
+            // Przenieś pionek z wierzchołka start do wierzchołka end
+            end.setPawn(start.getPawn());
+            start.setPawn(null);
+        } else {
+            System.out.println("Ruch jest nielegalny");
+        }
     }
+
+    //TODO DELETE THAT LATER WHEN GUI IS READY
+    public boolean teleportPawn(int startX, int startY, int endX, int endY) {
+        CellVertex startVertex = getVertexAt(startX, startY);
+        CellVertex endVertex = getVertexAt(endX, endY);
+
+        if (startVertex != null && startVertex.getPawn() != null && endVertex != null && endVertex.getPawn() == null) {
+            endVertex.setPawn(startVertex.getPawn());
+            startVertex.setPawn(null);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void display() {
         // Implementacja wyświetlania planszy
         for (int y = 0; y < 17; y++) {
-            for (int x = 0; x < 25; x++) {
+            for (int x = 0;  x < 25; x++) {
                 if (matrix[x][y] != null) {
                     Pawn pawn = matrix[x][y].getPawn();
                     if (pawn != null) {
@@ -133,10 +145,10 @@ public class StandardBoard implements Board,Serializable {
                 playerTargetRegions = new HashMap<>();
                 //player 1
                 playerTargetRegions.put(1,2);
-                initializePlayerPawns(1,1);
+                initializePlayerPawns(1,11); //15 pieces for 2 players
                 //player 2
                 playerTargetRegions.put(2,1);
-                initializePlayerPawns(2,4);
+                initializePlayerPawns(2,22); //15 pieces for 2 players
                 break;
             case 3:
                 playerTargetRegions = new HashMap<>();
@@ -199,7 +211,7 @@ public class StandardBoard implements Board,Serializable {
         }
     }
 
-    public int[][] getRegion(int Region) {
+    public int[][] getRegion(int Region) { //Regions are counted from the bottom one as 1 to 6 in circle
         switch (Region) {
             case 1:
                 return new int[][]{
@@ -225,12 +237,20 @@ public class StandardBoard implements Board,Serializable {
                 return new int[][]{
                     {0, 12}, {2, 12}, {4, 12}, {6, 12}, {1, 11}, {3, 11}, {5, 11}, {2, 10}, {4, 10}, {3,9}
                 };
+            case 11: //Special case when 2 people are playing (15 pieces) FIRST PLAYER
+                return new int[][]{
+                    {12, 16}, {11, 15}, {13, 15}, {10, 14}, {12, 14}, {14, 14}, {9, 13}, {11, 13}, {13, 13}, {15, 13}, {8, 12}, {10,12}, {12,12}, {14,12}, {16,12}
+                };
+            case 22: //Special case when 2 people are playing (15 pieces) SECOND PLAYER
+                return new int[][]{
+                    {12, 0}, {11, 1}, {13, 1}, {10, 2}, {12, 2}, {14, 2}, {9, 3}, {11, 3}, {13, 3}, {15, 3}, {8, 4}, {10, 4}, {12, 4}, {14, 4}, {16, 4}
+                };
             default:
                 return new int[0][0];
         }
     }
 
-    public Map<Integer, Integer> getPlayerTargetRegions() {
+    public Map<Integer, Integer> getPlayersTargetRegions() {
         return playerTargetRegions;
     }
 

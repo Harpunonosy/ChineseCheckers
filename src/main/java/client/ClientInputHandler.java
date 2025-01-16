@@ -21,8 +21,8 @@ public class ClientInputHandler {
         while (true) {
             System.out.print("Enter move (startX-startY-endX-endY): ");
             move = scanner.nextLine();
-            try {
-                if (isValidMoveFormat(move)) {
+            try { //TODO DELETE SECON CONDITION
+                if (isValidMoveFormat(move) || isValidTeleportFormat(move)) {
                     connection.sendMessage(move);
                     break;
                 } else {
@@ -36,5 +36,9 @@ public class ClientInputHandler {
 
     private boolean isValidMoveFormat(String move) {
         return move.matches("\\d+-\\d+-\\d+-\\d+");
+    }
+    //TODO DELETE LATER
+    private boolean isValidTeleportFormat(String move) {
+        return move.matches("teleport\\d+-\\d+-\\d+-\\d+");
     }
 }
