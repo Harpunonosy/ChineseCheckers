@@ -5,6 +5,7 @@ import game.board.Pawn;
 import game.board.StandardBoard.StandardBoard;
 
 import java.io.IOException;
+import utils.message.Message;
 
 public class ClientOutputHandler implements Runnable {
     private ClientConnection connection;
@@ -18,20 +19,15 @@ public class ClientOutputHandler implements Runnable {
     @Override
     public void run() {
         try {
-            String message;
+            Message message;
             while ((message = connection.receiveMessage()) != null) {
-                if (message.startsWith("BOARD_STATE:")) {
-                    String serializedBoard = message.substring("BOARD_STATE:".length());
-                    StandardBoard board = connection.deserializeBoard(serializedBoard);
+                if (message.getType().equals("BOARD_STATE")) {
+                    StandardBoard board = connection.deserializeBoard(message.getContent());
                     updateBoardUI(board);
-                } else {
-                    if (message.equals("It's your turn!")) {
+                } else if (message.getType().equals("MESSAGE")) {
+                    System.out.println("Server: " + message.getContent());
+                    if (message.getContent().equals("It's your turn!")) {
                         inputHandler.promptForMove();
-                    } else if (message.startsWith("Invalid move")) {
-                        System.out.println("Server: " + message);
-                        inputHandler.promptForMove();
-                    } else {
-                        System.out.println("Server: " + message);
                     }
                 }
             }

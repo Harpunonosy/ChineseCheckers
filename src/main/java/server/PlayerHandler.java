@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import utils.message.Message;
+import utils.message.MessageUtils;
 
 public class PlayerHandler implements Runnable {
     private Socket socket;
@@ -28,18 +30,20 @@ public class PlayerHandler implements Runnable {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            String move;
-            while ((move = in.readLine()) != null) {
-                System.out.println("Received move from player " + playerId + ": " + move + '\n');
-                server.processMove(move, playerId);
+            String json;
+            while ((json = in.readLine()) != null) {
+                Message message = MessageUtils.deserializeMessage(json);
+                System.out.println("Received message from player " + playerId + ": " + message.getContent());
+                server.processMove(message.getContent(), playerId);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void sendMessage(String message) {
-        out.println(message);
+    public void sendMessage(Message message) {
+        String json = MessageUtils.serializeMessage(message);
+        out.println(json);
     }
 
     public int getPlayerId() {

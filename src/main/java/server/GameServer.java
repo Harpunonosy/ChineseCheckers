@@ -6,6 +6,8 @@ import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
 import game.state.GameState;
 import game.state.WaitingForPlayersState;
+import utils.message.Message;
+import utils.message.MessageUtils;
 import utils.SerializationUtils;
 import game.state.GameInProgressState;
 
@@ -45,19 +47,16 @@ public class GameServer {
             System.out.println("Player connected: " + players.size() + "/" + maxPlayers);
         }
     }
-    //TODO DELETE AFTER GUI IS MADE
-    public boolean teleportPawn(int startX, int startY, int endX, int endY) {
-        return ((StandardBoard) game.getBoard()).teleportPawn(startX, startY, endX, endY);
-    }
 
+    // Communication Methods
     /*
-     *  metody do rozsyłania
+     * Communication Methods
      */
 
     public void broadcastPlayerInfo() {
+        Message message = new Message("PLAYER_INFO", "Player " + playerCount + "/" + maxPlayers + " players connected.");
         for (PlayerHandler player : players) {
-            player.sendMessage("Player " + player.getPlayerId() + " connected. " +
-                    playerCount + "/" + maxPlayers + " players connected.");
+            player.sendMessage(message);
         }
     }
 
@@ -65,24 +64,28 @@ public class GameServer {
         StandardBoard board = (StandardBoard) game.getBoard();
         String serializedBoard = SerializationUtils.serializeBoard(board);
         if (serializedBoard != null) {
+            Message message = new Message("BOARD_STATE", serializedBoard);
             for (PlayerHandler player : players) {
-                player.sendMessage("BOARD_STATE:" + serializedBoard);
+                player.sendMessage(message);
             }
         }
     }
 
-    public void sendMessageToPlayer(int playerId, String message) {
+    public void sendMessageToPlayer(int playerId, String messageContent) {
+        Message message = new Message("MESSAGE", messageContent);
         players.get(playerId - 1).sendMessage(message);
     }
 
-    public void broadcastMessage(String message) {
+    public void broadcastMessage(String messageContent) {
+        Message message = new Message("MESSAGE", messageContent);
         for (PlayerHandler player : players) {
             player.sendMessage(message);
         }
     }
 
+    // Player Management Methods
     /*
-     * metody do zarządzania graczami
+     * Player Management Methods
      */
 
     public void setCurrentPlayer(PlayerHandler currentPlayer) {
@@ -114,8 +117,9 @@ public class GameServer {
         currentPlayer = players.get((currentIndex + 1) % players.size());
     }
 
+    // Game State Methods
     /*
-     * STAN GRY
+     * Game State Methods
      */
 
     public void setState(GameState state) {
@@ -126,11 +130,12 @@ public class GameServer {
         return game;
     }
 
+    // Move Handling Methods
     /*
-     * RUCH
+     * Move Handling Methods
      */
 
-     public Move parseMove(String move) {
+    public Move parseMove(String move) {
         String[] parts = move.split("-");
         int startX = Integer.parseInt(parts[0]);
         int startY = Integer.parseInt(parts[1]);
@@ -160,14 +165,14 @@ public class GameServer {
         }
     }
 
+    //TODO DELETE AFTER GUI IS MADE
+    public boolean teleportPawn(int startX, int startY, int endX, int endY) {
+        return ((StandardBoard) game.getBoard()).teleportPawn(startX, startY, endX, endY);
+    }
 
-    // public void processMove(String move, int playerId) {
-    //     currentState.handleMove(this, move, playerId);
-    //     broadcastBoardState();
-    // }
-
+    // Game Initialization Methods
     /*
-     * STARTOWANIE
+     * Game Initialization Methods
      */
 
     public void startGame() {

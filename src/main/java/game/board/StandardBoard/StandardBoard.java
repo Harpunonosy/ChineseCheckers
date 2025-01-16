@@ -24,7 +24,11 @@ public class StandardBoard implements Board, Serializable {
 
     @Override
     public void initialize() {
-        // Inicjalizacja wierzchołków
+        initializeVertices();
+        initializeEdges();
+    }
+
+    private void initializeVertices() {
         for (int x = 0; x < 25; x++) {
             for (int y = 0; y < 17; y++) {
                 if (isValidPosition(x, y)) {
@@ -34,8 +38,9 @@ public class StandardBoard implements Board, Serializable {
                 }
             }
         }
+    }
 
-        // Dodawanie krawędzi
+    private void initializeEdges() {
         for (int x = 0; x < 25; x++) {
             for (int y = 0; y < 17; y++) {
                 if (matrix[x][y] != null) {
