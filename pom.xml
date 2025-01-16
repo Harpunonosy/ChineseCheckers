@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://www.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
@@ -90,6 +90,30 @@
             <id>Work</id>
             <properties>
                 <exec.mainClass>game.board.Main</exec.mainClass>
+            </properties>
+        </profile>
+        <profile>
+            <id>javafx</id>
+            <properties>
+                <javafx.version>17.0.1</javafx.version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-controls</artifactId>
+                    <version>${javafx.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-fxml</artifactId>
+                    <version>${javafx.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>gui</id>
+            <properties>
+                <exec.mainClass>GUI.GUI</exec.mainClass>
             </properties>
         </profile>
     </profiles>
