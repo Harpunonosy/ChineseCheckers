@@ -160,7 +160,7 @@ public class GameServer {
     }
 
     public static void main(String[] args) throws IOException {
-        GameServer server = new GameServer(3);
+        GameServer server = new GameServer(2);
         server.startServer();
     }
 }
