@@ -88,6 +88,7 @@ public class ClientOutputHandler implements Runnable {
                 FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/GUI/InGameClient.fxml")));
                 Parent root = loader.load();
                 gameController = loader.getController();
+                gameController.setInputHandler(inputHandler); // Przekazanie instancji ClientInputHandler
 
                 Stage stage = (Stage) startController.getClientIdLabel().getScene().getWindow();
                 stage.setScene(new Scene(root, 1920, 1080));

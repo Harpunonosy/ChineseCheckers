@@ -23,6 +23,18 @@ public class ClientInputHandler {
      * Communication Methods
      */
 
+    public void sendMove(String move) {
+        try {
+            if (isValidMoveFormat(move)) {
+                Message message = new Message(MessageType.MOVE, move);
+                connection.sendMessage(message);
+            } else {
+                throw new InvalidMoveFormatException("Invalid move format. Please enter in the format x1-y1-x2-y2.");
+            }
+        } catch (InvalidMoveFormatException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void promptForMove() {
         String move;
         while (true) {
