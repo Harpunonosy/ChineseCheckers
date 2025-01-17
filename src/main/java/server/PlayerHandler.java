@@ -6,12 +6,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import utils.message.Message;
+import utils.message.MessageType;
 import utils.message.MessageUtils;
 
 public class PlayerHandler implements Runnable {
     private Socket socket;
     private GameServer server;
     private PrintWriter out;
+    private BufferedReader in;
     private int playerId;
 
     public PlayerHandler(Socket socket, GameServer server, int playerId) {
@@ -20,6 +22,7 @@ public class PlayerHandler implements Runnable {
         this.playerId = playerId;
         try {
             this.out = new PrintWriter(socket.getOutputStream(), true);
+            this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,16 +31,24 @@ public class PlayerHandler implements Runnable {
     @Override
     public void run() {
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
             String json;
             while ((json = in.readLine()) != null) {
                 Message message = MessageUtils.deserializeMessage(json);
                 System.out.println("Received message from player " + playerId + ": " + message.getContent());
-                server.processMove(message.getContent(), playerId);
+                handleMessage(message);
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void handleMessage(Message message) {
+        switch (message.getType()) {
+            case MOVE:
+                server.processMove(message.getContent(), playerId);
+                break;
+            default:
+                System.out.println("Unknown message type: " + message.getType());
         }
     }
 

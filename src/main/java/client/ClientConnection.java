@@ -22,12 +22,12 @@ public class ClientConnection {
         in = new BufferedReader(new InputStreamReader(socket.getInputStream())); // From server
     }
 
-    public void sendMessage(Message message) {
+    public void sendMessage(Message message) { //Send Message to server
         String json = MessageUtils.serializeMessage(message);
         out.println(json);
     }
 
-    public Message receiveMessage() throws IOException {
+    public Message receiveMessage() throws IOException { //Get message from server
         String json = in.readLine();
         return MessageUtils.deserializeMessage(json);
     }

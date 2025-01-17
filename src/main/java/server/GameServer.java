@@ -7,6 +7,7 @@ import game.move.Move;
 import game.state.GameState;
 import game.state.WaitingForPlayersState;
 import utils.message.Message;
+import utils.message.MessageType;
 import utils.message.MessageUtils;
 import utils.SerializationUtils;
 import game.state.GameInProgressState;
@@ -54,7 +55,7 @@ public class GameServer {
      */
 
     public void broadcastPlayerInfo() {
-        Message message = new Message("PLAYER_INFO", "Player " + playerCount + "/" + maxPlayers + " players connected.");
+        Message message = new Message(MessageType.INFO, "Player " + playerCount + "/" + maxPlayers + " players connected.");
         for (PlayerHandler playerHandler : players) {
             playerHandler.sendMessage(message);
         }
@@ -64,7 +65,7 @@ public class GameServer {
         StandardBoard board = (StandardBoard) game.getBoard();
         String serializedBoard = SerializationUtils.serializeBoard(board);
         if (serializedBoard != null) {
-            Message message = new Message("BOARD_STATE", serializedBoard);
+            Message message = new Message(MessageType.BOARD_STATE, serializedBoard);
             for (PlayerHandler playerHandler : players) {
                 playerHandler.sendMessage(message);
             }
@@ -72,12 +73,12 @@ public class GameServer {
     }
 
     public void sendMessageToPlayer(int playerId, String messageContent) {
-        Message message = new Message("MESSAGE", messageContent);
+        Message message = new Message(MessageType.INFO, messageContent);
         players.get(playerId - 1).sendMessage(message);
     }
 
     public void broadcastMessage(String messageContent) {
-        Message message = new Message("MESSAGE", messageContent);
+        Message message = new Message(MessageType.INFO, messageContent);
         for (PlayerHandler player : players) {
             player.sendMessage(message);
         }
@@ -124,6 +125,10 @@ public class GameServer {
 
     public void setState(GameState state) {
         this.currentState = state;
+    }
+
+    public GameState getState(){
+        return currentState;
     }
 
     public Game getGame() {

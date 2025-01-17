@@ -26,10 +26,6 @@ public class Game {
       return ruleSet;
     }
 
-    public void displayBoard() {
-        board.display();
-    }
-
     public void makeMove(Move move, int playerId){
       if(ruleSet.isValidMove(move, playerId, board)){
         board.makeMove(move, playerId, ruleSet);

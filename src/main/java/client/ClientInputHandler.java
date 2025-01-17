@@ -1,8 +1,9 @@
 package client;
 
 import java.util.Scanner;
-import exceptions.*;
+import exceptions.InvalidMoveFormatException;
 import utils.message.Message;
+import utils.message.MessageType;
 
 public class ClientInputHandler {
     private ClientConnection connection;
@@ -28,8 +29,8 @@ public class ClientInputHandler {
             System.out.print("Enter move (startX-startY-endX-endY): ");
             move = scanner.nextLine();
             try {
-                if (isValidMoveFormat(move) || isValidTeleportFormat(move)) {
-                    Message message = new Message("MOVE", move);
+                if (isValidMoveFormat(move)) {
+                    Message message = new Message(MessageType.MOVE, move);
                     connection.sendMessage(message);
                     break;
                 } else {
@@ -43,9 +44,5 @@ public class ClientInputHandler {
 
     private boolean isValidMoveFormat(String move) {
         return move.matches("\\d+-\\d+-\\d+-\\d+");
-    }
-
-    private boolean isValidTeleportFormat(String move) {
-        return move.matches("teleport\\d+-\\d+-\\d+-\\d+");
     }
 }

@@ -3,8 +3,10 @@ package client;
 import game.board.CellVertex;
 import game.board.Pawn;
 import game.board.StandardBoard.StandardBoard;
+
 import java.io.IOException;
 import utils.message.Message;
+import utils.message.MessageType;
 
 public class ClientOutputHandler implements Runnable {
     private ClientConnection connection;
@@ -20,18 +22,27 @@ public class ClientOutputHandler implements Runnable {
         try {
             Message message;
             while ((message = connection.receiveMessage()) != null) {
-                if (message.getType().equals("BOARD_STATE")) {
-                    StandardBoard board = connection.deserializeBoard(message.getContent());
-                    updateBoardUI(board);
-                } else if (message.getType().equals("MESSAGE")) {
-                    System.out.println("Server: " + message.getContent());
-                    if (message.getContent().equals("It's your turn!")) {
-                        inputHandler.promptForMove();
-                    }
-                }
+                handleMessage(message);
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void handleMessage(Message message) {
+        switch (message.getType()) {
+            case BOARD_STATE:
+                StandardBoard board = connection.deserializeBoard(message.getContent());
+                updateBoardUI(board);
+                break;
+            case INFO:
+                System.out.println("Server: " + message.getContent());
+                if (message.getContent().equals("It's your turn!")) {
+                    inputHandler.promptForMove();
+                }
+                break;
+            default:
+                System.out.println("Unknown message type: " + message.getType());
         }
     }
 

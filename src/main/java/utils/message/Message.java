@@ -1,15 +1,15 @@
 package utils.message;
 
 public class Message {
-    private String type;
+    private MessageType type;
     private String content;
 
-    public Message(String type, String content) {
+    public Message(MessageType type, String content) {
         this.type = type;
         this.content = content;
     }
 
-    public String getType() {
+    public MessageType getType() {
         return type;
     }
 
@@ -17,7 +17,7 @@ public class Message {
         return content;
     }
 
-    public void setType(String type) {
+    public void setType(MessageType type) {
         this.type = type;
     }
 
