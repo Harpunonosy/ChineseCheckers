@@ -8,7 +8,6 @@ public class WaitingForPlayersState implements GameState {
         server.incrementPlayerCount();
         server.broadcastPlayerInfo();
         if (server.getPlayerCount() >= server.getMaxPlayers()) {
-            //server.setState(new GameInProgressState());
             server.startGame();
         }
     }

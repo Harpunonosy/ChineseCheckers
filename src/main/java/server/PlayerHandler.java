@@ -31,6 +31,9 @@ public class PlayerHandler implements Runnable {
     @Override
     public void run() {
         try {
+            // Send player ID to client
+            sendMessage(new Message(MessageType.INFO, "Your ID: " + playerId)); //GIVE CLIENT HIS ID
+
             String json;
             while ((json = in.readLine()) != null) {
                 Message message = MessageUtils.deserializeMessage(json);

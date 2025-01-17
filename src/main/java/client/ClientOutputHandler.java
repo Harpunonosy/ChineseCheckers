@@ -1,16 +1,26 @@
 package client;
 
+import GUI.ClientStartController;
+import GUI.InGameClientController;
 import game.board.CellVertex;
 import game.board.Pawn;
 import game.board.StandardBoard.StandardBoard;
-
-import java.io.IOException;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import utils.message.Message;
 import utils.message.MessageType;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class ClientOutputHandler implements Runnable {
     private ClientConnection connection;
     private ClientInputHandler inputHandler;
+    private ClientStartController startController;
+    private InGameClientController gameController;
 
     public ClientOutputHandler(ClientConnection connection, ClientInputHandler inputHandler) {
         this.connection = connection;
@@ -36,10 +46,17 @@ public class ClientOutputHandler implements Runnable {
                 updateBoardUI(board);
                 break;
             case INFO:
-                System.out.println("Server: " + message.getContent());
-                if (message.getContent().equals("It's your turn!")) {
-                    inputHandler.promptForMove();
-                }
+                Platform.runLater(() -> {
+                    if (startController != null) {
+                        startController.setInfo(message.getContent());
+                        if (message.getContent().startsWith("Your ID: ")) {
+                            int clientId = Integer.parseInt(message.getContent().substring(9));
+                            startController.setClientId(clientId);
+                        } else if (message.getContent().equals("Game started")) {
+                            switchToGameScene();
+                        }
+                    }
+                });
                 break;
             default:
                 System.out.println("Unknown message type: " + message.getType());
@@ -63,5 +80,25 @@ public class ClientOutputHandler implements Runnable {
             }
             System.out.println();
         }
+    }
+
+    private void switchToGameScene() {
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/GUI/InGameClient.fxml")));
+                Parent root = loader.load();
+                gameController = loader.getController();
+
+                Stage stage = (Stage) startController.getClientIdLabel().getScene().getWindow();
+                stage.setScene(new Scene(root, 1920, 1080));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void setStartController(ClientStartController startController) {
+        this.startController = startController;
     }
 }

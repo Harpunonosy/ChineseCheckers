@@ -4,13 +4,12 @@ import factories.StandardGameFactory;
 import game.Game;
 import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
+import game.state.GameInProgressState;
 import game.state.GameState;
 import game.state.WaitingForPlayersState;
 import utils.message.Message;
 import utils.message.MessageType;
-import utils.message.MessageUtils;
 import utils.SerializationUtils;
-import game.state.GameInProgressState;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -49,10 +48,16 @@ public class GameServer {
         }
     }
 
-    // Communication Methods
-    /*
-     * Communication Methods
-     */
+    public void startGame() {
+        game = new Game(new StandardGameFactory(), maxPlayers);
+        setState(new GameInProgressState(this));
+        broadcastMessage("Game started");
+        broadcastBoardState();
+    }
+
+    public void setState(GameState state) {
+        this.currentState = state;
+    }
 
     public void broadcastPlayerInfo() {
         Message message = new Message(MessageType.INFO, "Player " + playerCount + "/" + maxPlayers + " players connected.");
@@ -84,11 +89,6 @@ public class GameServer {
         }
     }
 
-    // Player Management Methods
-    /*
-     * Player Management Methods
-     */
-
     public void setCurrentPlayer(PlayerHandler currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
@@ -118,15 +118,6 @@ public class GameServer {
         currentPlayer = players.get((currentIndex + 1) % players.size());
     }
 
-    // Game State Methods
-    /*
-     * Game State Methods
-     */
-
-    public void setState(GameState state) {
-        this.currentState = state;
-    }
-
     public GameState getState(){
         return currentState;
     }
@@ -134,11 +125,6 @@ public class GameServer {
     public Game getGame() {
         return game;
     }
-
-    // Move Handling Methods
-    /*
-     * Move Handling Methods
-     */
 
     public Move parseMove(String move) {
         String[] parts = move.split("-");
@@ -149,7 +135,6 @@ public class GameServer {
         return new Move(startX, startY, endX, endY);
     }
 
-    //TODO DELETE AFTER GUI IS READY
     public void processMove(String move, int playerId) {
         if (move.startsWith("teleport")) {
             String[] parts = move.substring("teleport".length()).split("-");
@@ -170,20 +155,8 @@ public class GameServer {
         }
     }
 
-    //TODO DELETE AFTER GUI IS MADE
     public boolean teleportPawn(int startX, int startY, int endX, int endY) {
         return ((StandardBoard) game.getBoard()).teleportPawn(startX, startY, endX, endY);
-    }
-
-    // Game Initialization Methods
-    /*
-     * Game Initialization Methods
-     */
-
-    public void startGame() {
-        game = new Game(new StandardGameFactory(), maxPlayers);
-        setState(new GameInProgressState(this));
-        broadcastBoardState();
     }
 
     public static void main(String[] args) throws IOException {
