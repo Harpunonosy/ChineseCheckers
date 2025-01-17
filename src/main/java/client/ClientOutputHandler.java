@@ -9,6 +9,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import utils.message.Message;
 import utils.message.MessageType;
@@ -44,6 +46,7 @@ public class ClientOutputHandler implements Runnable {
             case BOARD_STATE:
                 StandardBoard board = connection.deserializeBoard(message.getContent());
                 updateBoardUI(board);
+                updateBoardGUI(board);
                 break;
             case INFO:
                 Platform.runLater(() -> {
@@ -60,6 +63,38 @@ public class ClientOutputHandler implements Runnable {
                 break;
             default:
                 System.out.println("Unknown message type: " + message.getType());
+        }
+    }
+
+   private void updateBoardGUI(StandardBoard board) {
+    Platform.runLater(() -> {
+        gameController.clearBoard(); // Dodaj metodę do czyszczenia planszy
+        CellVertex[][] matrix = board.getMatrix();
+        for (int y = 0; y < matrix[0].length; y++) {
+            for (int x = 0; x < matrix.length; x++) {
+                if (matrix[x][y] != null) {
+                    Pawn pawn = matrix[x][y].getPawn();
+                    if (pawn != null) {
+                        Circle circle = gameController.getCircleAtPosition(x, y);
+                        if (circle != null) {
+                            gameController.highlightCircle(circle, getColorForPlayer(pawn.getPlayerId()));
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+    private Color getColorForPlayer(int playerId) {
+        switch (playerId) {
+            case 1: return Color.RED;
+            case 2: return Color.BLUE;
+            case 3: return Color.GREEN;
+            case 4: return Color.YELLOW;
+            case 5: return Color.ORANGE;
+            case 6: return Color.PURPLE;
+            default: return Color.BLACK;
         }
     }
 
