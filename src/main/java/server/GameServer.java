@@ -1,8 +1,9 @@
 package server;
 
 import factories.GameFactory;
+import factories.MultipleJumpsFactory;
 import factories.StandardGameFactory;
-import factories.MultiJumpGameFactory;
+import factories.BananJumpFactory;
 import game.Game;
 import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
@@ -149,7 +150,8 @@ public class GameServer {
 
         System.out.println("Select game variant:");
         System.out.println("1. Standard");
-        System.out.println("2. MultiJump");
+        System.out.println("2. BananaJump");
+        System.out.println("3. Multijump");
         int variant = scanner.nextInt();
 
         System.out.println("Enter number of players (2, 3, 4, or 6):");
@@ -159,7 +161,9 @@ public class GameServer {
         if (variant == 1) {
             gameFactory = new StandardGameFactory();
         } else if (variant == 2) {
-            gameFactory = new MultiJumpGameFactory();
+            gameFactory = new BananJumpFactory();
+        }else if (variant == 3){
+            gameFactory = new MultipleJumpsFactory();
         } else {
             throw new IllegalArgumentException("Invalid game variant selected.");
         }

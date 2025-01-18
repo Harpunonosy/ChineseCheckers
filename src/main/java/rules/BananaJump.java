@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
-public class MultiJumpRuleSet implements GameRuleSet {
-    private static final Logger logger = Logger.getLogger(MultiJumpRuleSet.class.getName());
+public class BananaJump implements GameRuleSet {
+    private static final Logger logger = Logger.getLogger(BananaJump.class.getName());
 
     @Override
     public boolean isValidMove(Move move, int playerId, Board board) {

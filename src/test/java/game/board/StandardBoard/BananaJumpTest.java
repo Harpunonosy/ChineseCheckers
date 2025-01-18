@@ -3,23 +3,23 @@ package game.board.StandardBoard;
 import game.board.Board;
 import game.board.Pawn;
 import game.move.Move;
-import rules.MultiJumpRuleSet;
+import rules.BananaJump;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MultiJumpRuleSetTest {
+public class BananaJumpTest {
     private Board board;
-    private MultiJumpRuleSet ruleSet;
+    private BananaJump ruleSet;
 
     @BeforeEach
     public void setUp() {
         board = new StandardBoard();
         board.initialize();
         ((StandardBoard) board).setPlayersToRegions(2); // Inicjalizacja playerTargetRegions dla 2 graczy
-        ruleSet = new MultiJumpRuleSet();
+        ruleSet = new BananaJump();
     }
 
     @Test

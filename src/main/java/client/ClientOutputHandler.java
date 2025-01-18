@@ -142,6 +142,7 @@ public class ClientOutputHandler implements Runnable {
                 Parent root = loader.load();
                 gameController = loader.getController();
                 gameController.setInputHandler(inputHandler); // Przekazanie instancji ClientInputHandler
+                
 
                 if (pendingBoard != null) {
                     updateBoardGUI(pendingBoard); // Update the board if there was a pending board
