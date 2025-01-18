@@ -2,10 +2,13 @@ package GUI;
 
 import client.ClientInputHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+
+import java.awt.*;
 
 public class InGameClientController {
 
@@ -14,6 +17,12 @@ public class InGameClientController {
 
     @FXML
     private Circle field;
+
+    @FXML
+    private Label turnState;
+
+    @FXML
+    private Label playerIdColor;
 
     private Integer startX, startY;
     private ClientInputHandler inputHandler;
@@ -75,5 +84,13 @@ public class InGameClientController {
                 ((Circle) node).setFill(Color.WHITE); // Ustaw domyślny kolor
             }
         }
+    }
+    public void setTurnState(String state) {
+        turnState.setText(state);
+    }
+
+    public void setPlayerIdColor(int playerId, Color color) {
+        playerIdColor.setText("Player ID: " + playerId);
+        playerIdColor.setTextFill(color);
     }
 }
