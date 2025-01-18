@@ -68,11 +68,12 @@ public class InGameClientController {
         }
         return null;
     }
+
     public void clearBoard() {
-    for (javafx.scene.Node node : Board.getChildren()) {
-        if (node instanceof Circle) {
-            ((Circle) node).setFill(Color.WHITE); // Ustaw domyślny kolor
+        for (javafx.scene.Node node : Board.getChildren()) {
+            if (node instanceof Circle) {
+                ((Circle) node).setFill(Color.WHITE); // Ustaw domyślny kolor
+            }
         }
     }
-}
 }

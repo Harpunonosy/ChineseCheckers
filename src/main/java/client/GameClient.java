@@ -39,6 +39,7 @@ public class GameClient extends Application {
         primaryStage.setScene(new Scene(root, 400, 200));
         primaryStage.show();
 
+        outputHandler.setPrimaryStage(primaryStage);
         new Thread(outputHandler).start();
     }
 

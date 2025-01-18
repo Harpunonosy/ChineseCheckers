@@ -15,7 +15,6 @@ public class WaitingForPlayersState implements GameState {
     @Override
     public void handleMove(GameServer server, String move, int playerId) {
         // No moves should be processed in this state
-        server.sendMessageToPlayer(playerId, "Game has not started yet. Waiting for more players.");
     }
 
     @Override

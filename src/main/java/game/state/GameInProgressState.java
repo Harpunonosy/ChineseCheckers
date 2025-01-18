@@ -3,6 +3,7 @@ package game.state;
 import java.util.Random;
 import server.GameServer;
 import game.move.Move;
+import utils.message.MessageType;
 
 public class GameInProgressState implements GameState {
 
@@ -16,8 +17,8 @@ public class GameInProgressState implements GameState {
         server.broadcastBoardState();
         
         // Notify the current player that it's their turn
-        server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!");
-        server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.");
+        server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!", MessageType.YOUR_TURN);
+        server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.", MessageType.INFO);
     }
 
     @Override
@@ -37,21 +38,20 @@ public class GameInProgressState implements GameState {
 
                 // Check if the game is over for the current player
                 if (server.getGame().getGameRuleSet().isGameOver(server.getGame().getBoard(), playerId)) {
-                    server.sendMessageToPlayer(playerId, "You won!");
-                    server.broadcastMessage("Player " + playerId + " has won the game!");
+                    server.broadcastMessage("Player " + playerId + " has won the game!", MessageType.GAME_OVER);
+                    server.sendMessageToPlayer(playerId, "YOU WON!", MessageType.GAME_OVER);
                     server.setState(new GameOverState(server));
-                    server.broadcastMessage("Game Over! Player " + playerId + " has won the game!"); // Rozsyłanie wiadomości o wygranej
                 } else {
                     // Move to the next player
                     server.nextPlayer();
-                    server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!");
-                    server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.");
+                    server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!", MessageType.YOUR_TURN);
+                    server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.", MessageType.INFO);
                 }
             } else {
-                server.sendMessageToPlayer(playerId, "Invalid move: either the start position does not contain your pawn or the end position is occupied.");
+                server.sendMessageToPlayer(playerId, "Invalid move: either the start position does not contain your pawn or the end position is occupied.", MessageType.INFO);
             }
         } else {
-            server.sendMessageToPlayer(playerId, "It's not your turn.");
+            server.sendMessageToPlayer(playerId, "It's not your turn.", MessageType.INFO);
         }
     }
 

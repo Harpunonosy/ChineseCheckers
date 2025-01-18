@@ -1,11 +1,12 @@
 package game.state;
 
 import server.GameServer;
+import utils.message.MessageType;
 
 public class GameOverState implements GameState {
 
     public GameOverState(GameServer server){
-      server.broadcastMessage("Game Over !");
+        // No need to broadcast "Game Over!" message here
     }
 
     @Override
@@ -22,6 +23,6 @@ public class GameOverState implements GameState {
 
     @Override
     public void broadcastState(GameServer server) {
-        server.broadcastMessage("Game over.");
+        // No need to broadcast "Game over." message here
     }
 }

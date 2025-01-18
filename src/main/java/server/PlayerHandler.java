@@ -32,7 +32,7 @@ public class PlayerHandler implements Runnable {
     public void run() {
         try {
             // Send player ID to client
-            sendMessage(new Message(MessageType.INFO, "Your ID: " + playerId)); //GIVE CLIENT HIS ID
+            sendMessage(new Message(MessageType.YOUR_ID, String.valueOf(playerId))); //GIVE CLIENT HIS ID
 
             String json;
             while ((json = in.readLine()) != null) {

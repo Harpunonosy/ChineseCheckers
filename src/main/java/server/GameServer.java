@@ -52,7 +52,7 @@ public class GameServer {
     public void startGame() {
         game = new Game(new StandardGameFactory(), maxPlayers);
         setState(new GameInProgressState(this));
-        broadcastMessage("Game started");
+        broadcastMessage("Game started", MessageType.GAME_STARTED);
         broadcastBoardState();
     }
 
@@ -78,13 +78,13 @@ public class GameServer {
         }
     }
 
-    public void sendMessageToPlayer(int playerId, String messageContent) {
-        Message message = new Message(MessageType.INFO, messageContent);
+    public void sendMessageToPlayer(int playerId, String messageContent, MessageType messageType) {
+        Message message = new Message(messageType, messageContent);
         players.get(playerId - 1).sendMessage(message);
     }
 
-    public void broadcastMessage(String messageContent) {
-        Message message = new Message(MessageType.INFO, messageContent);
+    public void broadcastMessage(String messageContent, MessageType messageType) {
+        Message message = new Message(messageType, messageContent);
         for (PlayerHandler player : players) {
             player.sendMessage(message);
         }

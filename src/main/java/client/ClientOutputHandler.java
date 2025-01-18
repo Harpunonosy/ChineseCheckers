@@ -1,6 +1,7 @@
 package client;
 
 import GUI.ClientStartController;
+import GUI.GameOverController;
 import GUI.InGameClientController;
 import game.board.CellVertex;
 import game.board.Pawn;
@@ -17,14 +18,17 @@ import utils.message.MessageType;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.concurrent.CountDownLatch;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class ClientOutputHandler implements Runnable {
+    private static final Logger logger = Logger.getLogger(ClientOutputHandler.class.getName());
     private ClientConnection connection;
     private ClientInputHandler inputHandler;
     private ClientStartController startController;
     private InGameClientController gameController;
     private StandardBoard pendingBoard;
+    private Stage primaryStage;
 
     public ClientOutputHandler(ClientConnection connection, ClientInputHandler inputHandler) {
         this.connection = connection;
@@ -39,7 +43,7 @@ public class ClientOutputHandler implements Runnable {
                 handleMessage(message);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error receiving message", e);
         }
     }
 
@@ -57,26 +61,48 @@ public class ClientOutputHandler implements Runnable {
                 Platform.runLater(() -> {
                     if (startController != null) {
                         startController.setInfo(message.getContent());
-                        if (message.getContent().startsWith("Your ID: ")) {
-                            int clientId = Integer.parseInt(message.getContent().substring(9));
-                            startController.setClientId(clientId);
-                        } else if (message.getContent().equals("Game started")) {
-                            switchToGameScene();
-                        }else{
-                            System.out.println("Server: " + message.getContent());
-                        }
+                        logger.info("Server: " + message.getContent());
                     }
                 });
                 break;
+            case GAME_STARTED:
+                Platform.runLater(() -> {
+                    if (startController != null) {
+                        startController.setInfo("Game started");
+                        switchToGameScene();
+                    }
+                });
+                break;
+            case YOUR_ID:
+                Platform.runLater(() -> {
+                    if (startController != null) {
+                        int clientId = Integer.parseInt(message.getContent());
+                        startController.setClientId(clientId);
+                    }
+                });
+                break;
+            case YOUR_TURN:
+                Platform.runLater(() -> {
+                    if (gameController != null) {
+                        //TODO
+                        //gameController.showYourTurnMessage();
+                    }
+                });
+                break;
+            case GAME_OVER:
+                Platform.runLater(() -> {
+                    switchToGameOverScene(message.getContent());
+                });
+                break;
             default:
-                System.out.println("Unknown message type: " + message.getType());
+                logger.warning("Unknown message type: " + message.getType());
         }
     }
 
     private void updateBoardGUI(StandardBoard board) {
         Platform.runLater(() -> {
             if (gameController == null) {
-                System.out.println("gameController is null in updateBoardGUI");
+                logger.warning("gameController is null in updateBoardGUI");
                 return;
             }
             gameController.clearBoard(); // Dodaj metodę do czyszczenia planszy
@@ -117,26 +143,45 @@ public class ClientOutputHandler implements Runnable {
                 gameController = loader.getController();
                 gameController.setInputHandler(inputHandler); // Przekazanie instancji ClientInputHandler
 
-                if (gameController == null) {
-                    System.out.println("gameController is null in switchToGameScene");
-                } else {
-                    System.out.println("gameController is set in switchToGameScene");
-                    if (pendingBoard != null) {
-                        updateBoardGUI(pendingBoard); // Update the board if there was a pending board
-                        pendingBoard = null;
-                    }
+                if (pendingBoard != null) {
+                    updateBoardGUI(pendingBoard); // Update the board if there was a pending board
+                    pendingBoard = null;
                 }
 
-                Stage stage = (Stage) startController.getClientIdLabel().getScene().getWindow();
-                stage.setScene(new Scene(root, 1920, 1080));
-                stage.show();
+                primaryStage.setScene(new Scene(root, 1920, 1080));
+                primaryStage.show();
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.log(Level.SEVERE, "Error switching to game scene", e);
+            }
+        });
+    }
+
+    private void switchToGameOverScene(String winner) {
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/GUI/GameOver.fxml")));
+                Parent root = loader.load();
+                GameOverController controller = loader.getController();
+                logger.info("Switching to game over scene with winner: " + winner);
+                if (winner.equals("YOU WON!")) {
+                    controller.setWinner("YOU WON!");
+                } else {
+                    controller.setWinner(winner);
+                }
+
+                primaryStage.setScene(new Scene(root, 400, 200));
+                primaryStage.show();
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "Error switching to game over scene", e);
             }
         });
     }
 
     public void setStartController(ClientStartController startController) {
         this.startController = startController;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 }
