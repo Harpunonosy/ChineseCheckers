@@ -7,8 +7,10 @@ import game.move.Move;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class MultiJumpRuleSet implements GameRuleSet {
+    private static final Logger logger = Logger.getLogger(MultiJumpRuleSet.class.getName());
 
     @Override
     public boolean isValidMove(Move move, int playerId, Board board) {
@@ -25,12 +27,21 @@ public class MultiJumpRuleSet implements GameRuleSet {
             return false;
         }
 
+        // Check if there is a direct edge between start and end positions
+        for (CCEdge edge : start.getEdges()) {
+            if (edge.getDestVertex().equals(end)) {
+                return true;
+            }
+        }
+
         // Use DFS to check if there is a valid multi-jump path from start to end
         return canReachWithMultiJump(start, end, board, new HashSet<>());
     }
 
     private boolean canReachWithMultiJump(CellVertex start, CellVertex end, Board board, Set<CellVertex> visited) {
+        logger.info("Visiting: " + start.getLocation());
         if (start.equals(end)) {
+            logger.info("Reached end: " + end.getLocation());
             return true;
         }
 
@@ -41,10 +52,12 @@ public class MultiJumpRuleSet implements GameRuleSet {
             if (midVertex.getPawn() != null && !visited.contains(midVertex)) {
                 for (CCEdge jumpEdge : midVertex.getEdges()) {
                     CellVertex jumpDest = jumpEdge.getDestVertex();
-                    if (!visited.contains(jumpDest) && jumpDest.equals(end)) {
-                        return true;
-                    }
                     if (!visited.contains(jumpDest) && jumpDest.getPawn() == null) {
+                        logger.info("Jumping from " + midVertex.getLocation() + " to " + jumpDest.getLocation());
+                        if (jumpDest.equals(end)) {
+                            logger.info("Reached end via jump: " + jumpDest.getLocation());
+                            return true;
+                        }
                         if (canReachWithMultiJump(jumpDest, end, board, visited)) {
                             return true;
                         }

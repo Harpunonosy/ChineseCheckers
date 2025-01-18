@@ -20,7 +20,7 @@ public class CellVertex implements Serializable {
         this.edges = new ArrayList<>();
         this.pawn = null;
     }
-
+    
     public Point getLocation() {
         return location;
     }
