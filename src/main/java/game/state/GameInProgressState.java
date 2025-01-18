@@ -35,10 +35,18 @@ public class GameInProgressState implements GameState {
                 server.getGame().makeMove(parsedMove, playerId);
                 server.broadcastBoardState();
 
-                // Move to the next player
-                server.nextPlayer();
-                server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!");
-                server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.");
+                // Check if the game is over for the current player
+                if (server.getGame().getGameRuleSet().isGameOver(server.getGame().getBoard(), playerId)) {
+                    server.sendMessageToPlayer(playerId, "You won!");
+                    server.broadcastMessage("Player " + playerId + " has won the game!");
+                    server.setState(new GameOverState(server));
+                    server.broadcastMessage("Game Over! Player " + playerId + " has won the game!"); // Rozsyłanie wiadomości o wygranej
+                } else {
+                    // Move to the next player
+                    server.nextPlayer();
+                    server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!");
+                    server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.");
+                }
             } else {
                 server.sendMessageToPlayer(playerId, "Invalid move: either the start position does not contain your pawn or the end position is occupied.");
             }

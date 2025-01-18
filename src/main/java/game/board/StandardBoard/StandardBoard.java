@@ -107,8 +107,8 @@ public class StandardBoard implements Board, Serializable {
         playerTargetRegions = new HashMap<>();
         switch (numberOfPlayers) {
             case 2:
-                setPlayerTargetRegion(1, 2, 11);
-                setPlayerTargetRegion(2, 1, 22);
+                setPlayerTargetRegion(1, 4, 22);
+                setPlayerTargetRegion(2, 1, 3);
                 break;
             case 3:
                 setPlayerTargetRegion(1, 4, 1);

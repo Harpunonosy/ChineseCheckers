@@ -17,12 +17,14 @@ import utils.message.MessageType;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
 
 public class ClientOutputHandler implements Runnable {
     private ClientConnection connection;
     private ClientInputHandler inputHandler;
     private ClientStartController startController;
     private InGameClientController gameController;
+    private StandardBoard pendingBoard;
 
     public ClientOutputHandler(ClientConnection connection, ClientInputHandler inputHandler) {
         this.connection = connection;
@@ -45,7 +47,11 @@ public class ClientOutputHandler implements Runnable {
         switch (message.getType()) {
             case BOARD_STATE:
                 StandardBoard board = connection.deserializeBoard(message.getContent());
-                updateBoardGUI(board);
+                if (gameController == null) {
+                    pendingBoard = board; // Store the board until the gameController is set
+                } else {
+                    updateBoardGUI(board);
+                }
                 break;
             case INFO:
                 Platform.runLater(() -> {
@@ -56,6 +62,8 @@ public class ClientOutputHandler implements Runnable {
                             startController.setClientId(clientId);
                         } else if (message.getContent().equals("Game started")) {
                             switchToGameScene();
+                        }else{
+                            System.out.println("Server: " + message.getContent());
                         }
                     }
                 });
@@ -65,25 +73,29 @@ public class ClientOutputHandler implements Runnable {
         }
     }
 
-   private void updateBoardGUI(StandardBoard board) {
-    Platform.runLater(() -> {
-        gameController.clearBoard(); // Dodaj metodę do czyszczenia planszy
-        CellVertex[][] matrix = board.getMatrix();
-        for (int y = 0; y < matrix[0].length; y++) {
-            for (int x = 0; x < matrix.length; x++) {
-                if (matrix[x][y] != null) {
-                    Pawn pawn = matrix[x][y].getPawn();
-                    if (pawn != null) {
-                        Circle circle = gameController.getCircleAtPosition(x, y);
-                        if (circle != null) {
-                            gameController.highlightCircle(circle, getColorForPlayer(pawn.getPlayerId()));
+    private void updateBoardGUI(StandardBoard board) {
+        Platform.runLater(() -> {
+            if (gameController == null) {
+                System.out.println("gameController is null in updateBoardGUI");
+                return;
+            }
+            gameController.clearBoard(); // Dodaj metodę do czyszczenia planszy
+            CellVertex[][] matrix = board.getMatrix();
+            for (int y = 0; y < matrix[0].length; y++) {
+                for (int x = 0; x < matrix.length; x++) {
+                    if (matrix[x][y] != null) {
+                        Pawn pawn = matrix[x][y].getPawn();
+                        if (pawn != null) {
+                            Circle circle = gameController.getCircleAtPosition(x, y);
+                            if (circle != null) {
+                                gameController.highlightCircle(circle, getColorForPlayer(pawn.getPlayerId()));
+                            }
                         }
                     }
                 }
             }
-        }
-    });
-}
+        });
+    }
 
     private Color getColorForPlayer(int playerId) {
         switch (playerId) {
@@ -104,6 +116,16 @@ public class ClientOutputHandler implements Runnable {
                 Parent root = loader.load();
                 gameController = loader.getController();
                 gameController.setInputHandler(inputHandler); // Przekazanie instancji ClientInputHandler
+
+                if (gameController == null) {
+                    System.out.println("gameController is null in switchToGameScene");
+                } else {
+                    System.out.println("gameController is set in switchToGameScene");
+                    if (pendingBoard != null) {
+                        updateBoardGUI(pendingBoard); // Update the board if there was a pending board
+                        pendingBoard = null;
+                    }
+                }
 
                 Stage stage = (Stage) startController.getClientIdLabel().getScene().getWindow();
                 stage.setScene(new Scene(root, 1920, 1080));

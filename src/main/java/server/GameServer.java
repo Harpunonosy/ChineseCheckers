@@ -5,6 +5,7 @@ import game.Game;
 import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
 import game.state.GameInProgressState;
+import game.state.GameOverState;
 import game.state.GameState;
 import game.state.WaitingForPlayersState;
 import utils.message.Message;
@@ -141,7 +142,7 @@ public class GameServer {
     }
 
     public static void main(String[] args) throws IOException {
-        GameServer server = new GameServer(6);
+        GameServer server = new GameServer(2);
         server.startServer();
     }
 }

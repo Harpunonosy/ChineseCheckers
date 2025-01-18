@@ -40,7 +40,6 @@ public class GameClient extends Application {
         primaryStage.show();
 
         new Thread(outputHandler).start();
-        inputHandler.handleInput();
     }
 
     public static void main(String[] args) {
