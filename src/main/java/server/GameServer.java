@@ -1,6 +1,8 @@
 package server;
 
+import factories.GameFactory;
 import factories.StandardGameFactory;
+import factories.MultiJumpGameFactory;
 import game.Game;
 import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
@@ -17,6 +19,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameServer {
     private List<PlayerHandler> players = new ArrayList<>();
@@ -26,13 +29,14 @@ public class GameServer {
     private GameState currentState;
     private PlayerHandler currentPlayer;
 
-    public GameServer(int maxPlayers) {
+    public GameServer(int maxPlayers, GameFactory gameFactory) {
         if (maxPlayers < 2 || maxPlayers > 6 || maxPlayers == 5) {
             throw new IllegalArgumentException("Invalid number of players. The game supports between 2 3 4 or 6 players");
         }
         this.maxPlayers = maxPlayers;
         this.playerCount = 0;
         this.currentState = new WaitingForPlayersState();
+        this.game = new Game(gameFactory, maxPlayers);
     }
 
     public void startServer() throws IOException {
@@ -50,7 +54,6 @@ public class GameServer {
     }
 
     public void startGame() {
-        game = new Game(new StandardGameFactory(), maxPlayers);
         setState(new GameInProgressState(this));
         broadcastMessage("Game started", MessageType.GAME_STARTED);
         broadcastBoardState();
@@ -142,7 +145,26 @@ public class GameServer {
     }
 
     public static void main(String[] args) throws IOException {
-        GameServer server = new GameServer(2);
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Select game variant:");
+        System.out.println("1. Standard");
+        System.out.println("2. MultiJump");
+        int variant = scanner.nextInt();
+
+        System.out.println("Enter number of players (2, 3, 4, or 6):");
+        int maxPlayers = scanner.nextInt();
+
+        GameFactory gameFactory;
+        if (variant == 1) {
+            gameFactory = new StandardGameFactory();
+        } else if (variant == 2) {
+            gameFactory = new MultiJumpGameFactory();
+        } else {
+            throw new IllegalArgumentException("Invalid game variant selected.");
+        }
+
+        GameServer server = new GameServer(maxPlayers, gameFactory);
         server.startServer();
     }
 }

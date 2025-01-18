@@ -7,6 +7,7 @@
 /media/harpun/Nowy/ChineseCheckers/src/main/java/client/GameClient.java
 /media/harpun/Nowy/ChineseCheckers/src/main/java/exceptions/InvalidMoveFormatException.java
 /media/harpun/Nowy/ChineseCheckers/src/main/java/factories/GameFactory.java
+/media/harpun/Nowy/ChineseCheckers/src/main/java/factories/MultiJumpGameFactory.java
 /media/harpun/Nowy/ChineseCheckers/src/main/java/factories/StandardGameFactory.java
 /media/harpun/Nowy/ChineseCheckers/src/main/java/game/Game.java
 /media/harpun/Nowy/ChineseCheckers/src/main/java/game/board/Board.java
@@ -21,6 +22,7 @@
 /media/harpun/Nowy/ChineseCheckers/src/main/java/game/state/GameState.java
 /media/harpun/Nowy/ChineseCheckers/src/main/java/game/state/WaitingForPlayersState.java
 /media/harpun/Nowy/ChineseCheckers/src/main/java/rules/GameRuleSet.java
+/media/harpun/Nowy/ChineseCheckers/src/main/java/rules/MultiJumpRuleSet.java
 /media/harpun/Nowy/ChineseCheckers/src/main/java/rules/StandardRuleSet.java
 /media/harpun/Nowy/ChineseCheckers/src/main/java/server/GameServer.java
 /media/harpun/Nowy/ChineseCheckers/src/main/java/server/PlayerHandler.java
