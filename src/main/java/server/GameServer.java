@@ -136,27 +136,8 @@ public class GameServer {
     }
 
     public void processMove(String move, int playerId) {
-        if (move.startsWith("teleport")) {
-            String[] parts = move.substring("teleport".length()).split("-");
-            int startX = Integer.parseInt(parts[0]);
-            int startY = Integer.parseInt(parts[1]);
-            int endX = Integer.parseInt(parts[2]);
-            int endY = Integer.parseInt(parts[3]);
-            boolean success = teleportPawn(startX, startY, endX, endY);
-            if (success) {
-                sendMessageToPlayer(playerId, "Teleport successful.");
-                broadcastBoardState();
-            } else {
-                sendMessageToPlayer(playerId, "Teleport failed. Either the start position does not contain your pawn or the end position is occupied.");
-            }
-        } else {
-            currentState.handleMove(this, move, playerId);
-            broadcastBoardState();
-        }
-    }
-
-    public boolean teleportPawn(int startX, int startY, int endX, int endY) {
-        return ((StandardBoard) game.getBoard()).teleportPawn(startX, startY, endX, endY);
+        currentState.handleMove(this, move, playerId);
+        broadcastBoardState();
     }
 
     public static void main(String[] args) throws IOException {

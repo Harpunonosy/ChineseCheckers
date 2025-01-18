@@ -102,20 +102,6 @@ public class StandardBoard implements Board, Serializable {
             System.out.println("Ruch jest nielegalny");
         }
     }
-
-    //TODO DELETE THAT LATER WHEN GUI IS READY
-    public boolean teleportPawn(int startX, int startY, int endX, int endY) {
-        CellVertex startVertex = getVertexAt(startX, startY);
-        CellVertex endVertex = getVertexAt(endX, endY);
-
-        if (startVertex != null && startVertex.getPawn() != null && endVertex != null && endVertex.getPawn() == null) {
-            endVertex.setPawn(startVertex.getPawn());
-            startVertex.setPawn(null);
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void setPlayersToRegions(int numberOfPlayers) {
         playerTargetRegions = new HashMap<>();

@@ -45,7 +45,6 @@ public class ClientOutputHandler implements Runnable {
         switch (message.getType()) {
             case BOARD_STATE:
                 StandardBoard board = connection.deserializeBoard(message.getContent());
-                updateBoardUI(board);
                 updateBoardGUI(board);
                 break;
             case INFO:
@@ -95,25 +94,6 @@ public class ClientOutputHandler implements Runnable {
             case 5: return Color.ORANGE;
             case 6: return Color.PURPLE;
             default: return Color.BLACK;
-        }
-    }
-
-    private void updateBoardUI(StandardBoard board) {
-        CellVertex[][] matrix = board.getMatrix();
-        for (int y = 0; y < matrix[0].length; y++) {
-            for (int x = 0; x < matrix.length; x++) {
-                if (matrix[x][y] != null) {
-                    Pawn pawn = matrix[x][y].getPawn();
-                    if (pawn != null) {
-                        System.out.print(pawn.getPlayerId() + " ");
-                    } else {
-                        System.out.print("0 ");
-                    }
-                } else {
-                    System.out.print(". ");
-                }
-            }
-            System.out.println();
         }
     }
 
