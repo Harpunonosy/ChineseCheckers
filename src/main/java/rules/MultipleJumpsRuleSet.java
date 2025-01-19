@@ -9,6 +9,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
+/**
+ * Implements the MultipleJumps rule set for the game.
+ */
 public class MultipleJumpsRuleSet implements GameRuleSet {
     private static final Logger logger = Logger.getLogger(MultipleJumpsRuleSet.class.getName());
 
@@ -39,88 +42,36 @@ public class MultipleJumpsRuleSet implements GameRuleSet {
     }
 
     private boolean canReachWithMultiJump(CellVertex start, CellVertex end, Board board, Set<CellVertex> visited) {
-      logger.info("Visiting: " + start.getLocation());
-      if (start.equals(end)) {
-          logger.info("Reached end: " + end.getLocation());
-          return true;
-      }
-  
-      visited.add(start);
-  
-      for (CCEdge edge : start.getEdges()) {
-          CellVertex midVertex = edge.getDestVertex();
-  
-          // Sprawdzamy, czy jest pionek do przeskoczenia
-          if (midVertex.getPawn() != null && !visited.contains(midVertex)) {
-              for (CCEdge jumpEdge : midVertex.getEdges()) {
-                  CellVertex jumpDest = jumpEdge.getDestVertex();
-  
-                  if (!visited.contains(jumpDest) && jumpDest.getPawn() == null) {
-                      // Pobieramy współrzędne
-                      int xStart = start.getLocation().x;
-                      int yStart = start.getLocation().y;
-                      int xEnd = jumpDest.getLocation().x;
-                      int yEnd = jumpDest.getLocation().y;
-  
-                      // Obliczamy różnice w położeniu
-                      int dx = xEnd - xStart;
-                      int dy = yEnd - yStart;
-  
-                      // Sprawdzamy legalność skoku
-                      if (isValidJump(dx, dy)) {
-                          logger.info("Valid jump from " + start.getLocation() + " to " + jumpDest.getLocation());
-  
-                          if (jumpDest.equals(end)) {
-                              logger.info("Reached end via jump: " + jumpDest.getLocation());
-                              return true;
-                          }
-  
-                          // Rekurencja
-                          if (canReachWithMultiJump(jumpDest, end, board, visited)) {
-                              return true;
-                          }
-                      } else {
-                          logger.info("Illegal jump detected: dx = " + dx + ", dy = " + dy);
-                      }
-                  }
-              }
-          }
-      }
-  
-      visited.remove(start);
-      return false;
-  }
-  
-  // Funkcja sprawdzająca, czy skok jest legalny
-  private boolean isValidJump(int dx, int dy) {
-      // Przypadki diagonalne
-      if (dx == 2 && dy == 2) {
-          return true;
-      }
-      if (dx == 2 && dy == -2) {
-          return true;
-      }
-      if (dx == -2 && dy == 2) {
-          return true;
-      }
-      if (dx == -2 && dy == -2) {
-          return true;
-      }
-  
-      // Przypadki horyzontalne
-      if (dx == 4 && dy == 0) {
-          return true;
-      }
-      if (dx == -4 && dy == 0) {
-          return true;
-      }
-  
-      // W innych przypadkach skok jest nielegalny
-      return false;
-  }
-  
+        logger.info("Visiting: " + start.getLocation());
+        if (start.equals(end)) {
+            logger.info("Reached end: " + end.getLocation());
+            return true;
+        }
 
+        visited.add(start);
 
+        for (CCEdge edge : start.getEdges()) {
+            CellVertex midVertex = edge.getDestVertex();
+            if (midVertex.getPawn() != null && !visited.contains(midVertex)) {
+                for (CCEdge jumpEdge : midVertex.getEdges()) {
+                    CellVertex jumpDest = jumpEdge.getDestVertex();
+                    if (!visited.contains(jumpDest) && jumpDest.getPawn() == null) {
+                        logger.info("Jumping from " + midVertex.getLocation() + " to " + jumpDest.getLocation());
+                        if (jumpDest.equals(end)) {
+                            logger.info("Reached end via jump: " + jumpDest.getLocation());
+                            return true;
+                        }
+                        if (canReachWithMultiJump(jumpDest, end, board, visited)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        visited.remove(start);
+        return false;
+    }
 
     private boolean isMoveWithinAllowedRegions(Move move, int playerId, Board board) {
         int[][] playerRegion = board.getRegion(board.getPlayersTargetRegions().get(playerId));

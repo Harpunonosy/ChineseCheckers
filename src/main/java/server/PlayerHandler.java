@@ -9,6 +9,9 @@ import utils.message.Message;
 import utils.message.MessageType;
 import utils.message.MessageUtils;
 
+/**
+ * Handles communication with a single player.
+ */
 public class PlayerHandler implements Runnable {
     private Socket socket;
     private GameServer server;
@@ -16,6 +19,13 @@ public class PlayerHandler implements Runnable {
     private BufferedReader in;
     private int playerId;
 
+    /**
+     * Initializes a new PlayerHandler.
+     * 
+     * @param socket The socket for communication with the player.
+     * @param server The game server.
+     * @param playerId The ID of the player.
+     */
     public PlayerHandler(Socket socket, GameServer server, int playerId) {
         this.socket = socket;
         this.server = server;
@@ -55,11 +65,21 @@ public class PlayerHandler implements Runnable {
         }
     }
 
+    /**
+     * Sends a message to the player.
+     * 
+     * @param message The message to send.
+     */
     public void sendMessage(Message message) {
         String json = MessageUtils.serializeMessage(message);
         out.println(json);
     }
 
+    /**
+     * Gets the ID of the player.
+     * 
+     * @return The ID of the player.
+     */
     public int getPlayerId() {
         return playerId;
     }

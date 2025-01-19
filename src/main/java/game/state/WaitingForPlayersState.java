@@ -2,6 +2,9 @@ package game.state;
 
 import server.GameServer;
 
+/**
+ * Represents the state of the game when waiting for players.
+ */
 public class WaitingForPlayersState implements GameState {
     @Override
     public void handlePlayerJoin(GameServer server) {

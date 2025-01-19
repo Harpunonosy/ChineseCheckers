@@ -1,0 +1,9 @@
+<map id="factories.GameFactory" name="factories.GameFactory">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,175,80"/>
+<area shape="rect" id="Node000002" href="$classfactories_1_1BananJumpFactory.html" title=" " alt="" coords="234,5,438,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,49,271,28,272,33,168,55"/>
+<area shape="rect" id="Node000003" href="$classfactories_1_1MultipleJumpsFactory.html" title=" " alt="" coords="225,55,447,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="188,65,224,65,224,70,188,70"/>
+<area shape="rect" id="Node000004" href="$classfactories_1_1StandardGameFactory.html" title=" " alt="" coords="223,104,449,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="168,80,272,101,271,107,167,85"/>
+</map>

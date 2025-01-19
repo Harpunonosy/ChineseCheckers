@@ -1,0 +1,84 @@
+\doxysection{rules.\+Standard\+Rule\+Set Class Reference}
+\hypertarget{classrules_1_1StandardRuleSet}{}\label{classrules_1_1StandardRuleSet}\index{rules.StandardRuleSet@{rules.StandardRuleSet}}
+
+
+Inheritance diagram for rules.\+Standard\+Rule\+Set\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classrules_1_1StandardRuleSet__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for rules.\+Standard\+Rule\+Set\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classrules_1_1StandardRuleSet__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{classrules_1_1StandardRuleSet_a10056dd4d16fd83ba1f606c935623d03}{is\+Valid\+Move}} (Move move, int player\+Id, Board board)
+\item 
+boolean \mbox{\hyperlink{classrules_1_1StandardRuleSet_ace3224f2a740884f086ba75ecdeca553}{is\+Game\+Over}} (Board board, int player\+Id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implements the standard rule set for the game. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classrules_1_1StandardRuleSet_ace3224f2a740884f086ba75ecdeca553}\label{classrules_1_1StandardRuleSet_ace3224f2a740884f086ba75ecdeca553} 
+\index{rules.StandardRuleSet@{rules.StandardRuleSet}!isGameOver@{isGameOver}}
+\index{isGameOver@{isGameOver}!rules.StandardRuleSet@{rules.StandardRuleSet}}
+\doxysubsubsection{\texorpdfstring{isGameOver()}{isGameOver()}}
+{\footnotesize\ttfamily boolean rules.\+Standard\+Rule\+Set.\+is\+Game\+Over (\begin{DoxyParamCaption}\item[{Board}]{board,  }\item[{int}]{player\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks if the game is over for a player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & The game board. \\
+\hline
+{\em player\+Id} & The ID of the player. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the game is over for the player, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacerules_1_1GameRuleSet_ad299283500aac1ae849ca656cf2833f7}{rules.\+Game\+Rule\+Set}}.
+
+\Hypertarget{classrules_1_1StandardRuleSet_a10056dd4d16fd83ba1f606c935623d03}\label{classrules_1_1StandardRuleSet_a10056dd4d16fd83ba1f606c935623d03} 
+\index{rules.StandardRuleSet@{rules.StandardRuleSet}!isValidMove@{isValidMove}}
+\index{isValidMove@{isValidMove}!rules.StandardRuleSet@{rules.StandardRuleSet}}
+\doxysubsubsection{\texorpdfstring{isValidMove()}{isValidMove()}}
+{\footnotesize\ttfamily boolean rules.\+Standard\+Rule\+Set.\+is\+Valid\+Move (\begin{DoxyParamCaption}\item[{Move}]{move,  }\item[{int}]{player\+Id,  }\item[{Board}]{board }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks if a move is valid.
+
+
+\begin{DoxyParams}{Parameters}
+{\em move} & The move to check. \\
+\hline
+{\em player\+Id} & The ID of the player making the move. \\
+\hline
+{\em board} & The game board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the move is valid, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacerules_1_1GameRuleSet_add75d1f6f2f78f75288c3a9e8a2c38b6}{rules.\+Game\+Rule\+Set}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/rules/Standard\+Rule\+Set.\+java\end{DoxyCompactItemize}

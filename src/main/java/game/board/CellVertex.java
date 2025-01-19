@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a vertex (cell) on the board.
+ */
 public class CellVertex implements Serializable {
     private static final long serialVersionUID = 1L;
     private Point location;
@@ -20,7 +23,7 @@ public class CellVertex implements Serializable {
         this.edges = new ArrayList<>();
         this.pawn = null;
     }
-    
+
     public Point getLocation() {
         return location;
     }

@@ -1,5 +1,8 @@
 package game.move;
 
+/**
+ * Represents a move in the game.
+ */
 public class Move {
     private int startX;
     private int startY;

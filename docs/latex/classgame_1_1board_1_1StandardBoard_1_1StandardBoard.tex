@@ -1,0 +1,149 @@
+\doxysection{game.\+board.\+Standard\+Board.\+Standard\+Board Class Reference}
+\hypertarget{classgame_1_1board_1_1StandardBoard_1_1StandardBoard}{}\label{classgame_1_1board_1_1StandardBoard_1_1StandardBoard}\index{game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}}
+
+
+Inheritance diagram for game.\+board.\+Standard\+Board.\+Standard\+Board\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=280pt]{classgame_1_1board_1_1StandardBoard_1_1StandardBoard__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for game.\+board.\+Standard\+Board.\+Standard\+Board\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=280pt]{classgame_1_1board_1_1StandardBoard_1_1StandardBoard__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a9c87f446630b6f380cf05736e4e15b8a}{Standard\+Board}} ()
+\item 
+void \mbox{\hyperlink{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a83d1dbdd38dd7f814099f60fd4067977}{initialize}} ()
+\item 
+boolean \mbox{\hyperlink{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_aca1faf2c94b861bce21c664462a9d3b8}{is\+Valid\+Position}} (int x, int y)
+\item 
+\mbox{\hyperlink{classgame_1_1board_1_1CellVertex}{Cell\+Vertex}} \mbox{\hyperlink{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a687546f1781c6a636db48d862f565203}{get\+Vertex\+At}} (int x, int y)
+\item 
+\mbox{\hyperlink{classgame_1_1board_1_1CellVertex}{Cell\+Vertex}}\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a7c4dd04be8384c30832fd2f631d52ff5}{get\+Matrix}} ()
+\item 
+void \mbox{\hyperlink{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a16d656b9ea98c36bf2d40539a7459d79}{make\+Move}} (Move move, int player\+Id, Game\+Rule\+Set rule\+Set)
+\item 
+void \mbox{\hyperlink{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_acd0c10688c10fdd90ea2ba0301d54bba}{set\+Players\+To\+Regions}} (int number\+Of\+Players)
+\item 
+int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a403cb4e937f8c393e22ed7a3dc58eab4}{get\+Region}} (int region)
+\item 
+Map$<$ Integer, Integer $>$ \mbox{\hyperlink{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_aa21bb581c7e5ef6a97419879625626b1}{get\+Players\+Target\+Regions}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a standard game board. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a9c87f446630b6f380cf05736e4e15b8a}\label{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a9c87f446630b6f380cf05736e4e15b8a} 
+\index{game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}!StandardBoard@{StandardBoard}}
+\index{StandardBoard@{StandardBoard}!game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}}
+\doxysubsubsection{\texorpdfstring{StandardBoard()}{StandardBoard()}}
+{\footnotesize\ttfamily game.\+board.\+Standard\+Board.\+Standard\+Board.\+Standard\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Initializes a new standard board. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a7c4dd04be8384c30832fd2f631d52ff5}\label{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a7c4dd04be8384c30832fd2f631d52ff5} 
+\index{game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}!getMatrix@{getMatrix}}
+\index{getMatrix@{getMatrix}!game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}}
+\doxysubsubsection{\texorpdfstring{getMatrix()}{getMatrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgame_1_1board_1_1CellVertex}{Cell\+Vertex}}\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} game.\+board.\+Standard\+Board.\+Standard\+Board.\+get\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1board_1_1Board}{game.\+board.\+Board}}.
+
+\Hypertarget{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_aa21bb581c7e5ef6a97419879625626b1}\label{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_aa21bb581c7e5ef6a97419879625626b1} 
+\index{game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}!getPlayersTargetRegions@{getPlayersTargetRegions}}
+\index{getPlayersTargetRegions@{getPlayersTargetRegions}!game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}}
+\doxysubsubsection{\texorpdfstring{getPlayersTargetRegions()}{getPlayersTargetRegions()}}
+{\footnotesize\ttfamily Map$<$ Integer, Integer $>$ game.\+board.\+Standard\+Board.\+Standard\+Board.\+get\+Players\+Target\+Regions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1board_1_1Board}{game.\+board.\+Board}}.
+
+\Hypertarget{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a403cb4e937f8c393e22ed7a3dc58eab4}\label{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a403cb4e937f8c393e22ed7a3dc58eab4} 
+\index{game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}!getRegion@{getRegion}}
+\index{getRegion@{getRegion}!game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}}
+\doxysubsubsection{\texorpdfstring{getRegion()}{getRegion()}}
+{\footnotesize\ttfamily int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} game.\+board.\+Standard\+Board.\+Standard\+Board.\+get\+Region (\begin{DoxyParamCaption}\item[{int}]{region }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1board_1_1Board}{game.\+board.\+Board}}.
+
+\Hypertarget{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a687546f1781c6a636db48d862f565203}\label{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a687546f1781c6a636db48d862f565203} 
+\index{game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}!getVertexAt@{getVertexAt}}
+\index{getVertexAt@{getVertexAt}!game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}}
+\doxysubsubsection{\texorpdfstring{getVertexAt()}{getVertexAt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgame_1_1board_1_1CellVertex}{Cell\+Vertex}} game.\+board.\+Standard\+Board.\+Standard\+Board.\+get\+Vertex\+At (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1board_1_1Board}{game.\+board.\+Board}}.
+
+\Hypertarget{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a83d1dbdd38dd7f814099f60fd4067977}\label{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a83d1dbdd38dd7f814099f60fd4067977} 
+\index{game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}!initialize@{initialize}}
+\index{initialize@{initialize}!game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily void game.\+board.\+Standard\+Board.\+Standard\+Board.\+initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1board_1_1Board}{game.\+board.\+Board}}.
+
+\Hypertarget{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_aca1faf2c94b861bce21c664462a9d3b8}\label{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_aca1faf2c94b861bce21c664462a9d3b8} 
+\index{game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}!isValidPosition@{isValidPosition}}
+\index{isValidPosition@{isValidPosition}!game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}}
+\doxysubsubsection{\texorpdfstring{isValidPosition()}{isValidPosition()}}
+{\footnotesize\ttfamily boolean game.\+board.\+Standard\+Board.\+Standard\+Board.\+is\+Valid\+Position (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks if a position is valid on the board.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/coordinate. \\
+\hline
+{\em y} & The y-\/coordinate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the position is valid, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a16d656b9ea98c36bf2d40539a7459d79}\label{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_a16d656b9ea98c36bf2d40539a7459d79} 
+\index{game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}!makeMove@{makeMove}}
+\index{makeMove@{makeMove}!game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}}
+\doxysubsubsection{\texorpdfstring{makeMove()}{makeMove()}}
+{\footnotesize\ttfamily void game.\+board.\+Standard\+Board.\+Standard\+Board.\+make\+Move (\begin{DoxyParamCaption}\item[{Move}]{move,  }\item[{int}]{player\+Id,  }\item[{Game\+Rule\+Set}]{rule\+Set }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1board_1_1Board}{game.\+board.\+Board}}.
+
+\Hypertarget{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_acd0c10688c10fdd90ea2ba0301d54bba}\label{classgame_1_1board_1_1StandardBoard_1_1StandardBoard_acd0c10688c10fdd90ea2ba0301d54bba} 
+\index{game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}!setPlayersToRegions@{setPlayersToRegions}}
+\index{setPlayersToRegions@{setPlayersToRegions}!game.board.StandardBoard.StandardBoard@{game.board.StandardBoard.StandardBoard}}
+\doxysubsubsection{\texorpdfstring{setPlayersToRegions()}{setPlayersToRegions()}}
+{\footnotesize\ttfamily void game.\+board.\+Standard\+Board.\+Standard\+Board.\+set\+Players\+To\+Regions (\begin{DoxyParamCaption}\item[{int}]{number\+Of\+Players }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1board_1_1Board}{game.\+board.\+Board}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/game/board/\+Standard\+Board/Standard\+Board.\+java\end{DoxyCompactItemize}

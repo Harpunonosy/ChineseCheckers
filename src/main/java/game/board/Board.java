@@ -5,6 +5,9 @@ import java.util.Map;
 import game.move.Move;
 import rules.GameRuleSet;
 
+/**
+ * Interface representing a game board.
+ */
 public interface Board {
     void initialize();
     void makeMove(Move move, int playerId, GameRuleSet ruleSet);

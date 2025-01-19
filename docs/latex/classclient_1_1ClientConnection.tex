@@ -1,0 +1,105 @@
+\doxysection{client.\+Client\+Connection Class Reference}
+\hypertarget{classclient_1_1ClientConnection}{}\label{classclient_1_1ClientConnection}\index{client.ClientConnection@{client.ClientConnection}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classclient_1_1ClientConnection_ad57279e76f3ca64f5abe297dd167db6f}{Client\+Connection}} (String server\+Address)  throws IOException 
+\item 
+void \mbox{\hyperlink{classclient_1_1ClientConnection_a3ab02f234c0e5dcac521f9184a4bc669}{send\+Message}} (Message message)
+\item 
+Message \mbox{\hyperlink{classclient_1_1ClientConnection_ab17e5bf73b4b14f6d8ddc5e184f38798}{receive\+Message}} ()  throws IOException 
+\item 
+Standard\+Board \mbox{\hyperlink{classclient_1_1ClientConnection_a5d2c55fc7a9306fdc6f5e8f48dc9ff5b}{deserialize\+Board}} (String serialized\+Board)
+\item 
+void \mbox{\hyperlink{classclient_1_1ClientConnection_a5c7e6ecdacedd863a8402409e2df07a1}{close}} ()  throws IOException 
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the connection between the client and the server. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classclient_1_1ClientConnection_ad57279e76f3ca64f5abe297dd167db6f}\label{classclient_1_1ClientConnection_ad57279e76f3ca64f5abe297dd167db6f} 
+\index{client.ClientConnection@{client.ClientConnection}!ClientConnection@{ClientConnection}}
+\index{ClientConnection@{ClientConnection}!client.ClientConnection@{client.ClientConnection}}
+\doxysubsubsection{\texorpdfstring{ClientConnection()}{ClientConnection()}}
+{\footnotesize\ttfamily client.\+Client\+Connection.\+Client\+Connection (\begin{DoxyParamCaption}\item[{String}]{server\+Address }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}}
+
+Initializes a new Client\+Connection.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server\+Address} & The address of the server. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & If an I/O error occurs when creating the socket. \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classclient_1_1ClientConnection_a5c7e6ecdacedd863a8402409e2df07a1}\label{classclient_1_1ClientConnection_a5c7e6ecdacedd863a8402409e2df07a1} 
+\index{client.ClientConnection@{client.ClientConnection}!close@{close}}
+\index{close@{close}!client.ClientConnection@{client.ClientConnection}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily void client.\+Client\+Connection.\+close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}}
+
+Closes the connection.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & If an I/O error occurs when closing the connection. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classclient_1_1ClientConnection_a5d2c55fc7a9306fdc6f5e8f48dc9ff5b}\label{classclient_1_1ClientConnection_a5d2c55fc7a9306fdc6f5e8f48dc9ff5b} 
+\index{client.ClientConnection@{client.ClientConnection}!deserializeBoard@{deserializeBoard}}
+\index{deserializeBoard@{deserializeBoard}!client.ClientConnection@{client.ClientConnection}}
+\doxysubsubsection{\texorpdfstring{deserializeBoard()}{deserializeBoard()}}
+{\footnotesize\ttfamily Standard\+Board client.\+Client\+Connection.\+deserialize\+Board (\begin{DoxyParamCaption}\item[{String}]{serialized\+Board }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Deserializes a board from a string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serialized\+Board} & The serialized board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The deserialized board. 
+\end{DoxyReturn}
+\Hypertarget{classclient_1_1ClientConnection_ab17e5bf73b4b14f6d8ddc5e184f38798}\label{classclient_1_1ClientConnection_ab17e5bf73b4b14f6d8ddc5e184f38798} 
+\index{client.ClientConnection@{client.ClientConnection}!receiveMessage@{receiveMessage}}
+\index{receiveMessage@{receiveMessage}!client.ClientConnection@{client.ClientConnection}}
+\doxysubsubsection{\texorpdfstring{receiveMessage()}{receiveMessage()}}
+{\footnotesize\ttfamily Message client.\+Client\+Connection.\+receive\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}}
+
+Receives a message from the server.
+
+\begin{DoxyReturn}{Returns}
+The received message. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & If an I/O error occurs when reading the message. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classclient_1_1ClientConnection_a3ab02f234c0e5dcac521f9184a4bc669}\label{classclient_1_1ClientConnection_a3ab02f234c0e5dcac521f9184a4bc669} 
+\index{client.ClientConnection@{client.ClientConnection}!sendMessage@{sendMessage}}
+\index{sendMessage@{sendMessage}!client.ClientConnection@{client.ClientConnection}}
+\doxysubsubsection{\texorpdfstring{sendMessage()}{sendMessage()}}
+{\footnotesize\ttfamily void client.\+Client\+Connection.\+send\+Message (\begin{DoxyParamCaption}\item[{Message}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sends a message to the server.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to send. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/client/Client\+Connection.\+java\end{DoxyCompactItemize}

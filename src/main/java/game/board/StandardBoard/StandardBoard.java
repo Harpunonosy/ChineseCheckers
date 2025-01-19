@@ -12,11 +12,17 @@ import game.board.Pawn;
 import game.move.Move;
 import rules.GameRuleSet;
 
+/**
+ * Represents a standard game board.
+ */
 public class StandardBoard implements Board, Serializable {
     private Map<Point, CellVertex> vertices;
     private CellVertex[][] matrix;
     private Map<Integer, Integer> playerTargetRegions;
 
+    /**
+     * Initializes a new standard board.
+     */
     public StandardBoard() {
         vertices = new HashMap<>();
         matrix = new CellVertex[25][17];
@@ -51,6 +57,13 @@ public class StandardBoard implements Board, Serializable {
         }
     }
 
+    /**
+     * Checks if a position is valid on the board.
+     * 
+     * @param x The x-coordinate.
+     * @param y The y-coordinate.
+     * @return True if the position is valid, false otherwise.
+     */
     public boolean isValidPosition(int x, int y) {
         if ((x + y) % 2 != 0) return false;
         if (x < 0 || x >= 25 || y < 0 || y >= 17) return false;
@@ -102,6 +115,7 @@ public class StandardBoard implements Board, Serializable {
             System.out.println("Ruch jest nielegalny");
         }
     }
+
     @Override
     public void setPlayersToRegions(int numberOfPlayers) {
         playerTargetRegions = new HashMap<>();

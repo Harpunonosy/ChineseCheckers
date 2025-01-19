@@ -1,0 +1,7 @@
+<map id="game.board.StandardBoard.StandardBoard" name="game.board.StandardBoard.StandardBoard">
+<area shape="rect" id="Node000001" title=" " alt="" coords="47,79,251,119"/>
+<area shape="rect" id="Node000002" href="$interfacegame_1_1board_1_1Board.html" title=" " alt="" coords="5,5,148,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,39,133,77,129,80,94,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="173,5,271,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,43,168,80,164,77,200,39"/>
+</map>

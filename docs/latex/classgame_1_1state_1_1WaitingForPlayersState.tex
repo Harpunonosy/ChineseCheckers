@@ -1,0 +1,95 @@
+\doxysection{game.\+state.\+Waiting\+For\+Players\+State Class Reference}
+\hypertarget{classgame_1_1state_1_1WaitingForPlayersState}{}\label{classgame_1_1state_1_1WaitingForPlayersState}\index{game.state.WaitingForPlayersState@{game.state.WaitingForPlayersState}}
+
+
+Inheritance diagram for game.\+state.\+Waiting\+For\+Players\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classgame_1_1state_1_1WaitingForPlayersState__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for game.\+state.\+Waiting\+For\+Players\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classgame_1_1state_1_1WaitingForPlayersState__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classgame_1_1state_1_1WaitingForPlayersState_ad42ce5c75d101cec093005582f1da978}{handle\+Player\+Join}} (Game\+Server server)
+\item 
+void \mbox{\hyperlink{classgame_1_1state_1_1WaitingForPlayersState_a996749c4be8a5040c64f87d106d9b0e2}{handle\+Move}} (Game\+Server server, String move, int player\+Id)
+\item 
+void \mbox{\hyperlink{classgame_1_1state_1_1WaitingForPlayersState_a1d014fadc7669b95c672fdbbe056d202}{broadcast\+State}} (Game\+Server server)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the state of the game when waiting for players. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgame_1_1state_1_1WaitingForPlayersState_a1d014fadc7669b95c672fdbbe056d202}\label{classgame_1_1state_1_1WaitingForPlayersState_a1d014fadc7669b95c672fdbbe056d202} 
+\index{game.state.WaitingForPlayersState@{game.state.WaitingForPlayersState}!broadcastState@{broadcastState}}
+\index{broadcastState@{broadcastState}!game.state.WaitingForPlayersState@{game.state.WaitingForPlayersState}}
+\doxysubsubsection{\texorpdfstring{broadcastState()}{broadcastState()}}
+{\footnotesize\ttfamily void game.\+state.\+Waiting\+For\+Players\+State.\+broadcast\+State (\begin{DoxyParamCaption}\item[{Game\+Server}]{server }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Broadcasts the current state of the game.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The game server. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1state_1_1GameState_a050590fcb6f3aa77bab4a57cc75b32bb}{game.\+state.\+Game\+State}}.
+
+\Hypertarget{classgame_1_1state_1_1WaitingForPlayersState_a996749c4be8a5040c64f87d106d9b0e2}\label{classgame_1_1state_1_1WaitingForPlayersState_a996749c4be8a5040c64f87d106d9b0e2} 
+\index{game.state.WaitingForPlayersState@{game.state.WaitingForPlayersState}!handleMove@{handleMove}}
+\index{handleMove@{handleMove}!game.state.WaitingForPlayersState@{game.state.WaitingForPlayersState}}
+\doxysubsubsection{\texorpdfstring{handleMove()}{handleMove()}}
+{\footnotesize\ttfamily void game.\+state.\+Waiting\+For\+Players\+State.\+handle\+Move (\begin{DoxyParamCaption}\item[{Game\+Server}]{server,  }\item[{String}]{move,  }\item[{int}]{player\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Handles a move made by a player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The game server. \\
+\hline
+{\em move} & The move made by the player. \\
+\hline
+{\em player\+Id} & The ID of the player making the move. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1state_1_1GameState_aa332dfa0c79795e9c936684abfefd3db}{game.\+state.\+Game\+State}}.
+
+\Hypertarget{classgame_1_1state_1_1WaitingForPlayersState_ad42ce5c75d101cec093005582f1da978}\label{classgame_1_1state_1_1WaitingForPlayersState_ad42ce5c75d101cec093005582f1da978} 
+\index{game.state.WaitingForPlayersState@{game.state.WaitingForPlayersState}!handlePlayerJoin@{handlePlayerJoin}}
+\index{handlePlayerJoin@{handlePlayerJoin}!game.state.WaitingForPlayersState@{game.state.WaitingForPlayersState}}
+\doxysubsubsection{\texorpdfstring{handlePlayerJoin()}{handlePlayerJoin()}}
+{\footnotesize\ttfamily void game.\+state.\+Waiting\+For\+Players\+State.\+handle\+Player\+Join (\begin{DoxyParamCaption}\item[{Game\+Server}]{server }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Handles a player joining the game.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The game server. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1state_1_1GameState_a944314878c1e1294367f96d318a4fd0e}{game.\+state.\+Game\+State}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/game/state/Waiting\+For\+Players\+State.\+java\end{DoxyCompactItemize}

@@ -1,5 +1,8 @@
 package utils.message;
 
+/**
+ * Enum representing the types of messages that can be sent between the client and server.
+ */
 public enum MessageType {
     BOARD_STATE,
     MOVE,

@@ -9,6 +9,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
+/**
+ * Implements the BananaJump rule set for the game.
+ */
 public class BananaJump implements GameRuleSet {
     private static final Logger logger = Logger.getLogger(BananaJump.class.getName());
 

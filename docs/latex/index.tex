@@ -1,0 +1,145 @@
+\chapter{Chinese\+Chekkers}
+\hypertarget{index}{}\label{index}\index{ChineseChekkers@{ChineseChekkers}}
+\label{index_md_Readme}%
+\Hypertarget{index_md_Readme}%
+ \hypertarget{index_autotoc_md1}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{index_autotoc_md1}
+Chinese\+Chekkers is a multiplayer board game implemented in Java. This project includes both server and client components, allowing multiple players to connect and play the game.\hypertarget{index_autotoc_md2}{}\doxysection{\texorpdfstring{Prerequisites}{Prerequisites}}\label{index_autotoc_md2}
+Before you begin, ensure you have the following installed on your system\+:
+
+
+\begin{DoxyItemize}
+\item Java Development Kit (JDK) 8 or higher
+\item Apache Maven
+\end{DoxyItemize}\hypertarget{index_autotoc_md3}{}\doxysection{\texorpdfstring{How to Build and Run}{How to Build and Run}}\label{index_autotoc_md3}
+\hypertarget{index_autotoc_md4}{}\doxysubsection{\texorpdfstring{Building the Project}{Building the Project}}\label{index_autotoc_md4}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Clone the repository\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/your-\/repo/chinesechekkers.git}
+\DoxyCodeLine{cd\ chinesechekkers}
+
+\end{DoxyCode}
+
+\item {\bfseries{Build the project using Maven\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mvn\ clean\ install}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md5}{}\doxysubsection{\texorpdfstring{Running the Project}{Running the Project}}\label{index_autotoc_md5}
+\hypertarget{index_autotoc_md6}{}\doxysubsubsection{\texorpdfstring{Running the Server}{Running the Server}}\label{index_autotoc_md6}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Navigate to the target directory\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ target}
+
+\end{DoxyCode}
+
+\item {\bfseries{Run the server\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{java\ -\/cp\ classes\ server.GameServer}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md7}{}\doxysubsubsection{\texorpdfstring{Running the Client}{Running the Client}}\label{index_autotoc_md7}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Navigate to the target directory\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ target}
+
+\end{DoxyCode}
+
+\item {\bfseries{Run the client\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{java\ -\/cp\ classes\ client.GameClient}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md8}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{index_autotoc_md8}
+The project has the following structure\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ChineseChekkers/}
+\DoxyCodeLine{├──\ .gitignore}
+\DoxyCodeLine{├──\ docs/}
+\DoxyCodeLine{│\ \ \ ├──\ html/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ annotated.html}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ classclient\_1\_1ClientConnection-\/members.html}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ classclient\_1\_1ClientConnection.html}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ classclient\_1\_1ClientInputHandler-\/members.html}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ classclient\_1\_1ClientInputHandler.html}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ classclient\_1\_1ClientOutputHandler\_\_coll\_\_graph.md5}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ classclient\_1\_1ClientOutputHandler\_\_inherit\_\_graph.md5}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ ...}
+\DoxyCodeLine{│\ \ \ ├──\ latex/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ annotated.tex}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ ...}
+\DoxyCodeLine{├──\ Doxyfile}
+\DoxyCodeLine{├──\ pom.xml}
+\DoxyCodeLine{├──\ Readme.md}
+\DoxyCodeLine{├──\ src/}
+\DoxyCodeLine{│\ \ \ ├──\ main/}
+\DoxyCodeLine{│\ \ \ │\ \ \ ├──\ java/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ ├──\ client/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ ClientConnection.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ ClientInputHandler.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ ClientOutputHandler.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ └──\ GameClient.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ ├──\ GUI/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ ClientStartController.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ GameOverController.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ InGameClientController.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ InGameClient.fxml}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ └──\ GameOver.fxml}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ ├──\ server/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ GameServer.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ └──\ PlayerHandler.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ ├──\ game/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ Game.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ board/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ Board.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ StandardBoard.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ move/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ Move.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ state/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ GameState.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ WaitingForPlayersState.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ GameInProgressState.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ GameOverState.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ ├──\ rules/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ GameRuleSet.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ MultipleJumpsRuleSet.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ BananaJump.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ ├──\ utils/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ SerializationUtils.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ message/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ Message.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ MessageType.java}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │\ \ \ │\ \ \ ├──\ MessageUtils.java}
+\DoxyCodeLine{│\ \ \ ├──\ test/}
+\DoxyCodeLine{│\ \ \ \ \ \ \ ├──\ java/}
+\DoxyCodeLine{│\ \ \ \ \ \ \ │\ \ \ ├──\ client/}
+\DoxyCodeLine{│\ \ \ \ \ \ \ │\ \ \ ├──\ server/}
+\DoxyCodeLine{│\ \ \ \ \ \ \ │\ \ \ ├──\ common/}
+\DoxyCodeLine{│\ \ \ \ \ \ \ └──\ resources/}
+\DoxyCodeLine{├──\ UML/}
+\DoxyCodeLine{│\ \ \ ├──\ Idea.md}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md9}{}\doxysection{\texorpdfstring{UML Diagrams}{UML Diagrams}}\label{index_autotoc_md9}
+The UML diagrams for the project can be found in the \href{http://_vscodecontentref_/3}{\texttt{ UML}} directory. These diagrams provide a visual representation of the project\textquotesingle{}s architecture and design patterns used.\hypertarget{index_autotoc_md10}{}\doxysection{\texorpdfstring{Design Patterns}{Design Patterns}}\label{index_autotoc_md10}
+The project utilizes several design patterns, including\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Singleton}}\+: Ensures that there is only one instance of the server managing all connections and games.
+\item {\bfseries{Abstract Factory}}\+: Allows for the creation of different game variants (standard and custom boards and rules) without changing the main game logic.
+\item {\bfseries{Factory Method}}\+: Responsible for creating appropriate instances of boards and game rules.
+\item {\bfseries{Observer}}\+: Notifies players about moves, allowing them to see the effects of moves made by other players.
+\item {\bfseries{Strategy}}\+: Allows for dynamic assignment of different sets of game rules.
+\item {\bfseries{Facade}}\+: Simplifies client operations by providing a unified interface to manage the connection, input, and output.
+\item {\bfseries{State}}\+: Manages the different states of the game (waiting for players, player\textquotesingle{}s turn, game over) and changes the behavior of the game based on its state.
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md11}{}\doxysection{\texorpdfstring{License}{License}}\label{index_autotoc_md11}
+This project is licensed under the MIT License. See the LICENSE file for details. 

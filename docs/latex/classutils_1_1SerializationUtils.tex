@@ -1,0 +1,88 @@
+\doxysection{utils.\+Serialization\+Utils Class Reference}
+\hypertarget{classutils_1_1SerializationUtils}{}\label{classutils_1_1SerializationUtils}\index{utils.SerializationUtils@{utils.SerializationUtils}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \mbox{\hyperlink{classutils_1_1SerializationUtils_abd5882e0cdd098ba827deacb35475552}{serialize\+Board\+State}} (Board\+State board\+State)
+\item 
+static Board\+State \mbox{\hyperlink{classutils_1_1SerializationUtils_a70b17fbacbafa1f017353bfd1642f441}{deserialize\+Board\+State}} (String serialized\+Board\+State)
+\item 
+static String \mbox{\hyperlink{classutils_1_1SerializationUtils_ad4a5f4281520cdbac17cf70a6485162b}{serialize\+Board}} (Standard\+Board board)
+\item 
+static Standard\+Board \mbox{\hyperlink{classutils_1_1SerializationUtils_a7f67fe04c58f4571b622407e21001cd6}{deserialize\+Board}} (String serialized\+Board)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility class for serialization and deserialization of board states. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classutils_1_1SerializationUtils_a7f67fe04c58f4571b622407e21001cd6}\label{classutils_1_1SerializationUtils_a7f67fe04c58f4571b622407e21001cd6} 
+\index{utils.SerializationUtils@{utils.SerializationUtils}!deserializeBoard@{deserializeBoard}}
+\index{deserializeBoard@{deserializeBoard}!utils.SerializationUtils@{utils.SerializationUtils}}
+\doxysubsubsection{\texorpdfstring{deserializeBoard()}{deserializeBoard()}}
+{\footnotesize\ttfamily static Standard\+Board utils.\+Serialization\+Utils.\+deserialize\+Board (\begin{DoxyParamCaption}\item[{String}]{serialized\+Board }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Deserializes a board from a Base64 encoded string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serialized\+Board} & The serialized board as a Base64 encoded string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The deserialized board. 
+\end{DoxyReturn}
+\Hypertarget{classutils_1_1SerializationUtils_a70b17fbacbafa1f017353bfd1642f441}\label{classutils_1_1SerializationUtils_a70b17fbacbafa1f017353bfd1642f441} 
+\index{utils.SerializationUtils@{utils.SerializationUtils}!deserializeBoardState@{deserializeBoardState}}
+\index{deserializeBoardState@{deserializeBoardState}!utils.SerializationUtils@{utils.SerializationUtils}}
+\doxysubsubsection{\texorpdfstring{deserializeBoardState()}{deserializeBoardState()}}
+{\footnotesize\ttfamily static Board\+State utils.\+Serialization\+Utils.\+deserialize\+Board\+State (\begin{DoxyParamCaption}\item[{String}]{serialized\+Board\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Deserializes a board state from a Base64 encoded string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em serialized\+Board\+State} & The serialized board state as a Base64 encoded string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The deserialized board state. 
+\end{DoxyReturn}
+\Hypertarget{classutils_1_1SerializationUtils_ad4a5f4281520cdbac17cf70a6485162b}\label{classutils_1_1SerializationUtils_ad4a5f4281520cdbac17cf70a6485162b} 
+\index{utils.SerializationUtils@{utils.SerializationUtils}!serializeBoard@{serializeBoard}}
+\index{serializeBoard@{serializeBoard}!utils.SerializationUtils@{utils.SerializationUtils}}
+\doxysubsubsection{\texorpdfstring{serializeBoard()}{serializeBoard()}}
+{\footnotesize\ttfamily static String utils.\+Serialization\+Utils.\+serialize\+Board (\begin{DoxyParamCaption}\item[{Standard\+Board}]{board }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Serializes a board to a Base64 encoded string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & The board to serialize. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The serialized board as a Base64 encoded string. 
+\end{DoxyReturn}
+\Hypertarget{classutils_1_1SerializationUtils_abd5882e0cdd098ba827deacb35475552}\label{classutils_1_1SerializationUtils_abd5882e0cdd098ba827deacb35475552} 
+\index{utils.SerializationUtils@{utils.SerializationUtils}!serializeBoardState@{serializeBoardState}}
+\index{serializeBoardState@{serializeBoardState}!utils.SerializationUtils@{utils.SerializationUtils}}
+\doxysubsubsection{\texorpdfstring{serializeBoardState()}{serializeBoardState()}}
+{\footnotesize\ttfamily static String utils.\+Serialization\+Utils.\+serialize\+Board\+State (\begin{DoxyParamCaption}\item[{Board\+State}]{board\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Serializes a board state to a Base64 encoded string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em board\+State} & The board state to serialize. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The serialized board state as a Base64 encoded string. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/utils/Serialization\+Utils.\+java\end{DoxyCompactItemize}

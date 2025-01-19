@@ -2,7 +2,10 @@ package game.board;
 
 import java.io.Serializable;
 
-public class CCEdge implements Serializable{
+/**
+ * Represents an edge between two vertices on the board.
+ */
+public class CCEdge implements Serializable {
     private CellVertex srcVertex;
     private CellVertex destVertex;
 

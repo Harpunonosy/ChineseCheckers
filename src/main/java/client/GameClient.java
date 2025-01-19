@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * The main class for the game client.
+ */
 public class GameClient extends Application {
     private ClientConnection connection;
     private ClientInputHandler inputHandler;
@@ -19,6 +22,12 @@ public class GameClient extends Application {
     public GameClient() {
     }
 
+    /**
+     * Initializes the client connection and handlers.
+     * 
+     * @param serverAddress The address of the server.
+     * @throws IOException If an I/O error occurs when creating the connection.
+     */
     public void initialize(String serverAddress) throws IOException {
         connection = new ClientConnection(serverAddress);
         inputHandler = new ClientInputHandler(connection);

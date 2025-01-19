@@ -2,7 +2,10 @@ package game.board;
 
 import java.io.Serializable;
 
-public class Pawn implements Serializable{
+/**
+ * Represents a pawn on the board.
+ */
+public class Pawn implements Serializable {
     private static final long serialVersionUID = 1L;
     private int playerId;
 

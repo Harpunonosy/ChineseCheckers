@@ -1,0 +1,87 @@
+\doxysection{server.\+Player\+Handler Class Reference}
+\hypertarget{classserver_1_1PlayerHandler}{}\label{classserver_1_1PlayerHandler}\index{server.PlayerHandler@{server.PlayerHandler}}
+
+
+Inheritance diagram for server.\+Player\+Handler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{classserver_1_1PlayerHandler__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for server.\+Player\+Handler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{classserver_1_1PlayerHandler__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classserver_1_1PlayerHandler_a87c91b1d921bfd792b2c1510097c9f55}{Player\+Handler}} (Socket socket, \mbox{\hyperlink{classserver_1_1GameServer}{Game\+Server}} server, int player\+Id)
+\item 
+\Hypertarget{classserver_1_1PlayerHandler_a7ae16d5faf03619f090af5767fe22428}\label{classserver_1_1PlayerHandler_a7ae16d5faf03619f090af5767fe22428} 
+void {\bfseries run} ()
+\item 
+void \mbox{\hyperlink{classserver_1_1PlayerHandler_ac10d774c1bb7b946e3790c04e451e9d6}{send\+Message}} (Message message)
+\item 
+int \mbox{\hyperlink{classserver_1_1PlayerHandler_ac2abcaece55428cb142f86eb5430632d}{get\+Player\+Id}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles communication with a single player. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classserver_1_1PlayerHandler_a87c91b1d921bfd792b2c1510097c9f55}\label{classserver_1_1PlayerHandler_a87c91b1d921bfd792b2c1510097c9f55} 
+\index{server.PlayerHandler@{server.PlayerHandler}!PlayerHandler@{PlayerHandler}}
+\index{PlayerHandler@{PlayerHandler}!server.PlayerHandler@{server.PlayerHandler}}
+\doxysubsubsection{\texorpdfstring{PlayerHandler()}{PlayerHandler()}}
+{\footnotesize\ttfamily server.\+Player\+Handler.\+Player\+Handler (\begin{DoxyParamCaption}\item[{Socket}]{socket,  }\item[{\mbox{\hyperlink{classserver_1_1GameServer}{Game\+Server}}}]{server,  }\item[{int}]{player\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Initializes a new Player\+Handler.
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & The socket for communication with the player. \\
+\hline
+{\em server} & The game server. \\
+\hline
+{\em player\+Id} & The ID of the player. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classserver_1_1PlayerHandler_ac2abcaece55428cb142f86eb5430632d}\label{classserver_1_1PlayerHandler_ac2abcaece55428cb142f86eb5430632d} 
+\index{server.PlayerHandler@{server.PlayerHandler}!getPlayerId@{getPlayerId}}
+\index{getPlayerId@{getPlayerId}!server.PlayerHandler@{server.PlayerHandler}}
+\doxysubsubsection{\texorpdfstring{getPlayerId()}{getPlayerId()}}
+{\footnotesize\ttfamily int server.\+Player\+Handler.\+get\+Player\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Gets the ID of the player.
+
+\begin{DoxyReturn}{Returns}
+The ID of the player. 
+\end{DoxyReturn}
+\Hypertarget{classserver_1_1PlayerHandler_ac10d774c1bb7b946e3790c04e451e9d6}\label{classserver_1_1PlayerHandler_ac10d774c1bb7b946e3790c04e451e9d6} 
+\index{server.PlayerHandler@{server.PlayerHandler}!sendMessage@{sendMessage}}
+\index{sendMessage@{sendMessage}!server.PlayerHandler@{server.PlayerHandler}}
+\doxysubsubsection{\texorpdfstring{sendMessage()}{sendMessage()}}
+{\footnotesize\ttfamily void server.\+Player\+Handler.\+send\+Message (\begin{DoxyParamCaption}\item[{Message}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sends a message to the player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to send. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/server/Player\+Handler.\+java\end{DoxyCompactItemize}

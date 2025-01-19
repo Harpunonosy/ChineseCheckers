@@ -1,0 +1,75 @@
+\doxysection{rules.\+Game\+Rule\+Set Interface Reference}
+\hypertarget{interfacerules_1_1GameRuleSet}{}\label{interfacerules_1_1GameRuleSet}\index{rules.GameRuleSet@{rules.GameRuleSet}}
+
+
+Inheritance diagram for rules.\+Game\+Rule\+Set\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interfacerules_1_1GameRuleSet__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{interfacerules_1_1GameRuleSet_add75d1f6f2f78f75288c3a9e8a2c38b6}{is\+Valid\+Move}} (Move move, int player\+Id, Board board)
+\item 
+boolean \mbox{\hyperlink{interfacerules_1_1GameRuleSet_ad299283500aac1ae849ca656cf2833f7}{is\+Game\+Over}} (Board board, int player\+Id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface representing a set of game rules. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfacerules_1_1GameRuleSet_ad299283500aac1ae849ca656cf2833f7}\label{interfacerules_1_1GameRuleSet_ad299283500aac1ae849ca656cf2833f7} 
+\index{rules.GameRuleSet@{rules.GameRuleSet}!isGameOver@{isGameOver}}
+\index{isGameOver@{isGameOver}!rules.GameRuleSet@{rules.GameRuleSet}}
+\doxysubsubsection{\texorpdfstring{isGameOver()}{isGameOver()}}
+{\footnotesize\ttfamily boolean rules.\+Game\+Rule\+Set.\+is\+Game\+Over (\begin{DoxyParamCaption}\item[{Board}]{board,  }\item[{int}]{player\+Id }\end{DoxyParamCaption})}
+
+Checks if the game is over for a player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & The game board. \\
+\hline
+{\em player\+Id} & The ID of the player. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the game is over for the player, false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classrules_1_1BananaJump_a4f1334a09e5a16bc76c8d56660e899cb}{rules.\+Banana\+Jump}}, \mbox{\hyperlink{classrules_1_1MultipleJumpsRuleSet_a123f4f6e6574b48f6a1bb91f2015dce8}{rules.\+Multiple\+Jumps\+Rule\+Set}}, and \mbox{\hyperlink{classrules_1_1StandardRuleSet_ace3224f2a740884f086ba75ecdeca553}{rules.\+Standard\+Rule\+Set}}.
+
+\Hypertarget{interfacerules_1_1GameRuleSet_add75d1f6f2f78f75288c3a9e8a2c38b6}\label{interfacerules_1_1GameRuleSet_add75d1f6f2f78f75288c3a9e8a2c38b6} 
+\index{rules.GameRuleSet@{rules.GameRuleSet}!isValidMove@{isValidMove}}
+\index{isValidMove@{isValidMove}!rules.GameRuleSet@{rules.GameRuleSet}}
+\doxysubsubsection{\texorpdfstring{isValidMove()}{isValidMove()}}
+{\footnotesize\ttfamily boolean rules.\+Game\+Rule\+Set.\+is\+Valid\+Move (\begin{DoxyParamCaption}\item[{Move}]{move,  }\item[{int}]{player\+Id,  }\item[{Board}]{board }\end{DoxyParamCaption})}
+
+Checks if a move is valid.
+
+
+\begin{DoxyParams}{Parameters}
+{\em move} & The move to check. \\
+\hline
+{\em player\+Id} & The ID of the player making the move. \\
+\hline
+{\em board} & The game board. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the move is valid, false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classrules_1_1BananaJump_adf7369dc83a272d1566386564f527258}{rules.\+Banana\+Jump}}, \mbox{\hyperlink{classrules_1_1MultipleJumpsRuleSet_a96c9c0708a01d503660447244ca5b165}{rules.\+Multiple\+Jumps\+Rule\+Set}}, and \mbox{\hyperlink{classrules_1_1StandardRuleSet_a10056dd4d16fd83ba1f606c935623d03}{rules.\+Standard\+Rule\+Set}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/rules/Game\+Rule\+Set.\+java\end{DoxyCompactItemize}

@@ -5,6 +5,9 @@ import game.board.CCEdge;
 import game.board.CellVertex;
 import game.move.Move;
 
+/**
+ * Implements the standard rule set for the game.
+ */
 public class StandardRuleSet implements GameRuleSet {
 
     @Override

@@ -1,0 +1,73 @@
+\doxysection{server.\+Game\+Server Class Reference}
+\hypertarget{classserver_1_1GameServer}{}\label{classserver_1_1GameServer}\index{server.GameServer@{server.GameServer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classserver_1_1GameServer_a6a540956b60407ab93ef4b78395b871a}\label{classserver_1_1GameServer_a6a540956b60407ab93ef4b78395b871a} 
+{\bfseries Game\+Server} (int max\+Players, Game\+Factory game\+Factory)
+\item 
+\Hypertarget{classserver_1_1GameServer_a5eea580bdb58bd974948f56621681310}\label{classserver_1_1GameServer_a5eea580bdb58bd974948f56621681310} 
+void {\bfseries start\+Server} ()  throws IOException 
+\item 
+\Hypertarget{classserver_1_1GameServer_a79e09a1e4366fef9276c5d69088496e2}\label{classserver_1_1GameServer_a79e09a1e4366fef9276c5d69088496e2} 
+void {\bfseries start\+Game} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_ab7f5b7da0d4f373c36da5f7d070d412e}\label{classserver_1_1GameServer_ab7f5b7da0d4f373c36da5f7d070d412e} 
+void {\bfseries set\+State} (Game\+State state)
+\item 
+\Hypertarget{classserver_1_1GameServer_aed6db9f68dc92cc0b928e81b29bdc039}\label{classserver_1_1GameServer_aed6db9f68dc92cc0b928e81b29bdc039} 
+void {\bfseries broadcast\+Player\+Info} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_ad50085fcc1e3e1ea0b03e154d07b6a77}\label{classserver_1_1GameServer_ad50085fcc1e3e1ea0b03e154d07b6a77} 
+void {\bfseries broadcast\+Board\+State} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_acd425d02d330b32a29dfc074dd388a01}\label{classserver_1_1GameServer_acd425d02d330b32a29dfc074dd388a01} 
+void {\bfseries send\+Message\+To\+Player} (int player\+Id, String message\+Content, Message\+Type message\+Type)
+\item 
+\Hypertarget{classserver_1_1GameServer_a87dfb4bb27fecdfc3cca50fceec9921e}\label{classserver_1_1GameServer_a87dfb4bb27fecdfc3cca50fceec9921e} 
+void {\bfseries broadcast\+Message} (String message\+Content, Message\+Type message\+Type)
+\item 
+\Hypertarget{classserver_1_1GameServer_a669022e9c205b2b02f61c75ee6c3b853}\label{classserver_1_1GameServer_a669022e9c205b2b02f61c75ee6c3b853} 
+void {\bfseries set\+Current\+Player} (\mbox{\hyperlink{classserver_1_1PlayerHandler}{Player\+Handler}} current\+Player)
+\item 
+\Hypertarget{classserver_1_1GameServer_ab1190acf146a514dc65e111e796408c9}\label{classserver_1_1GameServer_ab1190acf146a514dc65e111e796408c9} 
+\mbox{\hyperlink{classserver_1_1PlayerHandler}{Player\+Handler}} {\bfseries get\+Current\+Player} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_a71568ab061d43aa0f305da1e04fa157c}\label{classserver_1_1GameServer_a71568ab061d43aa0f305da1e04fa157c} 
+void {\bfseries increment\+Player\+Count} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_a7b30398c06d8fc335e8d276b257b00c2}\label{classserver_1_1GameServer_a7b30398c06d8fc335e8d276b257b00c2} 
+int {\bfseries get\+Player\+Count} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_ae5facd1a853c6823004d7f2e7eaab6c3}\label{classserver_1_1GameServer_ae5facd1a853c6823004d7f2e7eaab6c3} 
+int {\bfseries get\+Max\+Players} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_aeaffe3b489dbe7bdb7500e11b69de37e}\label{classserver_1_1GameServer_aeaffe3b489dbe7bdb7500e11b69de37e} 
+List$<$ \mbox{\hyperlink{classserver_1_1PlayerHandler}{Player\+Handler}} $>$ {\bfseries get\+Players} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_ac8fadfc61aaeb31286a6c78a8f48a40c}\label{classserver_1_1GameServer_ac8fadfc61aaeb31286a6c78a8f48a40c} 
+void {\bfseries next\+Player} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_af27031c9714c771e606b5c0825f76d9f}\label{classserver_1_1GameServer_af27031c9714c771e606b5c0825f76d9f} 
+Game\+State {\bfseries get\+State} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_a55ca027d2d8b1f226b2030a70ddc3ac1}\label{classserver_1_1GameServer_a55ca027d2d8b1f226b2030a70ddc3ac1} 
+Game {\bfseries get\+Game} ()
+\item 
+\Hypertarget{classserver_1_1GameServer_ac0f4a89436b8c459edf52c688f0f7b2f}\label{classserver_1_1GameServer_ac0f4a89436b8c459edf52c688f0f7b2f} 
+Move {\bfseries parse\+Move} (String move)
+\item 
+\Hypertarget{classserver_1_1GameServer_a08add3b22666d76f60c57ed38db43823}\label{classserver_1_1GameServer_a08add3b22666d76f60c57ed38db43823} 
+void {\bfseries process\+Move} (String move, int player\+Id)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classserver_1_1GameServer_a5e9889d230426e7a3ef9bd9350e9749c}\label{classserver_1_1GameServer_a5e9889d230426e7a3ef9bd9350e9749c} 
+static void {\bfseries main} (String\mbox{[}$\,$\mbox{]} args)  throws IOException 
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/server/Game\+Server.\+java\end{DoxyCompactItemize}

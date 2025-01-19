@@ -20,6 +20,9 @@ import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+/**
+ * Handles output to the client.
+ */
 public class ClientOutputHandler implements Runnable {
     private static final Logger logger = Logger.getLogger(ClientOutputHandler.class.getName());
     private ClientConnection connection;
@@ -32,6 +35,12 @@ public class ClientOutputHandler implements Runnable {
     private boolean isMyTurn = false;
     private String currentTurnMessage;
 
+    /**
+     * Initializes a new ClientOutputHandler.
+     * 
+     * @param connection The client connection.
+     * @param inputHandler The client input handler.
+     */
     public ClientOutputHandler(ClientConnection connection, ClientInputHandler inputHandler) {
         this.connection = connection;
         this.inputHandler = inputHandler;
@@ -54,7 +63,7 @@ public class ClientOutputHandler implements Runnable {
             case BOARD_STATE:
                 StandardBoard board = connection.deserializeBoard(message.getContent());
                 if (gameController == null) {
-                    pendingBoard = board; // Store the board until the gameController is set
+                    pendingBoard = board;
                 } else {
                     updateBoardGUI(board);
                 }
@@ -68,7 +77,7 @@ public class ClientOutputHandler implements Runnable {
                     if (gameController != null) {
                         gameController.setTurnState(message.getContent());
                     }
-                    currentTurnMessage = message.getContent(); // Zapisz wiadomość
+                    currentTurnMessage = message.getContent();
                 });
                 break;
             case GAME_STARTED:
@@ -111,7 +120,7 @@ public class ClientOutputHandler implements Runnable {
                 logger.warning("gameController is null in updateBoardGUI");
                 return;
             }
-            gameController.clearBoard(); // Dodaj metodę do czyszczenia planszy
+            gameController.clearBoard();
             CellVertex[][] matrix = board.getMatrix();
             for (int y = 0; y < matrix[0].length; y++) {
                 for (int x = 0; x < matrix.length; x++) {
@@ -147,22 +156,20 @@ public class ClientOutputHandler implements Runnable {
                 FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/GUI/InGameClient.fxml")));
                 Parent root = loader.load();
                 gameController = loader.getController();
-                gameController.setInputHandler(inputHandler); // Przekazanie instancji ClientInputHandler
+                gameController.setInputHandler(inputHandler);
 
-        
                 gameController.setPlayerIdColor(clientId, getColorForPlayer(clientId));
 
                 if (pendingBoard != null) {
-                    updateBoardGUI(pendingBoard); // Update the board if there was a pending board
+                    updateBoardGUI(pendingBoard);
                     pendingBoard = null;
                 }
 
                 primaryStage.setScene(new Scene(root, 1920, 1080));
                 primaryStage.show();
                 if (isMyTurn) {
-                    gameController.setTurnState("Your turn"); // Ustawienie stanu tury
-                }
-                else  {
+                    gameController.setTurnState("Your turn");
+                } else {
                     gameController.setTurnState(currentTurnMessage);
                 }
             } catch (IOException e) {
@@ -192,10 +199,20 @@ public class ClientOutputHandler implements Runnable {
         });
     }
 
+    /**
+     * Sets the start controller.
+     * 
+     * @param startController The start controller.
+     */
     public void setStartController(ClientStartController startController) {
         this.startController = startController;
     }
 
+    /**
+     * Sets the primary stage.
+     * 
+     * @param primaryStage The primary stage.
+     */
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }

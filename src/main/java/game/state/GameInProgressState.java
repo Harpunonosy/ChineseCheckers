@@ -5,8 +5,16 @@ import server.GameServer;
 import game.move.Move;
 import utils.message.MessageType;
 
+/**
+ * Represents the state of the game when it is in progress.
+ */
 public class GameInProgressState implements GameState {
 
+    /**
+     * Initializes the game in progress state.
+     * 
+     * @param server The game server.
+     */
     public GameInProgressState(GameServer server) {
         // Randomly select the first player
         Random random = new Random();

@@ -1,0 +1,52 @@
+\doxysection{utils.\+message.\+Message\+Utils Class Reference}
+\hypertarget{classutils_1_1message_1_1MessageUtils}{}\label{classutils_1_1message_1_1MessageUtils}\index{utils.message.MessageUtils@{utils.message.MessageUtils}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \mbox{\hyperlink{classutils_1_1message_1_1MessageUtils_a7f83fdc68384fff2b35f379a915c5141}{serialize\+Message}} (\mbox{\hyperlink{classutils_1_1message_1_1Message}{Message}} message)
+\item 
+static \mbox{\hyperlink{classutils_1_1message_1_1Message}{Message}} \mbox{\hyperlink{classutils_1_1message_1_1MessageUtils_ac7a08d19ee73d8442b5a603d9edb5ec3}{deserialize\+Message}} (String json)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility class for serializing and deserializing messages. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classutils_1_1message_1_1MessageUtils_ac7a08d19ee73d8442b5a603d9edb5ec3}\label{classutils_1_1message_1_1MessageUtils_ac7a08d19ee73d8442b5a603d9edb5ec3} 
+\index{utils.message.MessageUtils@{utils.message.MessageUtils}!deserializeMessage@{deserializeMessage}}
+\index{deserializeMessage@{deserializeMessage}!utils.message.MessageUtils@{utils.message.MessageUtils}}
+\doxysubsubsection{\texorpdfstring{deserializeMessage()}{deserializeMessage()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classutils_1_1message_1_1Message}{Message}} utils.\+message.\+Message\+Utils.\+deserialize\+Message (\begin{DoxyParamCaption}\item[{String}]{json }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Deserializes a message from a JSON string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON string representing the message. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The deserialized message. 
+\end{DoxyReturn}
+\Hypertarget{classutils_1_1message_1_1MessageUtils_a7f83fdc68384fff2b35f379a915c5141}\label{classutils_1_1message_1_1MessageUtils_a7f83fdc68384fff2b35f379a915c5141} 
+\index{utils.message.MessageUtils@{utils.message.MessageUtils}!serializeMessage@{serializeMessage}}
+\index{serializeMessage@{serializeMessage}!utils.message.MessageUtils@{utils.message.MessageUtils}}
+\doxysubsubsection{\texorpdfstring{serializeMessage()}{serializeMessage()}}
+{\footnotesize\ttfamily static String utils.\+message.\+Message\+Utils.\+serialize\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classutils_1_1message_1_1Message}{Message}}}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Serializes a message to a JSON string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to serialize. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The serialized message as a JSON string. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/utils/message/Message\+Utils.\+java\end{DoxyCompactItemize}

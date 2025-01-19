@@ -1,0 +1,86 @@
+\doxysection{game.\+state.\+Game\+State Interface Reference}
+\hypertarget{interfacegame_1_1state_1_1GameState}{}\label{interfacegame_1_1state_1_1GameState}\index{game.state.GameState@{game.state.GameState}}
+
+
+Inheritance diagram for game.\+state.\+Game\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interfacegame_1_1state_1_1GameState__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interfacegame_1_1state_1_1GameState_a944314878c1e1294367f96d318a4fd0e}{handle\+Player\+Join}} (Game\+Server server)
+\item 
+void \mbox{\hyperlink{interfacegame_1_1state_1_1GameState_aa332dfa0c79795e9c936684abfefd3db}{handle\+Move}} (Game\+Server server, String move, int player\+Id)
+\item 
+void \mbox{\hyperlink{interfacegame_1_1state_1_1GameState_a050590fcb6f3aa77bab4a57cc75b32bb}{broadcast\+State}} (Game\+Server server)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface representing a game state. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfacegame_1_1state_1_1GameState_a050590fcb6f3aa77bab4a57cc75b32bb}\label{interfacegame_1_1state_1_1GameState_a050590fcb6f3aa77bab4a57cc75b32bb} 
+\index{game.state.GameState@{game.state.GameState}!broadcastState@{broadcastState}}
+\index{broadcastState@{broadcastState}!game.state.GameState@{game.state.GameState}}
+\doxysubsubsection{\texorpdfstring{broadcastState()}{broadcastState()}}
+{\footnotesize\ttfamily void game.\+state.\+Game\+State.\+broadcast\+State (\begin{DoxyParamCaption}\item[{Game\+Server}]{server }\end{DoxyParamCaption})}
+
+Broadcasts the current state of the game.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The game server. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classgame_1_1state_1_1GameInProgressState_ab16a1319d092c1bc2da2f3f1d948a38d}{game.\+state.\+Game\+In\+Progress\+State}}, \mbox{\hyperlink{classgame_1_1state_1_1GameOverState_a976aa36a1e0dbcf4d8117e607c067b3b}{game.\+state.\+Game\+Over\+State}}, and \mbox{\hyperlink{classgame_1_1state_1_1WaitingForPlayersState_a1d014fadc7669b95c672fdbbe056d202}{game.\+state.\+Waiting\+For\+Players\+State}}.
+
+\Hypertarget{interfacegame_1_1state_1_1GameState_aa332dfa0c79795e9c936684abfefd3db}\label{interfacegame_1_1state_1_1GameState_aa332dfa0c79795e9c936684abfefd3db} 
+\index{game.state.GameState@{game.state.GameState}!handleMove@{handleMove}}
+\index{handleMove@{handleMove}!game.state.GameState@{game.state.GameState}}
+\doxysubsubsection{\texorpdfstring{handleMove()}{handleMove()}}
+{\footnotesize\ttfamily void game.\+state.\+Game\+State.\+handle\+Move (\begin{DoxyParamCaption}\item[{Game\+Server}]{server,  }\item[{String}]{move,  }\item[{int}]{player\+Id }\end{DoxyParamCaption})}
+
+Handles a move made by a player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The game server. \\
+\hline
+{\em move} & The move made by the player. \\
+\hline
+{\em player\+Id} & The ID of the player making the move. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classgame_1_1state_1_1GameInProgressState_a1484d0f9a1ea0fbf5db3d0544584feaa}{game.\+state.\+Game\+In\+Progress\+State}}, \mbox{\hyperlink{classgame_1_1state_1_1GameOverState_a92a8c50e71901c43d2deb7361cf35d0f}{game.\+state.\+Game\+Over\+State}}, and \mbox{\hyperlink{classgame_1_1state_1_1WaitingForPlayersState_a996749c4be8a5040c64f87d106d9b0e2}{game.\+state.\+Waiting\+For\+Players\+State}}.
+
+\Hypertarget{interfacegame_1_1state_1_1GameState_a944314878c1e1294367f96d318a4fd0e}\label{interfacegame_1_1state_1_1GameState_a944314878c1e1294367f96d318a4fd0e} 
+\index{game.state.GameState@{game.state.GameState}!handlePlayerJoin@{handlePlayerJoin}}
+\index{handlePlayerJoin@{handlePlayerJoin}!game.state.GameState@{game.state.GameState}}
+\doxysubsubsection{\texorpdfstring{handlePlayerJoin()}{handlePlayerJoin()}}
+{\footnotesize\ttfamily void game.\+state.\+Game\+State.\+handle\+Player\+Join (\begin{DoxyParamCaption}\item[{Game\+Server}]{server }\end{DoxyParamCaption})}
+
+Handles a player joining the game.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The game server. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classgame_1_1state_1_1GameInProgressState_abc18237f9282d6b7fd8efb86f457ca4a}{game.\+state.\+Game\+In\+Progress\+State}}, \mbox{\hyperlink{classgame_1_1state_1_1GameOverState_a7c62971768063ba5bb9c2b305af46f63}{game.\+state.\+Game\+Over\+State}}, and \mbox{\hyperlink{classgame_1_1state_1_1WaitingForPlayersState_ad42ce5c75d101cec093005582f1da978}{game.\+state.\+Waiting\+For\+Players\+State}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/game/state/Game\+State.\+java\end{DoxyCompactItemize}

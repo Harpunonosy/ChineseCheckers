@@ -1,0 +1,113 @@
+\doxysection{game.\+state.\+Game\+Over\+State Class Reference}
+\hypertarget{classgame_1_1state_1_1GameOverState}{}\label{classgame_1_1state_1_1GameOverState}\index{game.state.GameOverState@{game.state.GameOverState}}
+
+
+Inheritance diagram for game.\+state.\+Game\+Over\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classgame_1_1state_1_1GameOverState__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for game.\+state.\+Game\+Over\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classgame_1_1state_1_1GameOverState__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1state_1_1GameOverState_a27b379fe255755f71d6b4d1234302293}{Game\+Over\+State}} (Game\+Server server)
+\item 
+void \mbox{\hyperlink{classgame_1_1state_1_1GameOverState_a7c62971768063ba5bb9c2b305af46f63}{handle\+Player\+Join}} (Game\+Server server)
+\item 
+void \mbox{\hyperlink{classgame_1_1state_1_1GameOverState_a92a8c50e71901c43d2deb7361cf35d0f}{handle\+Move}} (Game\+Server server, String move, int player\+Id)
+\item 
+void \mbox{\hyperlink{classgame_1_1state_1_1GameOverState_a976aa36a1e0dbcf4d8117e607c067b3b}{broadcast\+State}} (Game\+Server server)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the state of the game when it is over. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classgame_1_1state_1_1GameOverState_a27b379fe255755f71d6b4d1234302293}\label{classgame_1_1state_1_1GameOverState_a27b379fe255755f71d6b4d1234302293} 
+\index{game.state.GameOverState@{game.state.GameOverState}!GameOverState@{GameOverState}}
+\index{GameOverState@{GameOverState}!game.state.GameOverState@{game.state.GameOverState}}
+\doxysubsubsection{\texorpdfstring{GameOverState()}{GameOverState()}}
+{\footnotesize\ttfamily game.\+state.\+Game\+Over\+State.\+Game\+Over\+State (\begin{DoxyParamCaption}\item[{Game\+Server}]{server }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Initializes the game over state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The game server. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgame_1_1state_1_1GameOverState_a976aa36a1e0dbcf4d8117e607c067b3b}\label{classgame_1_1state_1_1GameOverState_a976aa36a1e0dbcf4d8117e607c067b3b} 
+\index{game.state.GameOverState@{game.state.GameOverState}!broadcastState@{broadcastState}}
+\index{broadcastState@{broadcastState}!game.state.GameOverState@{game.state.GameOverState}}
+\doxysubsubsection{\texorpdfstring{broadcastState()}{broadcastState()}}
+{\footnotesize\ttfamily void game.\+state.\+Game\+Over\+State.\+broadcast\+State (\begin{DoxyParamCaption}\item[{Game\+Server}]{server }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Broadcasts the current state of the game.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The game server. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1state_1_1GameState_a050590fcb6f3aa77bab4a57cc75b32bb}{game.\+state.\+Game\+State}}.
+
+\Hypertarget{classgame_1_1state_1_1GameOverState_a92a8c50e71901c43d2deb7361cf35d0f}\label{classgame_1_1state_1_1GameOverState_a92a8c50e71901c43d2deb7361cf35d0f} 
+\index{game.state.GameOverState@{game.state.GameOverState}!handleMove@{handleMove}}
+\index{handleMove@{handleMove}!game.state.GameOverState@{game.state.GameOverState}}
+\doxysubsubsection{\texorpdfstring{handleMove()}{handleMove()}}
+{\footnotesize\ttfamily void game.\+state.\+Game\+Over\+State.\+handle\+Move (\begin{DoxyParamCaption}\item[{Game\+Server}]{server,  }\item[{String}]{move,  }\item[{int}]{player\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Handles a move made by a player.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The game server. \\
+\hline
+{\em move} & The move made by the player. \\
+\hline
+{\em player\+Id} & The ID of the player making the move. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1state_1_1GameState_aa332dfa0c79795e9c936684abfefd3db}{game.\+state.\+Game\+State}}.
+
+\Hypertarget{classgame_1_1state_1_1GameOverState_a7c62971768063ba5bb9c2b305af46f63}\label{classgame_1_1state_1_1GameOverState_a7c62971768063ba5bb9c2b305af46f63} 
+\index{game.state.GameOverState@{game.state.GameOverState}!handlePlayerJoin@{handlePlayerJoin}}
+\index{handlePlayerJoin@{handlePlayerJoin}!game.state.GameOverState@{game.state.GameOverState}}
+\doxysubsubsection{\texorpdfstring{handlePlayerJoin()}{handlePlayerJoin()}}
+{\footnotesize\ttfamily void game.\+state.\+Game\+Over\+State.\+handle\+Player\+Join (\begin{DoxyParamCaption}\item[{Game\+Server}]{server }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Handles a player joining the game.
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & The game server. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interfacegame_1_1state_1_1GameState_a944314878c1e1294367f96d318a4fd0e}{game.\+state.\+Game\+State}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/game/state/Game\+Over\+State.\+java\end{DoxyCompactItemize}
