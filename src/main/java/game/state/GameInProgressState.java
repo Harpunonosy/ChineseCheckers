@@ -17,8 +17,8 @@ public class GameInProgressState implements GameState {
         server.broadcastBoardState();
         
         // Notify the current player that it's their turn
-        server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!", MessageType.YOUR_TURN);
         server.broadcastMessage("Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.", MessageType.INFO);
+        server.sendMessageToPlayer(server.getCurrentPlayer().getPlayerId(), "It's your turn!", MessageType.YOUR_TURN);
     }
 
     @Override

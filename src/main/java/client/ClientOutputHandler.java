@@ -29,6 +29,8 @@ public class ClientOutputHandler implements Runnable {
     private StandardBoard pendingBoard;
     private Stage primaryStage;
     private int clientId;
+    private boolean isMyTurn = false;
+    private String currentTurnMessage;
 
     public ClientOutputHandler(ClientConnection connection, ClientInputHandler inputHandler) {
         this.connection = connection;
@@ -64,8 +66,9 @@ public class ClientOutputHandler implements Runnable {
                         logger.info("Server: " + message.getContent());
                     }
                     if (gameController != null) {
-                            gameController.setTurnState(message.getContent());
+                        gameController.setTurnState(message.getContent());
                     }
+                    currentTurnMessage = message.getContent(); // Zapisz wiadomość
                 });
                 break;
             case GAME_STARTED:
@@ -89,6 +92,7 @@ public class ClientOutputHandler implements Runnable {
                     if (gameController != null) {
                         gameController.setTurnState("Your turn");
                     }
+                    isMyTurn = true;
                 });
                 break;
             case GAME_OVER:
@@ -155,6 +159,12 @@ public class ClientOutputHandler implements Runnable {
 
                 primaryStage.setScene(new Scene(root, 1920, 1080));
                 primaryStage.show();
+                if (isMyTurn) {
+                    gameController.setTurnState("Your turn"); // Ustawienie stanu tury
+                }
+                else  {
+                    gameController.setTurnState(currentTurnMessage);
+                }
             } catch (IOException e) {
                 logger.log(Level.SEVERE, "Error switching to game scene", e);
             }
