@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import game.move.Move;
 import utils.message.Message;
 import utils.message.MessageType;
 import utils.message.MessageUtils;
@@ -49,6 +53,14 @@ public class PlayerHandler implements Runnable {
         switch (message.getType()) {
             case MOVE:
                 server.processMove(message.getContent(), playerId);
+                break;
+            case AVAILABLE_MOVES:
+                Move move = server.parseMove(message.getContent());
+                List<Move> availableMoves = server.getGame().getGameRuleSet().getAvailableMoves(move, playerId, server.getGame().getBoard());
+                String movesString = availableMoves.stream()
+                        .map(Move::toString)
+                        .collect(Collectors.joining("-"));
+                sendMessage(new Message(MessageType.AVAILABLE_MOVES, movesString));
                 break;
             default:
                 System.out.println("Unknown message type: " + message.getType());

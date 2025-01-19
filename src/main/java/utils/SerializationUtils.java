@@ -32,7 +32,6 @@ public class SerializationUtils {
         }
     }
 
-
     public static String serializeBoard(StandardBoard board) {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

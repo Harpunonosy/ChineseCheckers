@@ -95,6 +95,13 @@ public class ClientOutputHandler implements Runnable {
                     isMyTurn = true;
                 });
                 break;
+            case AVAILABLE_MOVES:
+                Platform.runLater(() -> {
+                    if (gameController != null) {
+                        gameController.setAvailableMoves(message.getContent());
+                    }
+                });
+                break;
             case GAME_OVER:
                 Platform.runLater(() -> {
                     switchToGameOverScene(message.getContent());

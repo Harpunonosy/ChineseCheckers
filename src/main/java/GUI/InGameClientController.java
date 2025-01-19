@@ -42,6 +42,10 @@ public class InGameClientController {
             startX = column;
             startY = row;
             highlightCircle(clickedCircle, Color.YELLOW); // Kolorowanie kółka na żółto
+            if (inputHandler != null) {
+                String move = buildMoveString(startX, startY, startX, startY);
+                inputHandler.sendAvailableMovesRequest(move);
+            }
         } else {
             String move = buildMoveString(startX, startY, column, row);
             System.out.println("Move: " + move);
@@ -94,4 +98,16 @@ public class InGameClientController {
         playerIdColor.setTextFill(color);
     }
 
+    public void setAvailableMoves(String content) {
+        String[] moves = content.split("-");
+        for (String move : moves) {
+            String[] parts = move.split("-");
+            int endX = Integer.parseInt(parts[2]);
+            int endY = Integer.parseInt(parts[3]);
+            Circle circle = getCircleAtPosition(endX, endY);
+            if (circle != null) {
+                highlightCircle(circle, Color.LIGHTGREEN); // Kolorowanie dostępnych pól na jasnozielono
+            }
+        }
+    }
 }

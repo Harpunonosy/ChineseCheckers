@@ -5,6 +5,8 @@ import game.board.CCEdge;
 import game.board.CellVertex;
 import game.move.Move;
 
+import java.util.List;
+
 public class StandardRuleSet implements GameRuleSet {
 
     @Override
@@ -104,6 +106,11 @@ public class StandardRuleSet implements GameRuleSet {
     public boolean isGameOver(Board board, int playerId) {
         int targetRegion = board.getPlayersTargetRegions().get(playerId);
         return areAllPawnsInTargetRegion(board, playerId, targetRegion);
+    }
+
+    @Override
+    public List<Move> getAvailableMoves(Move move, int playerId, Board board) {
+        return List.of();
     }
 
     private boolean areAllPawnsInTargetRegion(Board board, int playerId, int targetRegion) {

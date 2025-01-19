@@ -7,5 +7,6 @@ public enum MessageType {
     GAME_STARTED,
     YOUR_ID,
     YOUR_TURN,
-    GAME_OVER
+    GAME_OVER,
+    AVAILABLE_MOVES
 }

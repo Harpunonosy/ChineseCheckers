@@ -19,4 +19,7 @@ public class ClientInputHandler {
             System.out.println("Error sending move: " + e.getMessage());
         }
     }
+
+    public void sendAvailableMovesRequest(String move) {
+    }
 }
