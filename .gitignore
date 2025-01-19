@@ -40,9 +40,6 @@ generated-test-sources/
 # Ignore surefire reports
 surefire-reports/
 
-# Ignore test classes
-src/test/
-
 # Ignore other build directories
 bin/
 out/
