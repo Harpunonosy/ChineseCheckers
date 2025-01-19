@@ -176,10 +176,10 @@
 <Circle fx:id="field" fill="DODGERBLUE" onMouseClicked="#OnClicked" radius="33.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="10" />
 <Circle fx:id="field" fill="DODGERBLUE" onMouseClicked="#OnClicked" radius="33.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="19" GridPane.rowIndex="11" />
 <Circle fx:id="field" fill="DODGERBLUE" onMouseClicked="#OnClicked" radius="33.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="21" GridPane.rowIndex="11" />
-      <Pane prefHeight="69.0" prefWidth="192.0" GridPane.columnSpan="3" GridPane.rowSpan="2">
+      <Pane prefHeight="69.0" prefWidth="192.0" GridPane.columnSpan="5" GridPane.rowSpan="2">
          <children>
-            <Label fx:id="turnState" layoutX="13.0" layoutY="14.0" prefHeight="48.0" prefWidth="166.0" />
-            <Label fx:id="playerIdColor" layoutX="22.0" layoutY="62.0" prefHeight="48.0" prefWidth="148.0" />
+            <Label fx:id="playerIdColor" layoutX="22.0" layoutY="62.0" prefHeight="48.0" prefWidth="282.0" />
+            <Label fx:id="turnState" layoutX="23.0" layoutY="24.0" prefHeight="48.0" prefWidth="289.0" />
          </children>
       </Pane>
 </children>
