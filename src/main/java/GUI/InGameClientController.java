@@ -93,4 +93,5 @@ public class InGameClientController {
         playerIdColor.setText("Player ID: " + playerId);
         playerIdColor.setTextFill(color);
     }
+
 }

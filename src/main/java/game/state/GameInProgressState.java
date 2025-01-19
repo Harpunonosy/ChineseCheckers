@@ -53,7 +53,7 @@ public class GameInProgressState implements GameState {
                 server.sendMessageToPlayer(playerId, "Invalid move: either the start position does not contain your pawn or the end position is occupied.", MessageType.INFO);
             }
         } else {
-            server.sendMessageToPlayer(playerId, "It's not your turn.", MessageType.INFO);
+            server.sendMessageToPlayer(playerId, "Player " + server.getCurrentPlayer().getPlayerId() + " is making a move.", MessageType.INFO);
         }
     }
 

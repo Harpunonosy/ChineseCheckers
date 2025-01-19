@@ -14,7 +14,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import utils.message.Message;
-import utils.message.MessageType;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -65,7 +64,7 @@ public class ClientOutputHandler implements Runnable {
                         logger.info("Server: " + message.getContent());
                     }
                     if (gameController != null) {
-                            gameController.setTurnState("Opponent's turn");
+                            gameController.setTurnState(message.getContent());
                     }
                 });
                 break;
@@ -89,7 +88,6 @@ public class ClientOutputHandler implements Runnable {
                 Platform.runLater(() -> {
                     if (gameController != null) {
                         gameController.setTurnState("Your turn");
-                        gameController.setPlayerIdColor(clientId, getColorForPlayer(clientId));
                     }
                 });
                 break;
@@ -146,6 +144,7 @@ public class ClientOutputHandler implements Runnable {
                 Parent root = loader.load();
                 gameController = loader.getController();
                 gameController.setInputHandler(inputHandler); // Przekazanie instancji ClientInputHandler
+                gameController.setPlayerIdColor(clientId, getColorForPlayer(clientId));
 
                 if (pendingBoard != null) {
                     updateBoardGUI(pendingBoard); // Update the board if there was a pending board
