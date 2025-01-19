@@ -1,11 +1,13 @@
 client/ClientInputHandler.class
 GUI/InGameClientController.class
 utils/message/MessageType.class
+factories/BananJumpFactory.class
 GUI/GameOverController.class
 client/ClientOutputHandler.class
 game/board/CCEdge.class
 game/Game.class
 factories/StandardGameFactory.class
+factories/MultipleJumpsFactory.class
 rules/GameRuleSet.class
 utils/message/MessageUtils.class
 game/board/StandardBoard/StandardBoard.class
@@ -21,11 +23,13 @@ server/PlayerHandler$1.class
 client/ClientOutputHandler$1.class
 factories/GameFactory.class
 game/board/CellVertex.class
+rules/BananaJump.class
 game/move/Move.class
 exceptions/InvalidMoveFormatException.class
 game/board/Board.class
 game/state/GameInProgressState.class
 client/GameClient.class
+rules/MultipleJumpsRuleSet.class
 game/board/BoardState.class
 server/PlayerHandler.class
 game/board/Pawn.class
