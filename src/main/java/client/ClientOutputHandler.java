@@ -29,6 +29,7 @@ public class ClientOutputHandler implements Runnable {
     private InGameClientController gameController;
     private StandardBoard pendingBoard;
     private Stage primaryStage;
+    private int clientId;
 
     public ClientOutputHandler(ClientConnection connection, ClientInputHandler inputHandler) {
         this.connection = connection;
@@ -63,6 +64,9 @@ public class ClientOutputHandler implements Runnable {
                         startController.setInfo(message.getContent());
                         logger.info("Server: " + message.getContent());
                     }
+                    if (gameController != null) {
+                            gameController.setTurnState("Opponent's turn");
+                    }
                 });
                 break;
             case GAME_STARTED:
@@ -76,7 +80,7 @@ public class ClientOutputHandler implements Runnable {
             case YOUR_ID:
                 Platform.runLater(() -> {
                     if (startController != null) {
-                        int clientId = Integer.parseInt(message.getContent());
+                        clientId = Integer.parseInt(message.getContent());
                         startController.setClientId(clientId);
                     }
                 });
@@ -84,8 +88,8 @@ public class ClientOutputHandler implements Runnable {
             case YOUR_TURN:
                 Platform.runLater(() -> {
                     if (gameController != null) {
-                        //TODO
-                        //gameController.showYourTurnMessage();
+                        gameController.setTurnState("Your turn");
+                        gameController.setPlayerIdColor(clientId, getColorForPlayer(clientId));
                     }
                 });
                 break;
