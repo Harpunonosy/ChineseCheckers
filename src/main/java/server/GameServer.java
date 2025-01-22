@@ -1,7 +1,6 @@
 package server;
 
 import factories.GameFactory;
-import factories.MultipleJumpsFactory;
 import factories.StandardGameFactory;
 import factories.BananJumpFactory;
 import game.Game;
@@ -21,6 +20,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import factories.*;;
 
 public class GameServer {
     private List<PlayerHandler> players = new ArrayList<>();

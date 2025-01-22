@@ -1,5 +1,6 @@
 package factories;
 
+import factories.GameFactory;
 import game.board.StandardBoard.StandardBoard;
 import rules.MultipleJumpsRuleSet;
 
