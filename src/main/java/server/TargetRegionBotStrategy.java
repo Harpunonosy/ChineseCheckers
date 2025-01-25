@@ -10,9 +10,16 @@ import java.util.*;
 
 public class TargetRegionBotStrategy implements BotStrategy {
 
+    private GameRuleSet ruleSet;
+
+    public void setRuleSet(GameRuleSet ruleset){
+       this.ruleSet = ruleset;
+    }
+
     @Override
     public void makeMove(Bot bot) {
         StandardBoard board = (StandardBoard) bot.getServer().getGame().getBoard();
+        setRuleSet(bot.getServer().getGame().getGameRuleSet());
         int playerId = bot.getPlayerId();
         int targetRegion = board.getPlayersTargetRegions().get(playerId);
         List<CellVertex> targetVertices = getTargetVertices(board, targetRegion);
@@ -27,15 +34,11 @@ public class TargetRegionBotStrategy implements BotStrategy {
                 if (bestMove == null) {
                     break;
                 }
-                // if(bot.getPlayerId() == 2){
-                //     System.out.println("BEST MOVE: " + "(" + bestMove.getStartX() + " , " + bestMove.getStartY() + ")" + "  --->  " + "(" + bestMove.getEndX() + " , " + bestMove.getEndY() + ")");
-                //     System.out.println(isInTargetVertices(bestMove.getStartX(), bestMove.getStartY(), targetVertices));
-                // }
                 CellVertex startVertex = board.getVertexAt(bestMove.getStartX(), bestMove.getStartY());
                 int currentLayer = getLayerValue(startVertex, targetRegion);
                 int newLayer = getLayerValue(board.getVertexAt(bestMove.getEndX(), bestMove.getEndY()), targetRegion);
-                if (newLayer > currentLayer || !isInTargetVertices(bestMove.getStartX(), bestMove.getStartY(), targetVertices)) {
-                    // System.out.println("PROCESSING: " + "(" + bestMove.getStartX() + " , " + bestMove.getStartY() + ")" + "  --->  " + "(" + bestMove.getEndX() + " , " + bestMove.getEndY() + ")");
+                if ((newLayer > currentLayer || !isInTargetVertices(bestMove.getStartX(), bestMove.getStartY(), targetVertices)) &&
+                    ruleSet.isValidMove(bestMove, playerId, board)) {
                     bot.getServer().processMove(formatMove(bestMove), playerId);
                     return;
                 } else {
@@ -47,7 +50,7 @@ public class TargetRegionBotStrategy implements BotStrategy {
         // Evaluate moves and prioritize them
         Move bestMove;
         bestMove = evaluateMoves(board, playerId, targetVertices);
-        if (bestMove != null) {
+        if (bestMove != null && ruleSet.isValidMove(bestMove, playerId, board)) {
             bot.getServer().processMove(formatMove(bestMove), playerId);
         }
     }
