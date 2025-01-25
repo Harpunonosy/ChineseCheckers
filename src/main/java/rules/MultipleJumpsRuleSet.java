@@ -19,6 +19,7 @@ public class MultipleJumpsRuleSet implements GameRuleSet {
         }
         // Check if the move is within the allowed regions
         if (!isMoveWithinAllowedRegions(move, playerId, board)) {
+            System.out.println("WYJEBKA 2");
             return false;
         }
         // Check if there is a direct edge between start and end positions
@@ -111,35 +112,27 @@ public class MultipleJumpsRuleSet implements GameRuleSet {
       return false;
   }
   
-    private boolean isMoveWithinAllowedRegions(Move move, int playerId, Board board) {
-        int[][] playerRegion = board.getRegion(board.getPlayersTargetRegions().get(playerId));
-        int[][] startRegion = board.getRegion(getStartRegionForPlayer(playerId));
-        // Check if the move is within the player's allowed regions
-        if (isPositionInRegion(move.getEndX(), move.getEndY(), playerRegion) ||
-            isPositionInRegion(move.getEndX(), move.getEndY(), startRegion)) {
-            return true;
-        }
-        // Check if the move ends in another player's target region
-        for (int otherPlayerId : board.getPlayersTargetRegions().keySet()) {
-            if (otherPlayerId != playerId) {
-                int[][] otherPlayerRegion = board.getRegion(board.getPlayersTargetRegions().get(otherPlayerId));
-                if (isPositionInRegion(move.getEndX(), move.getEndY(), otherPlayerRegion)) {
-                    return false;
-                }
-            }
-        }
-        // Check if the move ends in any other player's target region
-        for (int region = 1; region <= 6; region++) {
-            if (region != board.getPlayersTargetRegions().get(playerId) &&
-                !board.getPlayersTargetRegions().containsValue(region)) {
-                int[][] otherRegion = board.getRegion(region);
-                if (isPositionInRegion(move.getEndX(), move.getEndY(), otherRegion)) {
-                    return false;
-                }
-            }
-        }
+  private boolean isMoveWithinAllowedRegions(Move move, int playerId, Board board) {
+    int[][] playerRegion = board.getRegion(board.getPlayersTargetRegions().get(playerId));
+    int[][] startRegion = board.getRegion(getStartRegionForPlayer(playerId,board));
+    // Check if the move is within the player's allowed regions
+    if (isPositionInRegion(move.getEndX(), move.getEndY(), playerRegion) ||
+        isPositionInRegion(move.getEndX(), move.getEndY(), startRegion)) {
         return true;
     }
+    // Check if the move ends in any other region except the player's start and target regions
+    for (int region = 1; region <= 6; region++) {
+        if (region != board.getPlayersTargetRegions().get(playerId) &&
+            region != getStartRegionForPlayer(playerId, board)) {
+            int[][] otherRegion = board.getRegion(region);
+            if (isPositionInRegion(move.getEndX(), move.getEndY(), otherRegion)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
     private boolean isPositionInRegion(int x, int y, int[][] region) {
         for (int[] pos : region) {
             if (pos[0] == x && pos[1] == y) {
@@ -148,15 +141,42 @@ public class MultipleJumpsRuleSet implements GameRuleSet {
         }
         return false;
     }
-    private int getStartRegionForPlayer(int playerId) {
-        switch (playerId) {
-            case 1: return 11;
-            case 2: return 22;
-            case 3: return 3;
-            case 4: return 4;
-            case 5: return 5;
-            case 6: return 6;
-            default: return -1;
+    private int getStartRegionForPlayer(int playerId, Board board) {
+        int numberOfPlayers = board.getNumberOfPlayers();
+        switch (numberOfPlayers) {
+            case 2:
+                switch (playerId) {
+                    case 1: return 11;
+                    case 2: return 22;
+                    default: return -1;
+                }
+            case 3:
+                switch (playerId) {
+                    case 1: return 1;
+                    case 2: return 3;
+                    case 3: return 5;
+                    default: return -1;
+                }
+            case 4:
+                switch (playerId) {
+                    case 1: return 2;
+                    case 2: return 3;
+                    case 3: return 5;
+                    case 4: return 6;
+                    default: return -1;
+                }
+            case 6:
+                switch (playerId) {
+                    case 1: return 1;
+                    case 2: return 2;
+                    case 3: return 3;
+                    case 4: return 4;
+                    case 5: return 5;
+                    case 6: return 6;
+                    default: return -1;
+                }
+            default:
+                return -1;
         }
     }
     @Override

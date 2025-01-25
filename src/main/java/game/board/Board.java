@@ -16,4 +16,6 @@ public interface Board {
     CellVertex[][] getMatrix();
     Map<Integer, Integer> getPlayersTargetRegions();
     int[][] getRegion(int region);
+    int getNumberOfPlayers();
+    void setNumberOfPlayers(int numberOfPlayers);
 }

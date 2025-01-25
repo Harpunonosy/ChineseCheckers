@@ -20,7 +20,6 @@ public class TargetRegionBotStrategy implements BotStrategy {
         // Find the highest empty cell in the target region
         CellVertex highestEmptyCell = findHighestEmptyCell(targetVertices, board, playerId);
         if (highestEmptyCell != null) {
-            System.out.print(highestEmptyCell.getLocation().x + " , " + highestEmptyCell.getLocation().y);
             Set<CellVertex> rejectedVertices = new HashSet<>();
             Move bestMove;
             do {
@@ -28,10 +27,15 @@ public class TargetRegionBotStrategy implements BotStrategy {
                 if (bestMove == null) {
                     break;
                 }
+                // if(bot.getPlayerId() == 2){
+                //     System.out.println("BEST MOVE: " + "(" + bestMove.getStartX() + " , " + bestMove.getStartY() + ")" + "  --->  " + "(" + bestMove.getEndX() + " , " + bestMove.getEndY() + ")");
+                //     System.out.println(isInTargetVertices(bestMove.getStartX(), bestMove.getStartY(), targetVertices));
+                // }
                 CellVertex startVertex = board.getVertexAt(bestMove.getStartX(), bestMove.getStartY());
                 int currentLayer = getLayerValue(startVertex, targetRegion);
                 int newLayer = getLayerValue(board.getVertexAt(bestMove.getEndX(), bestMove.getEndY()), targetRegion);
                 if (newLayer > currentLayer || !isInTargetVertices(bestMove.getStartX(), bestMove.getStartY(), targetVertices)) {
+                    // System.out.println("PROCESSING: " + "(" + bestMove.getStartX() + " , " + bestMove.getStartY() + ")" + "  --->  " + "(" + bestMove.getEndX() + " , " + bestMove.getEndY() + ")");
                     bot.getServer().processMove(formatMove(bestMove), playerId);
                     return;
                 } else {
@@ -192,10 +196,13 @@ public class TargetRegionBotStrategy implements BotStrategy {
                 break;
             case 5:
             case 6:
-                if (location.x == 24) return 4;
-                if (location.x == 23) return 3;
-                if (location.x == 22) return 2;
-                if (location.x == 21) return 1;
+                if (location.x == 24) return 8;
+                if (location.x == 23) return 7;
+                if (location.x == 22) return 6;
+                if (location.x == 21) return 5;
+                if (location.x == 20) return 4;
+                if (location.x == 19) return 3;
+                if (location.x == 18) return 2;
                 break;
             default:
                 return 0;

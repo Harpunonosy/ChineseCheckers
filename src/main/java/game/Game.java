@@ -23,6 +23,7 @@ public class Game {
         this.board = factory.createBoard();
         this.ruleSet = factory.createRuleSet();
         this.numberOfPlayers = numberOfPlayers;
+        board.setNumberOfPlayers(numberOfPlayers);
         board.initialize();
         board.setPlayersToRegions(numberOfPlayers);
     }

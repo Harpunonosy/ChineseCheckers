@@ -19,6 +19,17 @@ public class StandardBoard implements Board, Serializable {
     private Map<Point, CellVertex> vertices;
     private CellVertex[][] matrix;
     private Map<Integer, Integer> playerTargetRegions;
+    private int numberOfPlayers;
+
+    @Override
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    @Override
+    public void setNumberOfPlayers(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
+    }
 
     /**
      * Initializes a new standard board.
