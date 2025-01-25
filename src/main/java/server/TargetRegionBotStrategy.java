@@ -11,6 +11,7 @@ import java.util.*;
 public class TargetRegionBotStrategy implements BotStrategy {
 
     private GameRuleSet ruleSet;
+    private List<Move> moveHistory = new ArrayList<>();
 
     public void setRuleSet(GameRuleSet ruleset){
        this.ruleSet = ruleset;
@@ -38,8 +39,10 @@ public class TargetRegionBotStrategy implements BotStrategy {
                 int currentLayer = getLayerValue(startVertex, targetRegion);
                 int newLayer = getLayerValue(board.getVertexAt(bestMove.getEndX(), bestMove.getEndY()), targetRegion);
                 if ((newLayer > currentLayer || !isInTargetVertices(bestMove.getStartX(), bestMove.getStartY(), targetVertices)) &&
-                    ruleSet.isValidMove(bestMove, playerId, board)) {
+                    ruleSet.isValidMove(bestMove, playerId, board) &&
+                    !isRepeatingMoveSequence(bestMove)) {
                     bot.getServer().processMove(formatMove(bestMove), playerId);
+                    updateMoveHistory(bestMove);
                     return;
                 } else {
                     rejectedVertices.add(startVertex);
@@ -50,9 +53,25 @@ public class TargetRegionBotStrategy implements BotStrategy {
         // Evaluate moves and prioritize them
         Move bestMove;
         bestMove = evaluateMoves(board, playerId, targetVertices);
-        if (bestMove != null && ruleSet.isValidMove(bestMove, playerId, board)) {
+        if (bestMove != null && ruleSet.isValidMove(bestMove, playerId, board) && !isRepeatingMoveSequence(bestMove)) {
             bot.getServer().processMove(formatMove(bestMove), playerId);
+            updateMoveHistory(bestMove);
         }
+    }
+
+    private boolean isRepeatingMoveSequence(Move move) {
+        if (moveHistory.size() < 6) {
+            return false;
+        }
+        List<Move> lastMoves = moveHistory.subList(moveHistory.size() - 6, moveHistory.size());
+        return lastMoves.get(0).equals(move) && lastMoves.get(2).equals(move) && lastMoves.get(4).equals(move);
+    }
+
+    private void updateMoveHistory(Move move) {
+        if (moveHistory.size() >= 6) {
+            moveHistory.remove(0);
+        }
+        moveHistory.add(move);
     }
 
     private boolean isInTargetVertices(int x, int y, List<CellVertex> targetVertices) {
@@ -151,12 +170,12 @@ public class TargetRegionBotStrategy implements BotStrategy {
         double score = 0.0;
 
         if(farthestEmptyCell != null){
-        double currentDistanceToFarthest = start.getLocation().distance(farthestEmptyCell.getLocation());
-        double newDistanceToFarthest = neighbor.getLocation().distance(farthestEmptyCell.getLocation());
-        if (newDistanceToFarthest < currentDistanceToFarthest) {
-            score += 150;
+            double currentDistanceToFarthest = start.getLocation().distance(farthestEmptyCell.getLocation());
+            double newDistanceToFarthest = neighbor.getLocation().distance(farthestEmptyCell.getLocation());
+            if (newDistanceToFarthest < currentDistanceToFarthest) {
+                score += 150;
+            }
         }
-    }
 
         // Calculate distance to the target region
         double currentDistance = calculateDistanceToTarget(start, targetVertices);
@@ -168,11 +187,15 @@ public class TargetRegionBotStrategy implements BotStrategy {
         return score;
     }
 
-    private CellVertex findFarthestEmptyCell(List<CellVertex> targetVertices) {
+    private double calculateDistanceToTarget(CellVertex vertex, List<CellVertex> targetVertices) {
         return targetVertices.stream()
-                .filter(vertex -> vertex.getPawn() == null)
-                .max(Comparator.comparingDouble(vertex -> calculateDistanceToTarget(vertex, targetVertices)))
-                .orElse(null);
+                .mapToDouble(target -> vertex.getLocation().distance(target.getLocation()))
+                .min()
+                .orElse(Double.MAX_VALUE);
+    }
+
+    private String formatMove(Move move) {
+        return move.getStartX() + "-" + move.getStartY() + "-" + move.getEndX() + "-" + move.getEndY();
     }
 
     private int getLayerValue(CellVertex vertex, int targetRegion) {
@@ -212,15 +235,11 @@ public class TargetRegionBotStrategy implements BotStrategy {
         }
         return 0;
     }
-
-    private double calculateDistanceToTarget(CellVertex vertex, List<CellVertex> targetVertices) {
+    
+    private CellVertex findFarthestEmptyCell(List<CellVertex> targetVertices) {
         return targetVertices.stream()
-                .mapToDouble(target -> vertex.getLocation().distance(target.getLocation()))
-                .min()
-                .orElse(Double.MAX_VALUE);
-    }
-
-    private String formatMove(Move move) {
-        return move.getStartX() + "-" + move.getStartY() + "-" + move.getEndX() + "-" + move.getEndY();
+                .filter(vertex -> vertex.getPawn() == null)
+                .max(Comparator.comparingDouble(vertex -> calculateDistanceToTarget(vertex, targetVertices)))
+                .orElse(null);
     }
 }
