@@ -7,6 +7,10 @@ import game.state.GameInProgressState;
 import game.state.GameOverState;
 import game.state.GameState;
 import game.state.WaitingForPlayersState;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Component;
 import utils.message.Message;
 import utils.message.MessageType;
 import utils.SerializationUtils;
@@ -18,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import factories.*;;
-
+@Component
 public class GameServer {
     private List<PlayerHandler> players = new ArrayList<>();
     private int playerCount;
@@ -26,8 +30,13 @@ public class GameServer {
     private Game game;
     private GameState currentState;
     private PlayerHandler currentPlayer;
+    private GameFactory gameFactory;
 
-    public GameServer(int maxPlayers, GameFactory gameFactory) {
+
+    @Autowired
+    public GameServer(@Value("${game.maxPlayers}")int maxPlayers, GameFactory gameFactory) {
+        this.maxPlayers = maxPlayers;
+        this.gameFactory = gameFactory;
         if (maxPlayers < 2 || maxPlayers > 6 || maxPlayers == 5) {
             throw new IllegalArgumentException("Invalid number of players. The game supports between 2 3 4 or 6 players");
         }
@@ -152,37 +161,6 @@ public class GameServer {
         broadcastBoardState();
     }
 
-    public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-    
-        System.out.println("Select game variant:");
-        System.out.println("1. Standard");
-        System.out.println("2. BananaJump");
-        System.out.println("3. Multijump");
-        int variant = scanner.nextInt();
-    
-        System.out.println("Enter number of players (2, 3, 4, or 6):");
-        int maxPlayers = scanner.nextInt();
-    
-        GameFactory gameFactory;
-        if (variant == 1) {
-            gameFactory = new StandardGameFactory();
-        } else if (variant == 2) {
-            gameFactory = new BananJumpFactory();
-        } else if (variant == 3) {
-            gameFactory = new MultipleJumpsFactory();
-        } else {
-            throw new IllegalArgumentException("Invalid game variant selected.");
-        }
-    
-        GameServer server = new GameServer(maxPlayers, gameFactory);
-    
-        System.out.println("Enter number of bots:");
-        int botCount = scanner.nextInt();
-        for (int i = 0; i < botCount; i++) {
-            server.addBot(new TargetRegionBotStrategy());
-        }
-    
-        server.startServer();
+
     }
-}
+
