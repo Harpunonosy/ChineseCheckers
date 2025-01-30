@@ -21,6 +21,7 @@ public class GameService {
     // Zapisuje ukończoną grę do bazy danych
     public void saveCompletedGame(List<CompletedMove> moves, String winner) {
         CompletedGame completedGame = new CompletedGame(
+                1,
                 LocalDateTime.now().minusMinutes(30),  // Przykładowy czas rozpoczęcia
                 LocalDateTime.now(),                   // Czas zakończenia
                 moves

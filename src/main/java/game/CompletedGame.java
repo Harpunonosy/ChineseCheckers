@@ -17,7 +17,7 @@ public class CompletedGame {
 
 //    @ElementCollection
 //    private List<String> moves;
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "completedGame", cascade = CascadeType.ALL)
     private List<CompletedMove> moves = new ArrayList<>();
 
 
@@ -25,7 +25,8 @@ public class CompletedGame {
     // Bezargumentowy konstruktor wymagany przez JPA
     public CompletedGame() {}
 
-    public CompletedGame(LocalDateTime startTime, LocalDateTime endTime, List<CompletedMove> moves) {
+    public CompletedGame(long id, LocalDateTime startTime, LocalDateTime endTime, List<CompletedMove> moves) {
+        this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.moves = moves;

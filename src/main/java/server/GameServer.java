@@ -10,6 +10,7 @@ import game.state.WaitingForPlayersState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import utils.message.Message;
 import utils.message.MessageType;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Scanner;
 import factories.*;;
 @Component
+@PropertySource("values.properties")
 public class GameServer {
     private List<PlayerHandler> players = new ArrayList<>();
     private int playerCount;
@@ -34,7 +36,7 @@ public class GameServer {
 
 
     @Autowired
-    public GameServer(@Value("${game.maxPlayers}")int maxPlayers, GameFactory gameFactory) {
+    public GameServer(@Value("${config.maxPlayers}")int maxPlayers, GameFactory gameFactory) {
         this.maxPlayers = maxPlayers;
         this.gameFactory = gameFactory;
         if (maxPlayers < 2 || maxPlayers > 6 || maxPlayers == 5) {

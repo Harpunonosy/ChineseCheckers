@@ -1,13 +1,19 @@
 package app;
 
+import config.GameConfig;
 import factories.BananJumpFactory;
 import factories.GameFactory;
 import factories.MultipleJumpsFactory;
 import factories.StandardGameFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import repository.CompletedGameRepository;
+import repository.CompletedMoveRepository;
 import server.GameServer;
 import server.TargetRegionBotStrategy;
 
@@ -15,6 +21,9 @@ import java.io.IOException;
 import java.util.Scanner;
 @ComponentScan(basePackages = {"app", "server"})
 @SpringBootApplication
+@EnableConfigurationProperties({GameConfig.class})
+@EntityScan("game")
+@EnableJpaRepositories(basePackageClasses={CompletedGameRepository.class, CompletedMoveRepository.class})
 public class MainApp {
     public static void main(String[] args) throws IOException {
 
