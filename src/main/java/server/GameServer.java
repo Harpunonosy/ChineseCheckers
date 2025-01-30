@@ -1,8 +1,5 @@
 package server;
 
-import factories.GameFactory;
-import factories.StandardGameFactory;
-import factories.BananJumpFactory;
 import game.Game;
 import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
@@ -45,13 +42,23 @@ public class GameServer {
         System.out.println("Server started, waiting for players...");
 
         while (currentState instanceof WaitingForPlayersState) {
-            Socket clientSocket = serverSocket.accept();
-            PlayerHandler playerHandler = new PlayerHandler(clientSocket, this, players.size() + 1);
-            players.add(playerHandler);
-            new Thread(playerHandler).start();
-            currentState.handlePlayerJoin(this);
-            System.out.println("Player connected: " + players.size() + "/" + maxPlayers);
+            if (players.size() < maxPlayers) {
+                Socket clientSocket = serverSocket.accept();
+                PlayerHandler playerHandler = new PlayerHandler(clientSocket, this, players.size() + 1);
+                players.add(playerHandler);
+                new Thread(playerHandler).start();
+                currentState.handlePlayerJoin(this);
+                System.out.println("Player connected: " + players.size() + "/" + maxPlayers);
+            }
         }
+    }
+
+    public void addBot(BotStrategy strategy) {
+        Bot bot = new Bot(this, players.size() + 1, strategy);
+        players.add(bot);
+        new Thread(bot).start();
+        currentState.handlePlayerJoin(this);
+        System.out.println("Bot added: " + players.size() + "/" + maxPlayers);
     }
 
     public void startGame() {
@@ -147,28 +154,35 @@ public class GameServer {
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-
+    
         System.out.println("Select game variant:");
         System.out.println("1. Standard");
         System.out.println("2. BananaJump");
         System.out.println("3. Multijump");
         int variant = scanner.nextInt();
-
+    
         System.out.println("Enter number of players (2, 3, 4, or 6):");
         int maxPlayers = scanner.nextInt();
-
+    
         GameFactory gameFactory;
         if (variant == 1) {
             gameFactory = new StandardGameFactory();
         } else if (variant == 2) {
             gameFactory = new BananJumpFactory();
-        }else if (variant == 3){
+        } else if (variant == 3) {
             gameFactory = new MultipleJumpsFactory();
         } else {
             throw new IllegalArgumentException("Invalid game variant selected.");
         }
-
+    
         GameServer server = new GameServer(maxPlayers, gameFactory);
+    
+        System.out.println("Enter number of bots:");
+        int botCount = scanner.nextInt();
+        for (int i = 0; i < botCount; i++) {
+            server.addBot(new TargetRegionBotStrategy());
+        }
+    
         server.startServer();
     }
 }

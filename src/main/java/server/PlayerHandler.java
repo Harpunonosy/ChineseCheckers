@@ -13,11 +13,11 @@ import utils.message.MessageUtils;
  * Handles communication with a single player.
  */
 public class PlayerHandler implements Runnable {
-    private Socket socket;
-    private GameServer server;
-    private PrintWriter out;
-    private BufferedReader in;
-    private int playerId;
+    protected Socket socket;
+    protected GameServer server;
+    protected PrintWriter out;
+    protected BufferedReader in;
+    protected int playerId;
 
     /**
      * Initializes a new PlayerHandler.
@@ -30,19 +30,24 @@ public class PlayerHandler implements Runnable {
         this.socket = socket;
         this.server = server;
         this.playerId = playerId;
-        try {
-            this.out = new PrintWriter(socket.getOutputStream(), true);
-            this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (socket != null) {
+            try {
+                this.out = new PrintWriter(socket.getOutputStream(), true);
+                this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     public void run() {
+        if (socket == null) {
+            return; // Do not run if the socket is null (for bots)
+        }
         try {
             // Send player ID to client
-            sendMessage(new Message(MessageType.YOUR_ID, String.valueOf(playerId))); //GIVE CLIENT HIS ID
+            sendMessage(new Message(MessageType.YOUR_ID, String.valueOf(playerId))); // GIVE CLIENT HIS ID
 
             String json;
             while ((json = in.readLine()) != null) {
@@ -71,8 +76,10 @@ public class PlayerHandler implements Runnable {
      * @param message The message to send.
      */
     public void sendMessage(Message message) {
-        String json = MessageUtils.serializeMessage(message);
-        out.println(json);
+        if (out != null) {
+            String json = MessageUtils.serializeMessage(message);
+            out.println(json);
+        }
     }
 
     /**

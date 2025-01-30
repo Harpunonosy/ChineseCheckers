@@ -39,7 +39,8 @@ public class GameInProgressState implements GameState {
     public void handleMove(GameServer server, String move, int playerId) {
         if (server.getCurrentPlayer().getPlayerId() == playerId) {
             Move parsedMove = server.parseMove(move);
-            if (server.getGame().getGameRuleSet().isValidMove(parsedMove, playerId, server.getGame().getBoard())) {
+            System.out.println(parsedMove.getStartX() + " , " + parsedMove.getStartY() + "  --->  " + parsedMove.getEndX() + " , " + parsedMove.getEndY());
+            if (server.getGame().getGameRuleSet().isValidMove(parsedMove, playerId, server.getGame().getBoard())) { //TODO tuaj mozę być błąd
                 // Process the move
                 server.getGame().makeMove(parsedMove, playerId);
                 server.broadcastBoardState();

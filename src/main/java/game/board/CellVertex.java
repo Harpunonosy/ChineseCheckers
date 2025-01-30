@@ -44,6 +44,14 @@ public class CellVertex implements Serializable {
         edges.add(edge);
     }
 
+    public List<CellVertex> getNeighbors() {
+        List<CellVertex> neighbors = new ArrayList<>();
+        for (CCEdge edge : edges) {
+            neighbors.add(edge.getDestVertex());
+        }
+        return neighbors;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
