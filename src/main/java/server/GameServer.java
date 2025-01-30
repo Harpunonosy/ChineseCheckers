@@ -1,5 +1,7 @@
 package server;
 
+import game.CompletedGame;
+import game.CompletedMove;
 import game.Game;
 import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+import repository.CompletedGameRepository;
 import utils.message.Message;
 import utils.message.MessageType;
 import utils.SerializationUtils;
@@ -19,6 +22,7 @@ import utils.SerializationUtils;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -34,6 +38,8 @@ public class GameServer {
     private PlayerHandler currentPlayer;
     private GameFactory gameFactory;
 
+    @Autowired
+    CompletedGameRepository repo;
 
     @Autowired
     public GameServer(@Value("${config.maxPlayers}")int maxPlayers, GameFactory gameFactory) {
@@ -48,9 +54,34 @@ public class GameServer {
         this.game = new Game(gameFactory, maxPlayers);
     }
 
+    public void fakeSave() {
+
+        List<CompletedMove> moves = new ArrayList<>();
+        moves.add(new CompletedMove(new Move(1, 2, 3, 4), 1));
+        moves.add(new CompletedMove(new Move(1, 2, 3, 4), 2));
+        moves.add(new CompletedMove(new Move(1, 2, 3, 4), 3));
+
+        CompletedGame game = new CompletedGame(
+                1,
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                moves
+        );
+        repo.save(game);
+
+
+        List<CompletedGame> all = repo.findAll();
+
+        System.out.println("Saved games: " + all);
+
+    }
+
     public void startServer() throws IOException {
         ServerSocket serverSocket = new ServerSocket(12345);
         System.out.println("Server started, waiting for players...");
+
+        fakeSave();
+        System.out.println("fake save completed ");
 
         while (currentState instanceof WaitingForPlayersState) {
             if (players.size() < maxPlayers) {
