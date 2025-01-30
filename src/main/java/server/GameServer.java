@@ -1,5 +1,7 @@
 package server;
 
+import game.CompletedGame;
+import game.CompletedMove;
 import game.Game;
 import game.board.StandardBoard.StandardBoard;
 import game.move.Move;
@@ -7,6 +9,12 @@ import game.state.GameInProgressState;
 import game.state.GameOverState;
 import game.state.GameState;
 import game.state.WaitingForPlayersState;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+import repository.CompletedGameRepository;
 import utils.message.Message;
 import utils.message.MessageType;
 import utils.SerializationUtils;
@@ -14,11 +22,13 @@ import utils.SerializationUtils;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import factories.*;;
-
+@Component
+@PropertySource("values.properties")
 public class GameServer {
     private List<PlayerHandler> players = new ArrayList<>();
     private int playerCount;
@@ -26,8 +36,15 @@ public class GameServer {
     private Game game;
     private GameState currentState;
     private PlayerHandler currentPlayer;
+    private GameFactory gameFactory;
 
-    public GameServer(int maxPlayers, GameFactory gameFactory) {
+    @Autowired
+    CompletedGameRepository repo;
+
+    @Autowired
+    public GameServer(@Value("${config.maxPlayers}")int maxPlayers, GameFactory gameFactory) {
+        this.maxPlayers = maxPlayers;
+        this.gameFactory = gameFactory;
         if (maxPlayers < 2 || maxPlayers > 6 || maxPlayers == 5) {
             throw new IllegalArgumentException("Invalid number of players. The game supports between 2 3 4 or 6 players");
         }
@@ -37,9 +54,34 @@ public class GameServer {
         this.game = new Game(gameFactory, maxPlayers);
     }
 
+    public void fakeSave() {
+
+        List<CompletedMove> moves = new ArrayList<>();
+        moves.add(new CompletedMove(new Move(1, 2, 3, 4), 1));
+        moves.add(new CompletedMove(new Move(1, 2, 3, 4), 2));
+        moves.add(new CompletedMove(new Move(1, 2, 3, 4), 3));
+
+        CompletedGame game = new CompletedGame(
+                1,
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                moves
+        );
+        repo.save(game);
+
+
+        List<CompletedGame> all = repo.findAll();
+
+        System.out.println("Saved games: " + all);
+
+    }
+
     public void startServer() throws IOException {
         ServerSocket serverSocket = new ServerSocket(12345);
         System.out.println("Server started, waiting for players...");
+
+        fakeSave();
+        System.out.println("fake save completed ");
 
         while (currentState instanceof WaitingForPlayersState) {
             if (players.size() < maxPlayers) {
@@ -152,37 +194,6 @@ public class GameServer {
         broadcastBoardState();
     }
 
-    public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-    
-        System.out.println("Select game variant:");
-        System.out.println("1. Standard");
-        System.out.println("2. BananaJump");
-        System.out.println("3. Multijump");
-        int variant = scanner.nextInt();
-    
-        System.out.println("Enter number of players (2, 3, 4, or 6):");
-        int maxPlayers = scanner.nextInt();
-    
-        GameFactory gameFactory;
-        if (variant == 1) {
-            gameFactory = new StandardGameFactory();
-        } else if (variant == 2) {
-            gameFactory = new BananJumpFactory();
-        } else if (variant == 3) {
-            gameFactory = new MultipleJumpsFactory();
-        } else {
-            throw new IllegalArgumentException("Invalid game variant selected.");
-        }
-    
-        GameServer server = new GameServer(maxPlayers, gameFactory);
-    
-        System.out.println("Enter number of bots:");
-        int botCount = scanner.nextInt();
-        for (int i = 0; i < botCount; i++) {
-            server.addBot(new TargetRegionBotStrategy());
-        }
-    
-        server.startServer();
+
     }
-}
+
